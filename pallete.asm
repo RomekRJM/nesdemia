@@ -1,17 +1,17 @@
 LoadPalettes:
-  LDA PaletteData, X
-  STA $2007 ; $3F00, $3F01, $3F02 => $3F1F
+  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA #$3F
+  STA $2006             ; write the high byte of $3F00 address
+  LDA #$00
+  STA $2006             ; write the low byte of $3F00 address
+  LDX #$00
+LoadPalettesLoop:
+  LDA PaletteData, X      ; load data from address (palette + the value in x)
+                          ; 1st time through loop it will load palette+0
+                          ; 2nd time through loop it will load palette+1
+                          ; 3rd time through loop it will load palette+2
+                          ; etc
+  STA $2007
   INX
-  CPX #$20
-  BNE LoadPalettes
-
-  ; Enable interrupts
-  CLI
-
-  LDA #%10010000 ; enable NMI change background to use second chr set of tiles ($1000)
-  STA $2000
-  ; Enabling sprites and background for left-most 8 pixels
-  ; Enable sprites and background
-  LDA #%00011110
-  STA $2001
-  JMP MainGameLoop
+  CPX #$20              ; Compare X to hex $10, decimal 16 - copying 16 bytes = 4 sprites
+  BNE LoadPalettesLoop

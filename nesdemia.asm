@@ -149,7 +149,10 @@ CLEARMEM:
 
 .include "pallete.asm"
 
-  JSR InitPoints
+.include "background.asm"
+
+  ; Enable interrupts
+  CLI
 
 MainGameLoop:
   JSR GetControllerInput
@@ -197,7 +200,6 @@ NMI:
 RenderGraphics:
   LDA #$00
   STA spriteCounter
-
   JSR RenderPlayer
   JSR RenderPill
   JSR RenderViruses
