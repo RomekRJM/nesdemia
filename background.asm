@@ -16,11 +16,19 @@ RenderBackgroundLoop1:
   STA $2007
   INX
   BNE RenderBackgroundLoop1
+  LDX #$00
 RenderBackgroundLoop2:
   LDA Background2, X
   STA $2007
   INX
   BNE RenderBackgroundLoop2
+  LDX #$00
+RenderBackgroundLoop3:
+  LDA Background3, X
+  STA $2007
+  INX
+  CPX #$c0
+  BNE RenderBackgroundLoop3
 
 
 LoadAttribute:
@@ -34,7 +42,7 @@ LoadAttributeLoop:
   LDA Attribute, X
   STA $2007             ; write to PPU
   INX
-  CPX #$08              ; Compare X to hex $08, decimal 8 - copying 8 bytes
+  CPX #$40              ; Compare X to hex $08, decimal 8 - copying 8 bytes
   BNE LoadAttributeLoop
 
   LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
