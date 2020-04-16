@@ -51,8 +51,14 @@
 .define virusAnimationChangeFrame $35
 .define virusCntr $36
 .define virusPointer $37
-.define dbg1 $38
-.define dbg2 $39
+.define powerupLeft $38
+.define powerupTop $39
+.define powerupRight $3a
+.define powerupBottom $3b
+.define powerupTimer $3c
+.define powerupLifeTime $3d
+.define dbg1 $3e
+.define dbg2 $3f
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
 ; 0x81 - 0x89 - virus3
@@ -78,12 +84,15 @@ VIRUS_MOVE_INTERVAL = $04
 VIRUS_CHANGE_FRAME_INTERVAL = $0a
 
 PILL_LIFE_TIME = $1a
+PILL_WIDTH = $08
+PILL_HEIGHT = $08
+
+POWERUP_LIFE_TIME = $01
+POWERUP_WIDTH = $08
+POWERUP_HEIGHT = $08
 
 PLAYER_WIDTH = $10
 PLAYER_HEIGHT = $20
-
-PILL_WIDTH = $08
-PILL_HEIGHT = $08
 
 COLLISSION = $01
 NO_COLLISSION = $00
@@ -164,6 +173,7 @@ MainGameLoop:
 
 ComputeLogic:
   JSR SpawnPill
+  JSR SpawnPowerup
   JSR CheckCollisions
   JSR MoveViruses
   RTS
@@ -202,6 +212,7 @@ RenderGraphics:
   STA spriteCounter
   JSR RenderPlayer
   JSR RenderPill
+  JSR RenderPowerup
   JSR RenderViruses
   JSR RenderPoints
 
@@ -214,6 +225,8 @@ RenderGraphics:
 .include "points.asm"
 
 .include "pill.asm"
+
+.include "powerup.asm"
 
 .include "utils.asm"
 

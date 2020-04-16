@@ -27,7 +27,7 @@ RenderBackgroundLoop3:
   LDA Background3, X
   STA $2007
   INX
-  CPX #$c0
+  CPX #$80
   BNE RenderBackgroundLoop3
 
 

@@ -1,9 +1,3 @@
-22 points
-23 currentPointIndex
-24 pointIndexOffset
-25 playerCollidesWithCoin
-26 dim1Player
-27 dim2Player
 28 dim1Object
 29 dim2Object
 2a virusLeft
@@ -20,5 +14,11 @@
 35 virusAnimationChangeFrame
 36 virusCntr
 37 virusPointer
-38 dbg1
-39 dbg2
+38 powerupLeft
+39 powerupTop
+3a powerupRight
+3b powerupBottom
+3c powerupTimer
+3d powerupLifeTime
+3e dbg1
+3f dbg2
