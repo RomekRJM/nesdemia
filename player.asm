@@ -31,7 +31,7 @@ LoadPlayerSprites:
 
   STA $0200, X
   INX
-  CPX #$20
+  CPX #$10
   BNE LoadPlayerSprites
 	STX spriteCounter
 
