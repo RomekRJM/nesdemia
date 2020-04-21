@@ -1,22 +1,32 @@
 RenderPlayer:
   LDX spriteCounter
   LDY #$00
+  LDA playerInvincible
+  CMP #$01
+  BNE LoadPlayerSprites
+  LDA frame
+  BNE LoadPlayerSprites
+  JSR ChangePlayerPallete
 LoadPlayerSprites:
   LDA SpriteData, X
   CPY #$03
   BNE :+
-	 CLC
+	  CLC
 	  ADC playerLeft
   :
   CPY #$00
   BNE :+
-	 CLC
+	  CLC
 	  ADC playerTop
+  :
+  CPY #$02
+  BNE :+
+    LDA playerPallete
   :
   INY
   CPY #$04
   BNE :+
-	 LDY #$00
+	  LDY #$00
   :
 
   STA $0200, X
@@ -85,4 +95,17 @@ Collision:
   AND #$01
 
 EndCollisionCheck:
+  RTS
+
+ChangePlayerPallete:
+  LDA playerPallete
+  AND #$01
+  CMP #$01
+  BEQ ZeroPlayerPallete
+  INC playerPallete
+  LDA playerPallete
+  RTS
+ZeroPlayerPallete:
+  DEC playerPallete
+  LDA playerPallete
   RTS

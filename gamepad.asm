@@ -60,4 +60,11 @@ ReactOnInput:
     STA playerBottom
   :
 
+  LDA buttons
+  AND #BUTTON_B
+  BEQ :+
+    LDA #$01
+    STA playerInvincible
+  :
+
   RTS
