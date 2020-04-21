@@ -33,11 +33,11 @@
 .define points $23
 .define currentPointIndex $24
 .define pointIndexOffset $25
-.define playerCollidesWithCoin $26
-.define dim1Player $27
-.define dim2Player $28
-.define dim1Object $29
-.define dim2Object $2a
+.define playerCollidesWithObject $26
+.define dim1Source $27
+.define dim2Source $28
+.define dim1Destination $29
+.define dim2Destination $2a
 .define virusLeft $2b
 .define virusTop $2c
 .define virusRight $2d
@@ -181,16 +181,8 @@ ComputeLogic:
   RTS
 
 CheckCollisions:
-  JSR CheckCollision
-  LDA playerCollidesWithCoin
-  CMP #COLLISSION
-  BNE :+
-    INC points
-    JSR PointsToDecimal
-    JSR ForcePillRespawn
-    LDA #NO_COLLISSION
-    STA playerCollidesWithCoin
-  :
+  JSR CheckCollisionWithPill
+  JSR CheckVirusesCollideWithPlayer
   RTS
 
 WaitForNmi:

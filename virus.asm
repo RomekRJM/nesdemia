@@ -150,6 +150,82 @@ KillVirus:
   RTS
 
 
+CheckVirusesCollideWithPlayer:
+  LDA #NO_VIRUSES
+  STA virusCntr
+  LDA #$00
+  STA virusPointer
+
+CheckNextVirusCollides:
+  JSR LoadVirus
+  JSR CheckVirusCollidesWithPlayer
+  JSR StoreVirus
+  DEC virusCntr
+  LDA virusCntr
+  BNE CheckNextVirusCollides
+
+CheckVirusCollidesWithPlayer:
+  LDA #COLLISSION
+  STA playerCollidesWithObject
+
+  LDA playerLeft
+  STA dim1Source
+  LDA playerRight
+  STA dim2Source
+  LDA virusLeft
+  STA dim1Destination
+  LDA virusRight
+  STA dim2Destination
+  JSR DetectCollision
+
+  LDA playerTop
+  STA dim1Source
+  LDA playerBottom
+  STA dim2Source
+  LDA virusTop
+  STA dim1Destination
+  LDA virusBottom
+  STA dim2Destination
+  JSR DetectCollision
+
+  LDA playerCollidesWithObject
+  CMP #COLLISSION
+  BEQ CollisionDetected
+
+  LDA #COLLISSION
+  STA playerCollidesWithObject
+
+  LDA playerLeft
+  STA dim1Destination
+  LDA playerRight
+  STA dim2Destination
+  LDA virusLeft
+  STA dim1Source
+  LDA virusRight
+  STA dim2Source
+  JSR DetectCollision
+
+  LDA playerTop
+  STA dim1Destination
+  LDA playerBottom
+  STA dim2Destination
+  LDA virusTop
+  STA dim1Source
+  LDA virusBottom
+  STA dim2Source
+  JSR DetectCollision
+
+  LDA playerCollidesWithObject
+  CMP #COLLISSION
+  BNE :+
+  CollisionDetected:
+    JSR KillVirus
+    LDA #NO_COLLISSION
+    STA playerCollidesWithObject
+  :
+
+  RTS
+
 RenderViruses:
   INC virusAnimationChangeFrame
   LDA virusAnimationChangeFrame

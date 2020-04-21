@@ -40,60 +40,70 @@ LoadPlayerSprites:
   RTS
 
 
-CheckCollision:
+CheckCollisionWithPill:
   LDA #COLLISSION
-  STA playerCollidesWithCoin
+  STA playerCollidesWithObject
   LDA playerLeft
-  STA dim1Player
+  STA dim1Source
   LDA playerRight
-  STA dim2Player
+  STA dim2Source
   LDA pillLeft
-  STA dim1Object
+  STA dim1Destination
   LDA pillRight
-  STA dim2Object
+  STA dim2Destination
   JSR DetectCollision
 
   LDA playerTop
-  STA dim1Player
+  STA dim1Source
   LDA playerBottom
-  STA dim2Player
+  STA dim2Source
   LDA pillTop
-  STA dim1Object
+  STA dim1Destination
   LDA pillBottom
-  STA dim2Object
+  STA dim2Destination
   JSR DetectCollision
+
+  LDA playerCollidesWithObject
+  CMP #COLLISSION
+  BNE :+
+    INC points
+    JSR PointsToDecimal
+    JSR ForcePillRespawn
+    LDA #NO_COLLISSION
+    STA playerCollidesWithObject
+  :
 
   RTS
 
 DetectCollision:
-  LDA dim1Object
-  CMP dim1Player
+  LDA dim1Destination
+  CMP dim1Source
   BCS Check2
   JMP Check3
 
 Check2:
-  CMP dim2Player
+  CMP dim2Source
   BCC Collision
   BEQ Collision
 
 Check3:
-  LDA dim2Object
-  CMP dim1Player
+  LDA dim2Destination
+  CMP dim1Source
   BCS Check4
   JMP NoCollision
 
 Check4:
-  CMP dim2Player
+  CMP dim2Source
   BCC Collision
   BEQ Collision
   JMP NoCollision
 
 NoCollision:
   LDA #$00
-  STA playerCollidesWithCoin
+  STA playerCollidesWithObject
 
 Collision:
-  LDA playerCollidesWithCoin
+  LDA playerCollidesWithObject
   AND #$01
 
 EndCollisionCheck:

@@ -1,4 +1,4 @@
-2a dim2Object
+2a dim2Destination
 2b virusLeft
 2c virusTop
 2d virusRight
