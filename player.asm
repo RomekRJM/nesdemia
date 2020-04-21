@@ -5,6 +5,8 @@ RenderPlayer:
   CMP #$01
   BNE LoadPlayerSprites
   LDA frame
+  AND #%00010000
+  CMP #%00010000
   BNE LoadPlayerSprites
   JSR ChangePlayerPallete
 LoadPlayerSprites:
