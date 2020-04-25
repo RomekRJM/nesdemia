@@ -141,6 +141,14 @@ MoveVirusOnY:
   JSR KillVirus
 
 FinishMoveVirus:
+  LDA virusTop
+  CLC
+  ADC #VIRUS_HEIGHT
+  STA virusBottom
+  LDA virusLeft
+  CLC
+  ADC #VIRUS_WIDTH
+  STA virusRight
   RTS
 
 
@@ -190,35 +198,7 @@ CheckVirusCollidesWithPlayer:
 
   LDA playerCollidesWithObject
   CMP #COLLISSION
-  BEQ CollisionDetected
-
-  LDA #COLLISSION
-  STA playerCollidesWithObject
-
-  LDA playerLeft
-  STA dim1Destination
-  LDA playerRight
-  STA dim2Destination
-  LDA virusLeft
-  STA dim1Source
-  LDA virusRight
-  STA dim2Source
-  JSR DetectCollision
-
-  LDA playerTop
-  STA dim1Destination
-  LDA playerBottom
-  STA dim2Destination
-  LDA virusTop
-  STA dim1Source
-  LDA virusBottom
-  STA dim2Source
-  JSR DetectCollision
-
-  LDA playerCollidesWithObject
-  CMP #COLLISSION
   BNE :+
-  CollisionDetected:
     JSR KillVirus
     LDA #NO_COLLISSION
     STA playerCollidesWithObject

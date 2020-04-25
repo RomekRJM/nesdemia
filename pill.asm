@@ -44,8 +44,8 @@ LoadPillSprites:
   :
   CPY #$00
   BNE :+
-   CLC
-  ADC pillTop
+    CLC
+    ADC pillTop
   :
 
   STA $0200, X
