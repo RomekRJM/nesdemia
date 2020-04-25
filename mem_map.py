@@ -6,19 +6,23 @@ class VariableEnumerator():
 
     def enumerate_variables_in_file(self, file_name):
         variables = []
-        with open(file_name, 'r+') as s:
-            while True:
-                line = s.readline()
+        filedata = None
+        with open(file_name, 'r') as s:
+            filedata = s.read()
+
+        with open(file_name, 'w') as s:
+            for line in filedata.splitlines():
+                adjusted_line = line
+
                 if line.startswith('.define'):
                     _, name, addr = line.split()
                     adjusted_line = line.replace(addr, self.__hex_counter_in6502format())
-                    s.seek(-len(line), 1)
-                    s.write(adjusted_line)
                     variables.append((self.__hex_counter(), name))
 
                     self.counter += 1
-                elif not line:
-                    break
+
+                s.write(adjusted_line)
+                s.write("\n")
 
         return variables
 
@@ -38,9 +42,6 @@ def enumerate_all_variables(dir):
                variables += enumerator.enumerate_variables_in_file(os.path.join(root, file))
 
     return variables
-
-
-
 
 
 def save_to_map_file(file_name, variables):
