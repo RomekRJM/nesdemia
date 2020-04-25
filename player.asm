@@ -43,6 +43,7 @@ LoadPlayerSprites:
 CheckCollisionWithPill:
   LDA #COLLISSION
   STA playerCollidesWithObject
+
   LDA playerLeft
   STA dim1Source
   LDA playerRight
@@ -76,27 +77,16 @@ CheckCollisionWithPill:
   RTS
 
 DetectCollision:
-  LDA dim1Destination
-  CMP dim1Source
-  BCS Check2
-  JMP Check3
+  LDA dim1Source
+  CMP dim2Destination
+  BCC Check2
+  JMP NoCollision
 
 Check2:
-  CMP dim2Source
-  BCC Collision
+  LDA dim2Source
+  CMP dim1Destination
   BEQ Collision
-
-Check3:
-  LDA dim2Destination
-  CMP dim1Source
-  BCS Check4
-  JMP NoCollision
-
-Check4:
-  CMP dim2Source
-  BCC Collision
-  BEQ Collision
-  JMP NoCollision
+  BCS Collision
 
 NoCollision:
   LDA #$00

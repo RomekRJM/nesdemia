@@ -106,6 +106,10 @@ MoveVirusOnX:
     CLC
     ADC virusXSpeed
     STA virusLeft
+    CLC
+    ADC VIRUS_WIDTH
+    STA virusRight
+    LDA virusLeft
     CMP #$f7
     BCC MoveVirusOnY
     JSR KillVirus
@@ -115,6 +119,10 @@ MoveVirusOnX:
   SEC
   SBC virusXSpeed
   STA virusLeft
+  CLC
+  ADC VIRUS_WIDTH
+  STA virusRight
+  LDA virusLeft
   CMP #$02
   BCS MoveVirusOnY
   JSR KillVirus
@@ -127,6 +135,10 @@ MoveVirusOnY:
     CLC
     ADC virusYSpeed
     STA virusTop
+    CLC
+    ADC VIRUS_HEIGHT
+    STA virusBottom
+    LDA virusTop
     CMP #$f7
     BCC FinishMoveVirus
     JSR KillVirus
@@ -136,6 +148,10 @@ MoveVirusOnY:
   SEC
   SBC virusYSpeed
   STA virusTop
+  CLC
+  ADC VIRUS_HEIGHT
+  STA virusBottom
+  LDA virusTop
   CMP #$02
   BCS FinishMoveVirus
   JSR KillVirus
@@ -190,35 +206,7 @@ CheckVirusCollidesWithPlayer:
 
   LDA playerCollidesWithObject
   CMP #COLLISSION
-  BEQ CollisionDetected
-
-  LDA #COLLISSION
-  STA playerCollidesWithObject
-
-  LDA playerLeft
-  STA dim1Destination
-  LDA playerRight
-  STA dim2Destination
-  LDA virusLeft
-  STA dim1Source
-  LDA virusRight
-  STA dim2Source
-  JSR DetectCollision
-
-  LDA playerTop
-  STA dim1Destination
-  LDA playerBottom
-  STA dim2Destination
-  LDA virusTop
-  STA dim1Source
-  LDA virusBottom
-  STA dim2Source
-  JSR DetectCollision
-
-  LDA playerCollidesWithObject
-  CMP #COLLISSION
   BNE :+
-  CollisionDetected:
     JSR KillVirus
     LDA #NO_COLLISSION
     STA playerCollidesWithObject
