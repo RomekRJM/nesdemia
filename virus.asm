@@ -106,10 +106,6 @@ MoveVirusOnX:
     CLC
     ADC virusXSpeed
     STA virusLeft
-    CLC
-    ADC VIRUS_WIDTH
-    STA virusRight
-    LDA virusLeft
     CMP #$f7
     BCC MoveVirusOnY
     JSR KillVirus
@@ -119,10 +115,6 @@ MoveVirusOnX:
   SEC
   SBC virusXSpeed
   STA virusLeft
-  CLC
-  ADC VIRUS_WIDTH
-  STA virusRight
-  LDA virusLeft
   CMP #$02
   BCS MoveVirusOnY
   JSR KillVirus
@@ -135,10 +127,6 @@ MoveVirusOnY:
     CLC
     ADC virusYSpeed
     STA virusTop
-    CLC
-    ADC VIRUS_HEIGHT
-    STA virusBottom
-    LDA virusTop
     CMP #$f7
     BCC FinishMoveVirus
     JSR KillVirus
@@ -148,15 +136,19 @@ MoveVirusOnY:
   SEC
   SBC virusYSpeed
   STA virusTop
-  CLC
-  ADC VIRUS_HEIGHT
-  STA virusBottom
-  LDA virusTop
   CMP #$02
   BCS FinishMoveVirus
   JSR KillVirus
 
 FinishMoveVirus:
+  LDA virusTop
+  CLC
+  ADC #VIRUS_HEIGHT
+  STA virusBottom
+  LDA virusLeft
+  CLC
+  ADC #VIRUS_WIDTH
+  STA virusRight
   RTS
 
 
