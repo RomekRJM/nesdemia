@@ -41,26 +41,29 @@
 .define pillBottom $2b
 .define pillTimer $2c
 .define pillLifeTime $2d
-.define playerLeft $2e
-.define playerTop $2f
-.define playerRight $30
-.define playerBottom $31
-.define playerInvincible $32
-.define playerPallete $33
-.define virusLeft $34
-.define virusTop $35
-.define virusRight $36
-.define virusBottom $37
-.define virusXSpeed $38
-.define virusYSpeed $39
-.define virusXDirection $3a
-.define virusYDirection $3b
-.define virusAlive $3c
-.define virusMoveFrame $3d
-.define virusAnimationFrame $3e
-.define virusAnimationChangeFrame $3f
-.define virusCntr $40
-.define virusPointer $41
+.define virusLeft $2e
+.define virusTop $2f
+.define virusRight $30
+.define virusBottom $31
+.define virusXSpeed $32
+.define virusYSpeed $33
+.define virusXDirection $34
+.define virusYDirection $35
+.define virusAlive $36
+.define virusMoveFrame $37
+.define virusAnimationFrame $38
+.define virusAnimationChangeFrame $39
+.define virusCntr $3a
+.define virusPointer $3b
+.define playerLeft $3c
+.define playerTop $3d
+.define playerRight $3e
+.define playerBottom $3f
+.define playerInvincible $40
+.define playerDashing $41
+.define playerSpeed $42
+.define playerPallete $43
+
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
 ; 0x81 - 0x89 - virus3
@@ -97,6 +100,9 @@ POWERUP_HEIGHT = $08
 
 PLAYER_WIDTH = $10
 PLAYER_HEIGHT = $10
+PLAYER_DASHING_TIMEOUT = $1f
+PLAYER_NORMAL_SPEED = $01
+PLAYER_DASH_SPEED = $03
 
 COLLISSION = $01
 NO_COLLISSION = $00

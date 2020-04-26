@@ -20,44 +20,75 @@ GetControllerInputLoop:
 
 
 ReactOnInput:
+
+  LDA playerDashing
+  BNE :+
+    LDA #PLAYER_NORMAL_SPEED
+    STA playerSpeed
+    JMP CheckButtons
+  :
+
+  DEC playerDashing
+  LDA #PLAYER_DASH_SPEED
+  STA playerSpeed
+
+CheckButtons:
 	LDA buttons
   AND #BUTTON_LEFT
   BEQ :+
-    DEC playerLeft
-    LDA #PLAYER_WIDTH
+    LDA playerLeft
+    SEC
+    SBC playerSpeed
+    STA playerLeft
     CLC
-    ADC playerLeft
+    ADC #PLAYER_WIDTH
     STA playerRight
 	:
 
   LDA buttons
   AND #BUTTON_RIGHT
   BEQ :+
-    INC playerLeft
-    LDA #PLAYER_WIDTH
+    LDA playerLeft
     CLC
-    ADC playerLeft
+    ADC playerSpeed
+    STA playerLeft
+    CLC
+    ADC #PLAYER_WIDTH
     STA playerRight
   :
 
   LDA buttons
   AND #BUTTON_UP
   BEQ :+
-    DEC playerTop
-    LDA #PLAYER_HEIGHT
+    LDA playerTop
+    SEC
+    SBC playerSpeed
+    STA playerTop
     CLC
-    ADC playerTop
+    ADC #PLAYER_HEIGHT
     STA playerBottom
   :
 
 	LDA buttons
   AND #BUTTON_DOWN
   BEQ :+
-    INC playerTop
-    LDA #PLAYER_HEIGHT
+    LDA playerTop
     CLC
-    ADC playerTop
+    ADC playerSpeed
+    STA playerTop
+    CLC
+    ADC #PLAYER_HEIGHT
     STA playerBottom
+  :
+
+  LDA buttons
+  AND #BUTTON_A
+  BEQ :+
+    LDA playerDashing
+    BNE :+
+      LDA #PLAYER_DASHING_TIMEOUT
+      STA playerDashing
+    :
   :
 
   LDA buttons
