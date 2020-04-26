@@ -9,8 +9,32 @@ RenderPlayer:
   CMP #%00010000
   BNE LoadPlayerSprites
   JSR ChangePlayerPallete
-LoadPlayerSprites:
-  LDA SpriteData, X
+LoadPlayerNucleus:
+  LDA PlayerDataNucleus, X
+
+  CPY #$03
+  BNE :+
+    LDA playerLeft
+    CLC
+    ADC #$04
+  :
+
+  CPY #$00
+  BNE :+
+    LDA playerTop
+    CLC
+    ADC #$04
+  :
+
+  STA $0200, X
+  INX
+  INY
+  CPX #$04
+  BNE LoadPlayerNucleus
+
+  LDY #$00
+LoadPlayerCell:
+  LDA PlayerDataCell, X
   CPY #$03
   BNE :+
 	  CLC
@@ -34,7 +58,7 @@ LoadPlayerSprites:
   STA $0200, X
   INX
   CPX #$10
-  BNE LoadPlayerSprites
+  BNE LoadPlayerCell
 	STX spriteCounter
 
   RTS
