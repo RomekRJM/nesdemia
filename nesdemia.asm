@@ -59,10 +59,12 @@
 .define playerTop $3d
 .define playerRight $3e
 .define playerBottom $3f
-.define playerInvincible $40
-.define playerDashing $41
-.define playerSpeed $42
-.define playerPallete $43
+.define playerNucleusLeft $40
+.define playerNucleusTop $41
+.define playerInvincible $42
+.define playerDashing $43
+.define playerSpeed $44
+.define playerPallete $45
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2

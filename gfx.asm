@@ -107,7 +107,7 @@ PlayerDataCell:
   .byte $08, $11, $00, $08
 
 PlayerDataNucleus:
-  .byte $00, $00, $00, $00
+  .byte $00, $02, $00, $00
 
 PillData:
   .byte $00, $75, $01, $00

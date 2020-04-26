@@ -3,11 +3,11 @@ RenderPlayer:
   LDY #$00
   LDA playerInvincible
   CMP #$01
-  BNE LoadPlayerSprites
+  BNE LoadPlayerNucleus
   LDA frame
   AND #%00010000
   CMP #%00010000
-  BNE LoadPlayerSprites
+  BNE LoadPlayerNucleus
   JSR ChangePlayerPallete
 LoadPlayerNucleus:
   LDA PlayerDataNucleus, X
@@ -16,14 +16,19 @@ LoadPlayerNucleus:
   BNE :+
     LDA playerLeft
     CLC
-    ADC #$04
+    ADC playerNucleusLeft
   :
 
   CPY #$00
   BNE :+
     LDA playerTop
     CLC
-    ADC #$04
+    ADC playerNucleusTop
+  :
+
+  CPY #$02
+  BNE :+
+    LDA playerPallete
   :
 
   STA $0200, X
@@ -32,7 +37,10 @@ LoadPlayerNucleus:
   CPX #$04
   BNE LoadPlayerNucleus
 
+  STX spriteCounter
   LDY #$00
+  LDX #$00
+  STX $00
 LoadPlayerCell:
   LDA PlayerDataCell, X
   CPY #$03
@@ -55,11 +63,15 @@ LoadPlayerCell:
 	  LDY #$00
   :
 
+  STX $00
+  LDX spriteCounter
   STA $0200, X
   INX
+  STX spriteCounter
+  INC $00
+  LDX $00
   CPX #$10
   BNE LoadPlayerCell
-	STX spriteCounter
 
   RTS
 

@@ -1,5 +1,3 @@
-2c pillTimer
-2d pillLifeTime
 2e virusLeft
 2f virusTop
 30 virusRight
@@ -18,7 +16,9 @@
 3d playerTop
 3e playerRight
 3f playerBottom
-40 playerInvincible
-41 playerDashing
-42 playerSpeed
-43 playerPallete
+40 playerNucleusLeft
+41 playerNucleusTop
+42 playerInvincible
+43 playerDashing
+44 playerSpeed
+45 playerPallete

@@ -20,6 +20,9 @@ GetControllerInputLoop:
 
 
 ReactOnInput:
+  LDA #$04
+  STA playerNucleusLeft
+  STA playerNucleusTop
 
   LDA playerDashing
   BNE :+
@@ -43,6 +46,9 @@ CheckButtons:
     CLC
     ADC #PLAYER_WIDTH
     STA playerRight
+
+    LDA #$01
+    STA playerNucleusLeft
 	:
 
   LDA buttons
@@ -55,6 +61,9 @@ CheckButtons:
     CLC
     ADC #PLAYER_WIDTH
     STA playerRight
+
+    LDA #$07
+    STA playerNucleusLeft
   :
 
   LDA buttons
@@ -67,6 +76,9 @@ CheckButtons:
     CLC
     ADC #PLAYER_HEIGHT
     STA playerBottom
+
+    LDA #$01
+    STA playerNucleusTop
   :
 
 	LDA buttons
@@ -79,6 +91,9 @@ CheckButtons:
     CLC
     ADC #PLAYER_HEIGHT
     STA playerBottom
+
+    LDA #$07
+    STA playerNucleusTop
   :
 
   LDA buttons
@@ -88,7 +103,6 @@ CheckButtons:
     BNE :+
       LDA #PLAYER_DASHING_TIMEOUT
       STA playerDashing
-    :
   :
 
   LDA buttons
