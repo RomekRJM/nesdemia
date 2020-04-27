@@ -55,7 +55,7 @@ LoadPlayerCell:
   :
   CPY #$02
   BNE :+
-    LDA playerPallete
+    ORA playerPallete
   :
   INY
   CPY #$04
