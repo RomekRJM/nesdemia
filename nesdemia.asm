@@ -65,6 +65,8 @@
 .define playerDashing $43
 .define playerSpeed $44
 .define playerPallete $45
+.define playerAnimationFrame $46
+.define playerAnimationChangeFrame $47
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -105,6 +107,7 @@ PLAYER_HEIGHT = $10
 PLAYER_DASHING_TIMEOUT = $1f
 PLAYER_NORMAL_SPEED = $01
 PLAYER_DASH_SPEED = $03
+PLAYER_CHANGE_FRAME_INTERVAL = $08
 
 COLLISSION = $01
 NO_COLLISSION = $00

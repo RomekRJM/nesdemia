@@ -41,21 +41,41 @@ LoadPlayerNucleus:
   LDY #$00
   LDX #$00
   STX $00
+
+  INC playerAnimationChangeFrame
+  LDA playerAnimationChangeFrame
+  CMP #PLAYER_CHANGE_FRAME_INTERVAL
+  BNE LoadPlayerCell
+
+  LDA #$00
+  STA playerAnimationChangeFrame
+
+  INC playerAnimationFrame
+  LDA playerAnimationFrame
+  CMP #$03
+  BNE LoadPlayerCell
+
+  LDA #$00
+  STA playerAnimationFrame
 LoadPlayerCell:
   LDA PlayerDataCell, X
-  CPY #$03
-  BNE :+
-	  CLC
-	  ADC playerLeft
-  :
   CPY #$00
   BNE :+
 	  CLC
 	  ADC playerTop
   :
+  CPY #$01
+  BNE :+
+	  LDA playerAnimationFrame
+  :
   CPY #$02
   BNE :+
     ORA playerPallete
+  :
+  CPY #$03
+  BNE :+
+	  CLC
+	  ADC playerLeft
   :
   INY
   CPY #$04
