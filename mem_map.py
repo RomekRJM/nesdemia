@@ -32,6 +32,7 @@ class VariableEnumerator():
     def __hex_counter_in6502format(self):
         return '${}'.format(self.__hex_counter().zfill(2))
 
+
 def enumerate_all_variables(dir):
     enumerator = VariableEnumerator()
     variables = []
