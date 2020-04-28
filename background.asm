@@ -38,10 +38,21 @@ LoadAttribute:
   LDA #$C0
   STA $2006             ; write the low byte of $23C0 address
   LDX #$00
+  LDA #$20
+  STA health
+  LDA LUNG_HEALTHY_ATTRIBUTE
+  STA $00
 LoadAttributeLoop:
-  LDA Attribute, X
+  LDA $00;Attribute, X
   STA $2007             ; write to PPU
   INX
+  CPX health
+  BCC :+
+    LDA LUNG_SICK_ATTRIBUTE
+    STA $00
+  :
+  LDA LUNG_HEALTHY_ATTRIBUTE
+  STA $00
   CPX #$40              ; Compare X to hex $08, decimal 8 - copying 8 bytes
   BNE LoadAttributeLoop
 

@@ -67,6 +67,7 @@
 .define playerPallete $45
 .define playerAnimationFrame $46
 .define playerAnimationChangeFrame $47
+.define health $48
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -111,6 +112,9 @@ PLAYER_CHANGE_FRAME_INTERVAL = $08
 
 COLLISSION = $01
 NO_COLLISSION = $00
+
+LUNG_HEALTHY_ATTRIBUTE = %10101010
+LUNG_SICK_ATTRIBUTE = %11111111
 
 
 Reset:
