@@ -33,41 +33,42 @@
 .define powerupBottom $23
 .define powerupTimer $24
 .define powerupLifeTime $25
-.define dbg1 $26
-.define dbg2 $27
-.define pillLeft $28
-.define pillTop $29
-.define pillRight $2a
-.define pillBottom $2b
-.define pillTimer $2c
-.define pillLifeTime $2d
-.define virusLeft $2e
-.define virusTop $2f
-.define virusRight $30
-.define virusBottom $31
-.define virusXSpeed $32
-.define virusYSpeed $33
-.define virusXDirection $34
-.define virusYDirection $35
-.define virusAlive $36
-.define virusMoveFrame $37
-.define virusAnimationFrame $38
-.define virusAnimationChangeFrame $39
-.define virusCntr $3a
-.define virusPointer $3b
-.define playerLeft $3c
-.define playerTop $3d
-.define playerRight $3e
-.define playerBottom $3f
-.define playerNucleusLeft $40
-.define playerNucleusTop $41
-.define playerInvincible $42
-.define playerDashing $43
-.define playerSpeed $44
-.define playerPallete $45
-.define playerAnimationFrame $46
-.define playerAnimationChangeFrame $47
-.define health $48
+.define pillLeft $26
+.define pillTop $27
+.define pillRight $28
+.define pillBottom $29
+.define pillTimer $2a
+.define pillLifeTime $2b
+.define virusLeft $2c
+.define virusTop $2d
+.define virusRight $2e
+.define virusBottom $2f
+.define virusXSpeed $30
+.define virusYSpeed $31
+.define virusXDirection $32
+.define virusYDirection $33
+.define virusAlive $34
+.define virusMoveFrame $35
+.define virusAnimationFrame $36
+.define virusAnimationChangeFrame $37
+.define virusCntr $38
+.define virusPointer $39
+.define playerLeft $3a
+.define playerTop $3b
+.define playerRight $3c
+.define playerBottom $3d
+.define playerNucleusLeft $3e
+.define playerNucleusTop $3f
+.define playerInvincible $40
+.define playerDashing $41
+.define playerSpeed $42
+.define playerPallete $43
+.define playerAnimationFrame $44
+.define playerAnimationChangeFrame $45
+.define health $46
+.define attributesNeedReloading $47
+.define dbg1 $48
+.define dbg2 $49
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -219,6 +220,7 @@ NMI:
 .include "gamepad.asm"
 
 RenderGraphics:
+  JSR LoadAttributes
   LDA #$00
   STA spriteCounter
   JSR RenderPlayer
@@ -228,6 +230,8 @@ RenderGraphics:
   JSR RenderPoints
 
   RTS
+
+.include "attributes.asm"
 
 .include "player.asm"
 

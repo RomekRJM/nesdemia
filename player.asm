@@ -168,10 +168,11 @@ ZeroPlayerPallete:
   LDA playerPallete
   RTS
 
-
 LowerHealth:
   LDA health
-  CLC
-  SBC #$10
-  STA health
+  CMP #$03
+  BCS :+
+    INC health
+    INC attributesNeedReloading
+  :
   RTS
