@@ -53,3 +53,8 @@ CLEARMEM:
   STA $2006
 
   LDX #$00
+
+
+InitVariables:
+  LDA #$c0
+  STA health

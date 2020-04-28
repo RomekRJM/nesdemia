@@ -200,6 +200,7 @@ CheckVirusCollidesWithPlayer:
   CMP #COLLISSION
   BNE :+
     JSR KillVirus
+    JSR LowerHealth
     LDA #NO_COLLISSION
     STA playerCollidesWithObject
   :

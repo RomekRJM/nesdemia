@@ -167,3 +167,11 @@ ZeroPlayerPallete:
   DEC playerPallete
   LDA playerPallete
   RTS
+
+
+LowerHealth:
+  LDA health
+  CLC
+  SBC #$10
+  STA health
+  RTS
