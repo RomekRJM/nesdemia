@@ -3,6 +3,12 @@ LoadAttributes:
   BNE :+
     RTS
   :
+  ; Attributes
+  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA #$33
+  STA $2006             ; write the high byte of $23C0 address
+  LDA #$C0
+  STA $2006             ; write the low byte of $23C0 address
   LDA #$00
   STA attributesNeedReloading
   LDA #LUNG_HEALTHY_ATTRIBUTE
@@ -11,18 +17,17 @@ LoadAttributes:
   ; TEST CODE !!! ; #$00, #$16, #$20, #$30
   LDY health
 LoadAttributesLoop:
-  LDA $00;Attribute, X
-  STA $2007          ; write to PPU
-  INX
-  TXA
-  CMP #$30
+  LDA LungHealthLevels, Y
+  STA $01
+  CPX $01
   BCC :+
     LDA #LUNG_SICK_ATTRIBUTE
     STA $00
   :
-  LDA LungHealthLevels, Y
-  STA dbg1
-  STY dbg2
+  LDA $00
+  STA $2007          ; write to PPU
+  STA $6000, X
+  INX
   CPX #$40
   BNE LoadAttributesLoop
 

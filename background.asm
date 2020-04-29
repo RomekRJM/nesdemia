@@ -31,18 +31,9 @@ RenderBackgroundLoop3:
   BNE RenderBackgroundLoop3
 
 
-  ; Attributes
-  LDA $2002             ; read PPU status to reset the high/low latch
-  LDA #$33
-  STA $2006             ; write the high byte of $23C0 address
-  LDA #$C0
-  STA $2006             ; write the low byte of $23C0 address
-
   LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
   STA $2000
   ; Enabling sprites and background for left-most 8 pixels
   ; Enable sprites and background
   LDA #%00011110
   STA $2001
-
-  

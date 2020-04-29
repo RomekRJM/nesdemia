@@ -173,6 +173,11 @@ CheckNextVirusCollides:
   BNE CheckNextVirusCollides
 
 CheckVirusCollidesWithPlayer:
+  LDA virusAlive
+  BNE :+
+    RTS
+  :
+
   LDA #COLLISSION
   STA playerCollidesWithObject
 

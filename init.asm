@@ -58,3 +58,6 @@ CLEARMEM:
 InitVariables:
   LDA #$c0
   STA health
+
+  LDA #$01
+  STA attributesNeedReloading
