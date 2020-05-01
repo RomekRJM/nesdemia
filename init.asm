@@ -56,7 +56,10 @@ CLEARMEM:
 
 
 InitVariables:
-  LDA #$c0
+  LDA #$01
+  STA nmiTimer
+
+  LDA #$00
   STA health
 
   LDA #$01

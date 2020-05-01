@@ -26,9 +26,8 @@ LoadAttributesLoop:
   :
   LDA $00
   STA $2007          ; write to PPU
-  STA $6000, X
   INX
-  CPX #$40
+  CPX #$41
   BNE LoadAttributesLoop
 
   RTS
