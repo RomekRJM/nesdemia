@@ -32,7 +32,7 @@ CLEARMEM:
   STA $0500, X
   STA $0600, X
   STA $0700, X
-  LDA #$FF
+  LDA #$ff
   STA $0200, X ; $0200 => $02FF
   LDA #$00
   INX

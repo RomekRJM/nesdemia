@@ -1,7 +1,9 @@
 NMI:
   ; reload attribute table
   LDA attributesNeedReloading
-  BNE CopySpriteDataToPPU
+  BNE :+
+    JMP CopySpriteDataToPPU
+  :
 
   ; Attributes
   LDA $2002             ; read PPU status to reset the high/low latch
@@ -66,6 +68,33 @@ CopyAttributeDataToPPU:
   LDA $e4
   STA $2007
   LDA $e5
+  STA $2007
+  LDA #$ff
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
+  STA $2007
   STA $2007
 
 CopySpriteDataToPPU:
