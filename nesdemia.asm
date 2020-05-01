@@ -81,6 +81,8 @@
 JOYPAD1 = $4016
 JOYPAD2 = $4017
 
+BEGIN_OF_ATTRIBUTES_MEMORY = $bf
+
 BUTTON_A      = 1 << 7
 BUTTON_B      = 1 << 6
 BUTTON_SELECT = 1 << 5
@@ -154,17 +156,12 @@ WaitForNmiLoop:
   BEQ WaitForNmiLoop
   RTS
 
-NMI:
-  JSR LoadAttributes
-  LDA #$02 ; copy sprite data from $0200 => PPU memory for display
-  STA $4014
-  INC frame
-  INC nmiTimer
-  RTI
+.include "nmi.asm"
 
 .include "gamepad.asm"
 
 RenderGraphics:
+  JSR LoadAttributes
   LDA #$00
   STA spriteCounter
   JSR RenderPlayer
