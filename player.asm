@@ -52,10 +52,10 @@ LoadPlayerNucleus:
 
   INC playerAnimationFrame
   LDA playerAnimationFrame
-  CMP #$03
+  CMP #$04
   BNE LoadPlayerCell
 
-  LDA #$00
+  LDA #$01
   STA playerAnimationFrame
 LoadPlayerCell:
   LDA PlayerDataCell, X
