@@ -1,30 +1,30 @@
 LoadVirus:
   LDY virusPointer
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusLeft
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusTop
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusRight
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusBottom
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusXSpeed
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusYSpeed
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusXDirection
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusYDirection
   INY
-  LDA $70 ,Y
+  LDA $0100 ,Y
   STA virusAlive
   INY
   STY virusPointer
@@ -36,31 +36,31 @@ StoreVirus:
   SBC #$09
   TAY
   LDA virusLeft
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusTop
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusRight
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusBottom
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusXSpeed
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusYSpeed
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusXDirection
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusYDirection
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   LDA virusAlive
-  STA $70 ,Y
+  STA $0100 ,Y
   INY
   STY virusPointer
   RTS
@@ -173,6 +173,11 @@ CheckNextVirusCollides:
   BNE CheckNextVirusCollides
 
 CheckVirusCollidesWithPlayer:
+  LDA virusAlive
+  BNE :+
+    RTS
+  :
+
   LDA #COLLISSION
   STA playerCollidesWithObject
 
@@ -200,6 +205,7 @@ CheckVirusCollidesWithPlayer:
   CMP #COLLISSION
   BNE :+
     JSR KillVirus
+    JSR LowerHealth
     LDA #NO_COLLISSION
     STA playerCollidesWithObject
   :

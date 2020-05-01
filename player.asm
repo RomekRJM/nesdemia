@@ -52,10 +52,10 @@ LoadPlayerNucleus:
 
   INC playerAnimationFrame
   LDA playerAnimationFrame
-  CMP #$03
+  CMP #$04
   BNE LoadPlayerCell
 
-  LDA #$00
+  LDA #$01
   STA playerAnimationFrame
 LoadPlayerCell:
   LDA PlayerDataCell, X
@@ -166,4 +166,13 @@ ChangePlayerPallete:
 ZeroPlayerPallete:
   DEC playerPallete
   LDA playerPallete
+  RTS
+
+LowerHealth:
+  LDA health
+  CMP #$03
+  BCS :+
+    INC health
+    INC attributesNeedReloading
+  :
   RTS

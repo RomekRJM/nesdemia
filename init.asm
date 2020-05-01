@@ -53,3 +53,14 @@ CLEARMEM:
   STA $2006
 
   LDX #$00
+
+
+InitVariables:
+  LDA #$01
+  STA nmiTimer
+
+  LDA #$00
+  STA health
+
+  LDA #$01
+  STA attributesNeedReloading

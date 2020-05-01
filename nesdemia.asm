@@ -33,40 +33,42 @@
 .define powerupBottom $23
 .define powerupTimer $24
 .define powerupLifeTime $25
-.define dbg1 $26
-.define dbg2 $27
-.define pillLeft $28
-.define pillTop $29
-.define pillRight $2a
-.define pillBottom $2b
-.define pillTimer $2c
-.define pillLifeTime $2d
-.define virusLeft $2e
-.define virusTop $2f
-.define virusRight $30
-.define virusBottom $31
-.define virusXSpeed $32
-.define virusYSpeed $33
-.define virusXDirection $34
-.define virusYDirection $35
-.define virusAlive $36
-.define virusMoveFrame $37
-.define virusAnimationFrame $38
-.define virusAnimationChangeFrame $39
-.define virusCntr $3a
-.define virusPointer $3b
-.define playerLeft $3c
-.define playerTop $3d
-.define playerRight $3e
-.define playerBottom $3f
-.define playerNucleusLeft $40
-.define playerNucleusTop $41
-.define playerInvincible $42
-.define playerDashing $43
-.define playerSpeed $44
-.define playerPallete $45
-.define playerAnimationFrame $46
-.define playerAnimationChangeFrame $47
+.define pillLeft $26
+.define pillTop $27
+.define pillRight $28
+.define pillBottom $29
+.define pillTimer $2a
+.define pillLifeTime $2b
+.define virusLeft $2c
+.define virusTop $2d
+.define virusRight $2e
+.define virusBottom $2f
+.define virusXSpeed $30
+.define virusYSpeed $31
+.define virusXDirection $32
+.define virusYDirection $33
+.define virusAlive $34
+.define virusMoveFrame $35
+.define virusAnimationFrame $36
+.define virusAnimationChangeFrame $37
+.define virusCntr $38
+.define virusPointer $39
+.define playerLeft $3a
+.define playerTop $3b
+.define playerRight $3c
+.define playerBottom $3d
+.define playerNucleusLeft $3e
+.define playerNucleusTop $3f
+.define playerInvincible $40
+.define playerDashing $41
+.define playerSpeed $42
+.define playerPallete $43
+.define playerAnimationFrame $44
+.define playerAnimationChangeFrame $45
+.define health $46
+.define attributesNeedReloading $47
+.define dbg1 $48
+.define dbg2 $49
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -78,6 +80,8 @@
 
 JOYPAD1 = $4016
 JOYPAD2 = $4017
+
+BEGIN_OF_ATTRIBUTES_MEMORY = $bf
 
 BUTTON_A      = 1 << 7
 BUTTON_B      = 1 << 6
@@ -112,64 +116,11 @@ PLAYER_CHANGE_FRAME_INTERVAL = $08
 COLLISSION = $01
 NO_COLLISSION = $00
 
+LUNG_HEALTHY_ATTRIBUTE = %10101010
+LUNG_SICK_ATTRIBUTE = %11111111
 
-Reset:
-  SEI ; Disables all interrupts
-  CLD ; disable decimal mode
 
-  ; Disable sound IRQ
-  LDX #$40
-  STX $4017
-
-  ; Initialize the stack register
-  LDX #$FF
-  TXS
-
-  INX ; #$FF + 1 => #$00
-
-  ; Zero out the PPU registers
-  STX $2000
-  STX $2001
-
-  STX $4010
-
-  :
-    BIT $2002
-    BPL :-
-
-  TXA
-
-CLEARMEM:
-  STA $0000, X ; $0000 => $00FF
-  STA $0100, X ; $0100 => $01FF
-  STA $0300, X
-  STA $0400, X
-  STA $0500, X
-  STA $0600, X
-  STA $0700, X
-  LDA #$FF
-  STA $0200, X ; $0200 => $02FF
-  LDA #$00
-  INX
-  BNE CLEARMEM
-; wait for vblank
-  :
-    BIT $2002
-    BPL :-
-
-  LDA #$02
-  STA $4014
-  NOP
-
-  ; $3F00
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
-  LDA #$01
-  STA nmiTimer
+.include "init.asm"
 
 .include "pallete.asm"
 
@@ -205,16 +156,12 @@ WaitForNmiLoop:
   BEQ WaitForNmiLoop
   RTS
 
-NMI:
-  LDA #$02 ; copy sprite data from $0200 => PPU memory for display
-  STA $4014
-  INC frame
-  INC nmiTimer
-  RTI
+.include "nmi.asm"
 
 .include "gamepad.asm"
 
 RenderGraphics:
+  JSR LoadAttributes
   LDA #$00
   STA spriteCounter
   JSR RenderPlayer
@@ -224,6 +171,8 @@ RenderGraphics:
   JSR RenderPoints
 
   RTS
+
+.include "attributes.asm"
 
 .include "player.asm"
 
