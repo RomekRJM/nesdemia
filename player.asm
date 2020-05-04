@@ -170,7 +170,7 @@ ZeroPlayerPallete:
 
 LowerHealth:
   LDA health
-  CMP #$03
+  CMP #$04
   BCS :+
     INC health
     INC attributesNeedReloading
