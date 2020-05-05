@@ -1,5 +1,3 @@
-32 virusXDirection
-33 virusYDirection
 34 virusAlive
 35 virusMoveFrame
 36 virusAnimationFrame
@@ -20,5 +18,7 @@
 45 playerAnimationChangeFrame
 46 health
 47 attributesNeedReloading
-48 dbg1
-49 dbg2
+48 initReset
+49 resetCounter
+4a dbg1
+4b dbg2

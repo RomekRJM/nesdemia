@@ -67,8 +67,10 @@
 .define playerAnimationChangeFrame $45
 .define health $46
 .define attributesNeedReloading $47
-.define dbg1 $48
-.define dbg2 $49
+.define initReset $48
+.define resetCounter $49
+.define dbg1 $4a
+.define dbg2 $4b
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -134,6 +136,7 @@ MainGameLoop:
   JSR ReactOnInput
   JSR ComputeLogic
   JSR RenderGraphics
+  JSR ResetIfNeeded
   JSR WaitForNmi
   JMP MainGameLoop
 
@@ -154,6 +157,17 @@ WaitForNmi:
 WaitForNmiLoop:
   CMP nmiTimer
   BEQ WaitForNmiLoop
+  RTS
+
+ResetIfNeeded:
+  LDA initReset
+  BEQ :+
+    DEC resetCounter
+    LDA resetCounter
+    BNE :+
+      JMP ($FFFC)
+  :
+
   RTS
 
 .include "nmi.asm"

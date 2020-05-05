@@ -64,3 +64,6 @@ InitVariables:
 
   LDA #$01
   STA attributesNeedReloading
+
+  LDA #$a0
+  STA resetCounter

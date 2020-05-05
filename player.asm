@@ -175,4 +175,11 @@ LowerHealth:
     INC health
     INC attributesNeedReloading
   :
+
+  LDA health
+  CMP #$04
+  BNE :+
+    LDA #$01
+    STA initReset
+  :
   RTS
