@@ -1,5 +1,5 @@
 PaletteData:
-  .byte $1a,$29,$1A,$0F, $22,$36,$17,$0F, $22,$30,$21,$0F, $05,$07,$17,$0F  ;background palette
+  .byte $1a,$29,$1A,$0F, 05,$07,$17,$0F, $22,$36,$17,$0F, $33,$13,$23,$0F  ;background palette
   .byte $1c,$12,$10,$30, $02,$18,$27,$17, $3c,$3d,$05,$17, $22,$37,$1c,$17  ;sprite palette data
 
 Background0:
