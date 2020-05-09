@@ -27,50 +27,53 @@
 .define dim2Source $1d
 .define dim1Destination $1e
 .define dim2Destination $1f
-.define powerupLeft $20
-.define powerupTop $21
-.define powerupRight $22
-.define powerupBottom $23
-.define powerupTimer $24
-.define powerupLifeTime $25
-.define pillLeft $26
-.define pillTop $27
-.define pillRight $28
-.define pillBottom $29
-.define pillTimer $2a
-.define pillLifeTime $2b
-.define virusLeft $2c
-.define virusTop $2d
-.define virusRight $2e
-.define virusBottom $2f
-.define virusXSpeed $30
-.define virusYSpeed $31
-.define virusXDirection $32
-.define virusYDirection $33
-.define virusAlive $34
-.define virusMoveFrame $35
-.define virusAnimationFrame $36
-.define virusAnimationChangeFrame $37
-.define virusCntr $38
-.define virusPointer $39
-.define playerLeft $3a
-.define playerTop $3b
-.define playerRight $3c
-.define playerBottom $3d
-.define playerNucleusLeft $3e
-.define playerNucleusTop $3f
-.define playerInvincible $40
-.define playerDashing $41
-.define playerSpeed $42
-.define playerPallete $43
-.define playerAnimationFrame $44
-.define playerAnimationChangeFrame $45
-.define health $46
-.define attributesNeedReloading $47
-.define initReset $48
-.define resetCounter $49
-.define dbg1 $4a
-.define dbg2 $4b
+.define pillLeft $20
+.define pillTop $21
+.define pillRight $22
+.define pillBottom $23
+.define pillTimer $24
+.define pillLifeTime $25
+.define virusLeft $26
+.define virusTop $27
+.define virusRight $28
+.define virusBottom $29
+.define virusXSpeed $2a
+.define virusYSpeed $2b
+.define virusXDirection $2c
+.define virusYDirection $2d
+.define virusAlive $2e
+.define virusMoveFrame $2f
+.define virusAnimationFrame $30
+.define virusAnimationChangeFrame $31
+.define virusCntr $32
+.define virusPointer $33
+.define playerLeft $34
+.define playerTop $35
+.define playerRight $36
+.define playerBottom $37
+.define playerNucleusLeft $38
+.define playerNucleusTop $39
+.define playerInvincible $3a
+.define playerDashing $3b
+.define playerSpeed $3c
+.define playerPallete $3d
+.define playerAnimationFrame $3e
+.define playerAnimationChangeFrame $3f
+.define playerDashEnergy $40
+.define playerAttacks $41
+.define health $42
+.define attributesNeedReloading $43
+.define initReset $44
+.define resetCounter $45
+.define powerupLeft $46
+.define powerupTop $47
+.define powerupRight $48
+.define powerupBottom $49
+.define powerupTimer $4a
+.define powerupLifeTime $4b
+.define powerupType $4c
+.define dbg1 $4d
+.define dbg2 $4e
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -107,6 +110,8 @@ PILL_HEIGHT = $08
 POWERUP_LIFE_TIME = $01
 POWERUP_WIDTH = $08
 POWERUP_HEIGHT = $08
+POWERUP_DASH = $00
+POWERUP_ATTACK = $01
 
 PLAYER_WIDTH = $10
 PLAYER_HEIGHT = $10
@@ -114,6 +119,9 @@ PLAYER_DASHING_TIMEOUT = $1f
 PLAYER_NORMAL_SPEED = $01
 PLAYER_DASH_SPEED = $03
 PLAYER_CHANGE_FRAME_INTERVAL = $08
+PLAYER_ATTACK_MAX = $09
+PLAYER_DASH_INCREMENT = $10
+PLAYER_DASH_MAX = $30
 
 COLLISSION = $01
 NO_COLLISSION = $00
@@ -150,6 +158,7 @@ ComputeLogic:
 CheckCollisions:
   JSR CheckCollisionWithPill
   JSR CheckVirusesCollideWithPlayer
+  JSR CheckCollisionWithPowerup
   RTS
 
 WaitForNmi:

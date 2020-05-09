@@ -6,28 +6,34 @@ SpawnPowerup:
   :
 
   INC powerupTimer
-
+  BNE EndOfPowerupSpawning
+  DEC powerupLifeTime
+  BNE EndOfPowerupSpawning
+  ; by default powerup type is dash
+  LDY #POWERUP_DASH
+  ; powerups have 3/8 chance to be spawned
+  JSR NextRandom3Bits
+  CMP #$05
+  BCC EndOfPowerupSpawning ; aka don't spawn it
   BNE :+
-    DEC powerupLifeTime
-    BNE :+
-      ; powerups have 3/8 chance to be spawned
-      JSR NextRandom3Bits
-      CMP #$05
-      BCC :+ ; aka don't spawn it
-
-      LDA frame
-      JSR NextRandom16To206
-      STA powerupLeft
-      CLC
-      ADC #POWERUP_WIDTH
-      STA powerupRight
-      JSR NextRandom16To206
-      STA powerupTop
-      CLC
-      ADC #POWERUP_HEIGHT
-      STA powerupBottom
-      RTS
+    ; this powerup is attack
+    LDY #POWERUP_ATTACK
   :
+  STY powerupType
+
+  LDA frame
+  JSR NextRandom16To206
+  STA powerupLeft
+  CLC
+  ADC #POWERUP_WIDTH
+  STA powerupRight
+  JSR NextRandom16To206
+  STA powerupTop
+  CLC
+  ADC #POWERUP_HEIGHT
+  STA powerupBottom
+
+EndOfPowerupSpawning:
   RTS
 
 ForcePowerupRespawn:

@@ -132,6 +132,61 @@ CheckCollisionWithPill:
 
   RTS
 
+
+CheckCollisionWithPowerup:
+  LDA #COLLISSION
+  STA playerCollidesWithObject
+
+  LDA playerLeft
+  STA dim1Source
+  LDA playerRight
+  STA dim2Source
+  LDA powerupLeft
+  STA dim1Destination
+  LDA powerupRight
+  STA dim2Destination
+  JSR DetectCollision
+
+  LDA playerTop
+  STA dim1Source
+  LDA playerBottom
+  STA dim2Source
+  LDA powerupTop
+  STA dim1Destination
+  LDA powerupBottom
+  STA dim2Destination
+  JSR DetectCollision
+
+  LDA playerCollidesWithObject
+  CMP #COLLISSION
+  BNE :+
+    LDA powerupType
+    BNE AddDash
+    LDA playerAttacks
+    CMP #PLAYER_ATTACK_MAX
+    BCS AddDash
+    BEQ AddDash
+    INC playerAttacks
+    JSR ForcePowerupRespawn
+    RTS
+
+    AddDash:
+    LDA #PLAYER_DASH_INCREMENT
+    CLC
+    ADC playerDashEnergy
+    CMP #PLAYER_DASH_MAX
+    BCC :+
+    BEQ :+
+    LDA #PLAYER_DASH_MAX
+    STA playerDashEnergy
+    JSR ForcePowerupRespawn
+    RTS
+
+  :
+
+  RTS
+
+
 DetectCollision:
   LDA dim1Source
   CMP dim2Destination
