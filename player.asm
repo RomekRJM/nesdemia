@@ -159,31 +159,35 @@ CheckCollisionWithPowerup:
 
   LDA playerCollidesWithObject
   CMP #COLLISSION
-  BNE :+
-    LDA powerupType
-    BNE AddDash
-    LDA playerAttacks
-    CMP #PLAYER_ATTACK_MAX
-    BCS AddDash
-    BEQ AddDash
-    INC playerAttacks
-    JSR ForcePowerupRespawn
-    RTS
+  BNE EndOfPowerupCollision
 
-    AddDash:
-    LDA #PLAYER_DASH_INCREMENT
-    CLC
-    ADC playerDashEnergy
-    CMP #PLAYER_DASH_MAX
-    BCC :+
-    BEQ :+
-    LDA #PLAYER_DASH_MAX
-    STA playerDashEnergy
-    JSR ForcePowerupRespawn
-    RTS
+  JSR ForcePowerupRespawn
+  LDA powerupActive
+  BEQ EndOfPowerupCollision
+  DEC powerupActive
 
-  :
+  LDA powerupType
+  BNE AddDash
+  LDA playerAttacks
+  CMP #PLAYER_ATTACK_MAX
+  BCS EndOfPowerupCollision
+  BEQ EndOfPowerupCollision
+  INC playerAttacks
+  RTS
 
+AddDash:
+  LDA #PLAYER_DASH_INCREMENT
+  CLC
+  ADC playerDashEnergy
+  STA playerDashEnergy
+  CMP #PLAYER_DASH_MAX
+  BCC EndOfPowerupCollision
+  BEQ EndOfPowerupCollision
+  LDA #PLAYER_DASH_MAX
+  STA playerDashEnergy
+  RTS
+
+EndOfPowerupCollision:
   RTS
 
 

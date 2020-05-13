@@ -72,8 +72,9 @@
 .define powerupTimer $4a
 .define powerupLifeTime $4b
 .define powerupType $4c
-.define dbg1 $4d
-.define dbg2 $4e
+.define powerupActive $4d
+.define dbg1 $4e
+.define dbg2 $4f
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2

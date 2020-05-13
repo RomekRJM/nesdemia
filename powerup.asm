@@ -33,6 +33,9 @@ SpawnPowerup:
   ADC #POWERUP_HEIGHT
   STA powerupBottom
 
+  LDA #$01
+  STA powerupActive
+
 EndOfPowerupSpawning:
   RTS
 
@@ -56,7 +59,7 @@ LoadPowerupSprites:
   CPY #$00
   BNE :+
    CLC
-  ADC powerupTop
+   ADC powerupTop
   :
 
   STA $0200, X
