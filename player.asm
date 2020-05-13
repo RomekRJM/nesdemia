@@ -2,8 +2,7 @@ RenderPlayer:
   LDX spriteCounter
   LDY #$00
   LDA playerInvincible
-  CMP #$01
-  BNE LoadPlayerNucleus
+  BEQ LoadPlayerNucleus
   LDA frame
   AND #%00010000
   CMP #%00010000

@@ -108,8 +108,22 @@ CheckButtons:
   LDA buttons
   AND #BUTTON_B
   BEQ :+
-    LDA #$01
+    LDA playerAttacks
+    BEQ :+
+    LDA playerInvincible
+    BNE :+
+    DEC playerAttacks
+    LDA #PLAYER_INVINCIBLE_DURATION
     STA playerInvincible
+  :
+
+  LDA playerInvincible
+  BNE :+
+    LDA #$00
+    STA playerInvincible
+  :
+  BEQ :+
+    DEC playerInvincible
   :
 
   RTS
