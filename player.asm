@@ -1,11 +1,12 @@
 RenderPlayer:
   LDX spriteCounter
   LDY #$00
+  STY playerPallete
   LDA playerInvincible
   BEQ LoadPlayerNucleus
   LDA frame
-  AND #%00010000
-  CMP #%00010000
+  AND #%00001000
+  CMP #%00001000
   BNE LoadPlayerNucleus
   JSR ChangePlayerPallete
 LoadPlayerNucleus:
