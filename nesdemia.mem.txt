@@ -2,11 +2,11 @@
 39 playerNucleusTop
 3a playerInvincible
 3b playerDashing
-3c playerSpeed
-3d playerPallete
-3e playerAnimationFrame
-3f playerAnimationChangeFrame
-40 playerDashEnergy
+3c playerDashCount
+3d playerSpeed
+3e playerPallete
+3f playerAnimationFrame
+40 playerAnimationChangeFrame
 41 playerAttacks
 42 health
 43 attributesNeedReloading

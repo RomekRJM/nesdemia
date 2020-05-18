@@ -178,13 +178,13 @@ CheckCollisionWithPowerup:
 AddDash:
   LDA #PLAYER_DASH_INCREMENT
   CLC
-  ADC playerDashEnergy
-  STA playerDashEnergy
+  ADC playerDashCount
+  STA playerDashCount
   CMP #PLAYER_DASH_MAX
   BCC EndOfPowerupCollision
   BEQ EndOfPowerupCollision
   LDA #PLAYER_DASH_MAX
-  STA playerDashEnergy
+  STA playerDashCount
   RTS
 
 EndOfPowerupCollision:

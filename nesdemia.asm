@@ -55,11 +55,11 @@
 .define playerNucleusTop $39
 .define playerInvincible $3a
 .define playerDashing $3b
-.define playerSpeed $3c
-.define playerPallete $3d
-.define playerAnimationFrame $3e
-.define playerAnimationChangeFrame $3f
-.define playerDashEnergy $40
+.define playerDashCount $3c
+.define playerSpeed $3d
+.define playerPallete $3e
+.define playerAnimationFrame $3f
+.define playerAnimationChangeFrame $40
 .define playerAttacks $41
 .define health $42
 .define attributesNeedReloading $43
@@ -122,8 +122,8 @@ PLAYER_DASH_SPEED = $03
 PLAYER_CHANGE_FRAME_INTERVAL = $08
 PLAYER_ATTACK_MAX = $09
 PLAYER_INVINCIBLE_DURATION = $ff
-PLAYER_DASH_INCREMENT = $10
-PLAYER_DASH_MAX = $30
+PLAYER_DASH_INCREMENT = $02
+PLAYER_DASH_MAX = $10
 
 COLLISSION = $01
 NO_COLLISSION = $00

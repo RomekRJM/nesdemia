@@ -99,10 +99,13 @@ CheckButtons:
   LDA buttons
   AND #BUTTON_A
   BEQ :+
+    LDA playerDashCount
+    BEQ :+
     LDA playerDashing
     BNE :+
       LDA #PLAYER_DASHING_TIMEOUT
       STA playerDashing
+      DEC playerDashCount
   :
 
   LDA buttons
