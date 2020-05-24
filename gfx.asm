@@ -152,8 +152,11 @@ PlayerDataNucleus:
 PillData:
   .byte $00, $75, $01, $00
 
-PowerupData:
-  .byte $00, $74, $01, $00
+PowerupDashData:
+  .byte $00, $74, $00, $00
+
+PowerupAttackData:
+  .byte $00, $73, $00, $00
 
 VirusData0:
   .byte $00, $c2, $02, $00

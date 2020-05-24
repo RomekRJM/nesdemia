@@ -167,7 +167,7 @@ CheckCollisionWithPowerup:
   DEC powerupActive
 
   LDA powerupType
-  BNE AddDash
+  BEQ AddDash
   LDA playerAttacks
   CMP #PLAYER_ATTACK_MAX
   BCS EndOfPowerupCollision

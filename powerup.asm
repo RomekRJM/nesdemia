@@ -1,3 +1,4 @@
+
 SpawnPowerup:
   LDA powerupLifeTime
   BNE :+
@@ -50,7 +51,13 @@ RenderPowerup:
   LDX spriteCounter
   LDY #$00
 LoadPowerupSprites:
-  LDA PowerupData, Y
+  LDA powerupType
+  BNE :+
+    LDA PowerupDashData, Y
+    JMP ContinuePowerupLoading
+  :
+  LDA PowerupAttackData, Y
+ContinuePowerupLoading:
   CPY #$03
   BNE :+
     CLC
