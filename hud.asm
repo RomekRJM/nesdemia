@@ -1,4 +1,4 @@
-RenderPoints:
+RenderHUD:
   LDA #$00
   STA renderedNumberOffset
   LDA pointIndex0
@@ -34,6 +34,8 @@ RenderPoints:
   LDA dashIndex1
   STA renderedNumber
   JSR RenderPoint
+
+  JSR RenderPowerupHUD
 
   RTS
 
@@ -93,6 +95,44 @@ LoadPointSprites:
   INY
   CPY #$04
   BNE LoadPointSprites
+  STX spriteCounter
+  RTS
+
+
+RenderPowerupHUD:
+  LDX spriteCounter
+  LDY #$00
+LoadAttackPowerupHUDLoop:
+  LDA PowerupAttackData, Y
+  CPY #$00
+  BNE :+
+    LDA #$0f
+  :
+  CPY #$03
+  BNE :+
+    LDA #$08
+  :
+  STA $0200, X
+  INX
+  INY
+  CPY #$04
+  BNE LoadAttackPowerupHUDLoop
+  LDY #$00
+LoadDashPowerupHUDLoop:
+  LDA PowerupDashData, Y
+  CPY #$00
+  BNE :+
+    LDA #$0f
+  :
+  CPY #$03
+  BNE :+
+    LDA #$2f
+  :
+  STA $0200, X
+  INX
+  INY
+  CPY #$04
+  BNE LoadDashPowerupHUDLoop
   STX spriteCounter
   RTS
 

@@ -196,7 +196,7 @@ RenderGraphics:
   JSR RenderPill
   JSR RenderPowerup
   JSR RenderViruses
-  JSR RenderPoints
+  JSR RenderHUD
 
   RTS
 
