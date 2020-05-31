@@ -1,5 +1,3 @@
-38 playerNucleusLeft
-39 playerNucleusTop
 3a playerInvincible
 3b playerDashing
 3c playerDashCount
@@ -20,5 +18,7 @@
 4b powerupLifeTime
 4c powerupType
 4d powerupActive
-4e dbg1
-4f dbg2
+4e dashIndex0
+4f dashIndex1
+50 dbg1
+51 dbg2

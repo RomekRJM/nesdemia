@@ -20,8 +20,8 @@
 .define pointIndex1 $16
 .define pointIndex2 $17
 .define points $18
-.define currentPointIndex $19
-.define pointIndexOffset $1a
+.define renderedNumber $19
+.define renderedNumberOffset $1a
 .define playerCollidesWithObject $1b
 .define dim1Source $1c
 .define dim2Source $1d
@@ -73,8 +73,10 @@
 .define powerupLifeTime $4b
 .define powerupType $4c
 .define powerupActive $4d
-.define dbg1 $4e
-.define dbg2 $4f
+.define dashIndex0 $4e
+.define dashIndex1 $4f
+.define dbg1 $50
+.define dbg2 $51
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -155,6 +157,7 @@ ComputeLogic:
   JSR SpawnPowerup
   JSR CheckCollisions
   JSR MoveViruses
+  JSR DashToDecimal
   RTS
 
 CheckCollisions:
@@ -203,7 +206,7 @@ RenderGraphics:
 
 .include "virus.asm"
 
-.include "points.asm"
+.include "hud.asm"
 
 .include "pill.asm"
 

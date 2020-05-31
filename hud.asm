@@ -1,26 +1,38 @@
 RenderPoints:
   LDA #$00
-  STA pointIndexOffset
+  STA renderedNumberOffset
   LDA pointIndex0
-  STA currentPointIndex
+  STA renderedNumber
   JSR RenderPoint
 
   LDA #$09
-  STA pointIndexOffset
+  STA renderedNumberOffset
   LDA pointIndex1
-  STA currentPointIndex
+  STA renderedNumber
   JSR RenderPoint
 
   LDA #$12
-  STA pointIndexOffset
+  STA renderedNumberOffset
   LDA pointIndex2
-  STA currentPointIndex
+  STA renderedNumber
   JSR RenderPoint
 
   LDA #$df
-  STA pointIndexOffset
+  STA renderedNumberOffset
   LDA playerAttacks
-  STA currentPointIndex
+  STA renderedNumber
+  JSR RenderPoint
+
+  LDA #$af
+  STA renderedNumberOffset
+  LDA dashIndex0
+  STA renderedNumber
+  JSR RenderPoint
+
+  LDA #$b8
+  STA renderedNumberOffset
+  LDA dashIndex1
+  STA renderedNumber
   JSR RenderPoint
 
   RTS
@@ -30,7 +42,7 @@ RenderPoint:
   LDX spriteCounter
   LDY #$00
 LoadPointSprites:
-  LDA currentPointIndex
+  LDA renderedNumber
   CMP #$00
   BNE :+
     LDA Zero, Y
@@ -74,7 +86,7 @@ LoadPointSprites:
   CPY #$03
     BNE :+
     SEC
-    SBC pointIndexOffset
+    SBC renderedNumberOffset
   :
   STA $0200, X
   INX
@@ -112,4 +124,34 @@ Hundreds:
   INC pointIndex2
 
 End:
+  RTS
+
+
+DashToDecimal:
+  LDA #$00
+  STA dashIndex1
+
+  LDA #$ff
+  STA dashIndex0
+  STA $00
+
+DashToDecimalLoop:
+  INC dashIndex0
+  LDX dashIndex0
+  INC $00
+  CPX #$0a
+  BEQ DashTens
+  JMP ContinueDashToDecimalLoop
+
+DashTens:
+  LDX #$00
+  STX dashIndex0
+  INC dashIndex1
+
+ContinueDashToDecimalLoop:
+  LDX $00
+  CPX playerDashCount
+  BNE DashToDecimalLoop
+  BCC DashToDecimalLoop
+
   RTS
