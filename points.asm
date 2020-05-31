@@ -17,6 +17,12 @@ RenderPoints:
   STA currentPointIndex
   JSR RenderPoint
 
+  LDA #$df
+  STA pointIndexOffset
+  LDA playerAttacks
+  STA currentPointIndex
+  JSR RenderPoint
+
   RTS
 
 
