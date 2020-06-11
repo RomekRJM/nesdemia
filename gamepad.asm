@@ -129,4 +129,11 @@ CheckButtons:
     DEC playerInvincible
   :
 
+  LDA buttons
+  AND #BUTTON_START
+  BEQ :+
+    LDA #IN_GAME_MODE
+    STA gameMode
+  :
+
   RTS

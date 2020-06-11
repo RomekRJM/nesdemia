@@ -29,11 +29,3 @@ RenderBackgroundLoop3:
   INX
   CPX #$81
   BNE RenderBackgroundLoop3
-
-
-  LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
-  STA $2000
-  ; Enabling sprites and background for left-most 8 pixels
-  ; Enable sprites and background
-  LDA #%00011110
-  STA $2001

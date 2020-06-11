@@ -75,8 +75,9 @@
 .define powerupActive $4d
 .define dashIndex0 $4e
 .define dashIndex1 $4f
-.define dbg1 $50
-.define dbg2 $51
+.define gameMode $50
+.define dbg1 $51
+.define dbg2 $52
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -127,6 +128,9 @@ PLAYER_INVINCIBLE_DURATION = $ff
 PLAYER_DASH_INCREMENT = $02
 PLAYER_DASH_MAX = $10
 
+MAIN_MENU_MODE = $00
+IN_GAME_MODE = $01
+
 COLLISSION = $01
 NO_COLLISSION = $00
 
@@ -138,7 +142,7 @@ LUNG_SICK_ATTRIBUTE = %11111111
 
 .include "pallete.asm"
 
-.include "background.asm"
+.include "menu.asm"
 
   ; Enable interrupts
   CLI
@@ -146,9 +150,17 @@ LUNG_SICK_ATTRIBUTE = %11111111
 MainGameLoop:
   JSR GetControllerInput
   JSR ReactOnInput
+
+  LDA gameMode
+  CMP #MAIN_MENU_MODE
+  BEQ ContinueMainGameLoop
+
+  .include "background.asm"
   JSR ComputeLogic
   JSR RenderGraphics
   JSR ResetIfNeeded
+
+ContinueMainGameLoop:
   JSR WaitForNmi
   JMP MainGameLoop
 
