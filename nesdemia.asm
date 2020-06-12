@@ -62,23 +62,22 @@
 .define playerAnimationChangeFrame $40
 .define playerAttacks $41
 .define health $42
-.define attributesNeedReloading $43
-.define initReset $44
-.define resetCounter $45
-.define powerupLeft $46
-.define powerupTop $47
-.define powerupRight $48
-.define powerupBottom $49
-.define powerupTimer $4a
-.define powerupLifeTime $4b
-.define powerupType $4c
-.define powerupActive $4d
-.define dashIndex0 $4e
-.define dashIndex1 $4f
-.define gameMode $50
-.define renderBackground $51
-.define dbg1 $52
-.define dbg2 $53
+.define initReset $43
+.define resetCounter $44
+.define powerupLeft $45
+.define powerupTop $46
+.define powerupRight $47
+.define powerupBottom $48
+.define powerupTimer $49
+.define powerupLifeTime $4a
+.define powerupType $4b
+.define powerupActive $4c
+.define dashIndex0 $4d
+.define dashIndex1 $4e
+.define gameMode $4f
+.define refreshBackground $50
+.define dbg1 $51
+.define dbg2 $52
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2

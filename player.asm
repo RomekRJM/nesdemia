@@ -232,7 +232,7 @@ LowerHealth:
   CMP #$04
   BCS :+
     INC health
-    INC attributesNeedReloading
+    INC refreshBackground
   :
 
   LDA health

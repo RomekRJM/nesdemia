@@ -47,7 +47,7 @@ CLEARMEM:
 InitVariables:
   LDA #$01
   STA nmiTimer
-  STA attributesNeedReloading
+  STA refreshBackground
 
   LDA #$a0
   STA resetCounter
