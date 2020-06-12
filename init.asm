@@ -48,7 +48,6 @@ InitVariables:
   LDA #$01
   STA nmiTimer
   STA attributesNeedReloading
-  STA renderBackground
-  
+
   LDA #$a0
   STA resetCounter

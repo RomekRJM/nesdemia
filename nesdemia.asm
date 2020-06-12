@@ -153,7 +153,6 @@ MainGameLoop:
   CMP #MAIN_MENU_MODE
   BEQ ContinueMainGameLoop
 
-  .include "background.asm"
   JSR ComputeLogic
   JSR RenderGraphics
   JSR ResetIfNeeded
@@ -206,7 +205,7 @@ RenderGraphics:
   JSR RenderPowerup
   JSR RenderViruses
   JSR RenderHUD
-  JSR LoadAttributes
+  .include "background.asm"
 
   RTS
 

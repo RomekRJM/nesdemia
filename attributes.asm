@@ -1,10 +1,4 @@
 LoadAttributes:
-  ; reload attribute table
-  LDA attributesNeedReloading
-  BNE :+
-    RTS
-  :
-
   LDA $2002             ; read PPU status to reset the high/low latch
   LDA #$23
   STA $2006             ; write the high byte of $23C0 address
@@ -39,9 +33,6 @@ LoadAttributes:
   BNE :+
     JSR LoadAttributesLoop4
   :
-
-  LDA #$00
-  STA attributesNeedReloading
 
   LDX #$00
 CopyAttributeData:

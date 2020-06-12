@@ -1,5 +1,6 @@
 RenderBackground:
-  LDA renderBackground
+  ; reload attribute table
+  LDA attributesNeedReloading
   BEQ RenderBackgroundFinished
   LDA #$00
 	STA $2000
@@ -47,4 +48,4 @@ RenderBackgroundLoop3:
 
 RenderBackgroundFinished:
   LDA #$00
-  STA renderBackground
+  STA attributesNeedReloading
