@@ -199,7 +199,6 @@ ResetIfNeeded:
 .include "gamepad.asm"
 
 RenderGraphics:
-  JSR LoadAttributes
   LDA #$00
   STA spriteCounter
   JSR RenderPlayer
@@ -207,6 +206,7 @@ RenderGraphics:
   JSR RenderPowerup
   JSR RenderViruses
   JSR RenderHUD
+  JSR LoadAttributes
 
   RTS
 

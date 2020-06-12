@@ -1,12 +1,16 @@
 RenderBackground:
   LDA renderBackground
   BEQ RenderBackgroundFinished
-  LDA $2002             ; read PPU status to reset the high/low latch
-  LDA #$30
-  STA $2006             ; write the high byte of $3000 address
   LDA #$00
-  STA $2006             ; write the low byte of $3000 address
-  LDX #$00
+	STA $2000
+	STA $2001
+
+  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA #$20
+  STA $2006             ; write the high byte of $2000 address
+  LDA #$00
+  STA $2006             ; write the low byte of $2000 address
+  LDX #$00              ; start out at 0
 RenderBackgroundLoop0:
   LDA Background0, X
   STA $2007
@@ -32,8 +36,6 @@ RenderBackgroundLoop3:
   CPX #$81
   BNE RenderBackgroundLoop3
 
-RenderBackgroundFinished:
-
   LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
   STA $2000
   ; Enabling sprites and background for left-most 8 pixels
@@ -41,5 +43,6 @@ RenderBackgroundFinished:
   LDA #%00011110
   STA $2001
 
+RenderBackgroundFinished:
   LDA #$00
   STA renderBackground

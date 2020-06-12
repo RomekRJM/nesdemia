@@ -1,4 +1,5 @@
 LoadAttributes:
+  ; reload attribute table
   LDA attributesNeedReloading
   BNE :+
     RTS
@@ -8,19 +9,49 @@ LoadAttributes:
   LDY health
 
   CPY #$00
-  BEQ LoadAttributesLoop0
+  BNE :+
+    JSR LoadAttributesLoop0
+  :
 
   CPY #$01
-  BEQ LoadAttributesLoop1
+  BNE :+
+    JSR LoadAttributesLoop1
+  :
 
   CPY #$02
-  BEQ LoadAttributesLoop2
+  BNE :+
+    JSR LoadAttributesLoop2
+  :
 
   CPY #$03
-  BEQ LoadAttributesLoop3
+  BNE :+
+    JSR LoadAttributesLoop3
+  :
 
   CPY #$04
-  BEQ LoadAttributesLoop4
+  BNE :+
+    JSR LoadAttributesLoop4
+  :
+
+  LDA #$00
+  STA attributesNeedReloading
+
+  ; Attributes
+  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA #$23
+  STA $2006             ; write the high byte of $23C0 address
+  LDA #$C0
+  STA $2006             ; write the low byte of $23C0 address
+
+  LDX #$00
+CopyAttributeData:
+  LDA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
+  INX
+  CPX #$41
+  BNE CopyAttributeData
+  STX dbg2
+  RTS
 
 LoadAttributesLoop0:
   LDA Attribute0, X
