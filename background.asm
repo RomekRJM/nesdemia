@@ -36,6 +36,8 @@ RenderBackgroundLoop3:
   CPX #$81
   BNE RenderBackgroundLoop3
 
+  JSR LoadAttributes
+
   LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
   STA $2000
   ; Enabling sprites and background for left-most 8 pixels

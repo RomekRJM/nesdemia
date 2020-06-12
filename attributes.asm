@@ -5,6 +5,13 @@ LoadAttributes:
     RTS
   :
 
+  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA #$23
+  STA $2006             ; write the high byte of $23C0 address
+  LDA #$C0
+  STA $2006             ; write the low byte of $23C0 address
+  LDX #$00              ; start out at 0
+
   LDX #$00
   LDY health
 
@@ -35,13 +42,6 @@ LoadAttributes:
 
   LDA #$00
   STA attributesNeedReloading
-
-  ; Attributes
-  LDA $2002             ; read PPU status to reset the high/low latch
-  LDA #$23
-  STA $2006             ; write the high byte of $23C0 address
-  LDA #$C0
-  STA $2006             ; write the low byte of $23C0 address
 
   LDX #$00
 CopyAttributeData:
