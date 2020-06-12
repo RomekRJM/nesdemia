@@ -76,8 +76,9 @@
 .define dashIndex0 $4e
 .define dashIndex1 $4f
 .define gameMode $50
-.define dbg1 $51
-.define dbg2 $52
+.define renderBackground $51
+.define dbg1 $52
+.define dbg2 $53
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -140,12 +141,9 @@ LUNG_SICK_ATTRIBUTE = %11111111
 
 .include "init.asm"
 
-.include "pallete.asm"
+JSR LoadPalettes
 
 .include "menu.asm"
-
-  ; Enable interrupts
-  CLI
 
 MainGameLoop:
   JSR GetControllerInput
@@ -215,6 +213,8 @@ RenderGraphics:
 .include "attributes.asm"
 
 .include "player.asm"
+
+.include "pallete.asm"
 
 .include "virus.asm"
 

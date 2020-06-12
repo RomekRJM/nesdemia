@@ -1,4 +1,3 @@
-3b playerDashing
 3c playerDashCount
 3d playerSpeed
 3e playerPallete
@@ -20,5 +19,6 @@
 4e dashIndex0
 4f dashIndex1
 50 gameMode
-51 dbg1
-52 dbg2
+51 renderBackground
+52 dbg1
+53 dbg2

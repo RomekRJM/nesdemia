@@ -2,10 +2,6 @@ Reset:
   SEI ; Disables all interrupts
   CLD ; disable decimal mode
 
-  ; Disable sound IRQ
-  LDX #$40
-  STX $4017
-
   ; Initialize the stack register
   LDX #$FF
   TXS
@@ -17,10 +13,6 @@ Reset:
   STX $2001
 
   STX $4010
-
-:
-  BIT $2002
-  BPL :-
 
   TXA
 
@@ -37,33 +29,26 @@ CLEARMEM:
   LDA #$00
   INX
   BNE CLEARMEM
+
+  ; Disable sound IRQ
+  LDX #$40
+  STX $4017
+
+  ; Enable interrupts
+  CLI
+
+.repeat 3
 ; wait for vblank
 :
   BIT $2002
   BPL :-
-
-  LDA #$02
-  STA $4014
-  NOP
-
-  ; $3F00
-  LDA #$3F
-  STA $2006
-  LDA #$00
-  STA $2006
-
-  LDX #$00
-
+.endrepeat
 
 InitVariables:
   LDA #$01
   STA nmiTimer
-
-  LDA #$00
-  STA health
-
-  LDA #$01
   STA attributesNeedReloading
-
+  STA renderBackground
+  
   LDA #$a0
   STA resetCounter

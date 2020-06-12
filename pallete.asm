@@ -15,3 +15,5 @@ LoadPalettesLoop:
   INX
   CPX #$20              ; Compare X to hex $10, decimal 16 - copying 16 bytes = 4 sprites
   BNE LoadPalettesLoop
+
+  RTS
