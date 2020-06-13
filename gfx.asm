@@ -292,6 +292,9 @@ VirusData3:
   .byte $08, $92, $02, $00
   .byte $08, $93, $02, $08
 
+MainMenuCursor:
+  .byte $84, $05, $03, $08
+
 Zero:
   .byte $10, $60, $03, $f0
 

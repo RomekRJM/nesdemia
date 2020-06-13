@@ -129,11 +129,35 @@ CheckButtons:
     DEC playerInvincible
   :
 
+  RTS
+
+
+ReactOnInputInMenu:
   LDA buttons
-  AND #BUTTON_START
+  AND #BUTTON_SELECT
   BEQ :+
-    LDA #IN_GAME_MODE
-    STA gameMode
+    LDA previousButtons
+    AND #BUTTON_SELECT
+    BNE :+
+    INC difficultyLevel
+    LDA menuCursorTop
+    CLC
+    ADC #$10
+    STA menuCursorTop
+    CMP #$30
+    BCC :+
+      LDA #$00
+      STA menuCursorTop
+      STA difficultyLevel
   :
 
+  LDA buttons
+  AND #BUTTON_START
+  BEQ EndReactOnInputInMenu
+  LDA #IN_GAME_MODE
+  STA gameMode
+
+EndReactOnInputInMenu:
+  LDA buttons
+  STA previousButtons
   RTS
