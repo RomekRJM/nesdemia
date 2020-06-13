@@ -4,7 +4,8 @@ LoadCursorSprite:
   LDA MainMenuCursor, X
   CPX #$00
   BNE :+
-    LDA menuCursorTop
+    CLC
+    ADC menuCursorTop
   :
 
   STA $0200, X

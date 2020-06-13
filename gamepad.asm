@@ -134,29 +134,21 @@ CheckButtons:
 
 ReactOnInputInMenu:
   LDA buttons
-  AND #BUTTON_UP
+  AND #BUTTON_SELECT
   BEQ :+
-    LDA menuCursorTop
-    SEC
-    SBC $10
-    STA menuCursorTop
-    CMP $50
-    BCS :+
-      LDA $80
-      STA menuCursorTop
-  :
-
-	LDA buttons
-  AND #BUTTON_DOWN
-  BEQ :+
+    LDA previousButtons
+    AND #BUTTON_SELECT
+    BNE :+
+    INC difficultyLevel
     LDA menuCursorTop
     CLC
     ADC #$10
-    LDA menuCursorTop
-    CMP #$80
-    BCS :+
-      LDA #$50
-      LDA menuCursorTop
+    STA menuCursorTop
+    CMP #$30
+    BCC :+
+      LDA #$00
+      STA menuCursorTop
+      STA difficultyLevel
   :
 
   LDA buttons
@@ -165,28 +157,7 @@ ReactOnInputInMenu:
   LDA #IN_GAME_MODE
   STA gameMode
 
-  LDA menuCursorTop
-  CMP #$50
-  BNE :+
-    LDA #$01
-    STA difficultyLevel
-    JMP EndReactOnInputInMenu
-  :
-
-  LDA menuCursorTop
-  CMP #$60
-  BNE :+
-    LDA #$02
-    STA difficultyLevel
-    JMP EndReactOnInputInMenu
-  :
-
-  LDA menuCursorTop
-  CMP #$70
-  BNE :+
-    LDA #$03
-    STA difficultyLevel
-  :
-
 EndReactOnInputInMenu:
+  LDA buttons
+  STA previousButtons
   RTS
