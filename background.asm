@@ -34,7 +34,7 @@ RenderBackgroundLoop3:
   LDA Background3, X
   STA $2007
   INX
-  CPX #$81
+  CPX #$61
   BNE RenderBackgroundLoop3
 
   JSR LoadAttributes

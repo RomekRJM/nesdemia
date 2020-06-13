@@ -30,8 +30,7 @@ RenderMenuBackgroundLoop3:
   CPX #$81
   BNE RenderMenuBackgroundLoop3
 
-
-  LDA #%10000000 ; enable NMI change background to use first chr set of tiles ($0000)
+  LDA #%10010000 ; enable NMI change background to use second chr set of tiles
   STA $2000
   ; Enabling sprites and background for left-most 8 pixels
   ; Enable sprites and background
