@@ -46,41 +46,43 @@
 .define virusMoveFrame $30
 .define virusAnimationFrame $31
 .define virusAnimationChangeFrame $32
-.define virusCntr $33
-.define virusPointer $34
-.define playerLeft $35
-.define playerTop $36
-.define playerRight $37
-.define playerBottom $38
-.define playerNucleusLeft $39
-.define playerNucleusTop $3a
-.define playerInvincible $3b
-.define playerDashing $3c
-.define playerDashCount $3d
-.define playerSpeed $3e
-.define playerPallete $3f
-.define playerAnimationFrame $40
-.define playerAnimationChangeFrame $41
-.define playerAttacks $42
-.define health $43
-.define initReset $44
-.define resetCounter $45
-.define powerupLeft $46
-.define powerupTop $47
-.define powerupRight $48
-.define powerupBottom $49
-.define powerupTimer $4a
-.define powerupLifeTime $4b
-.define powerupType $4c
-.define powerupActive $4d
-.define dashIndex0 $4e
-.define dashIndex1 $4f
-.define gameMode $50
-.define refreshBackground $51
-.define menuCursorTop $52
-.define difficultyLevel $53
-.define dbg1 $54
-.define dbg2 $55
+.define noViruses $33
+.define virusCntr $34
+.define virusPointer $35
+.define playerLeft $36
+.define playerTop $37
+.define playerRight $38
+.define playerBottom $39
+.define playerNucleusLeft $3a
+.define playerNucleusTop $3b
+.define playerInvincible $3c
+.define playerDashing $3d
+.define playerDashCount $3e
+.define playerSpeed $3f
+.define playerPallete $40
+.define playerAnimationFrame $41
+.define playerAnimationChangeFrame $42
+.define playerAttacks $43
+.define health $44
+.define initReset $45
+.define resetCounter $46
+.define powerupLeft $47
+.define powerupTop $48
+.define powerupRight $49
+.define powerupBottom $4a
+.define powerupTimer $4b
+.define powerupLifeTime $4c
+.define powerupType $4d
+.define powerupActive $4e
+.define dashIndex0 $4f
+.define dashIndex1 $50
+.define gameMode $51
+.define previousGameMode $52
+.define refreshBackground $53
+.define menuCursorTop $54
+.define difficultyLevel $55
+.define dbg1 $56
+.define dbg2 $57
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -169,6 +171,7 @@ ContinueMainGameLoop:
 
 
 ComputeLogic:
+  JSR AdjustGameMode
   JSR SpawnPill
   JSR SpawnPowerup
   JSR CheckCollisions
@@ -219,6 +222,8 @@ RenderGraphics:
 .include "attributes.asm"
 
 .include "cursor.asm"
+
+.include "game_mode.asm"
 
 .include "player.asm"
 

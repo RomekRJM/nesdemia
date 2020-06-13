@@ -78,7 +78,7 @@ MoveViruses:
     RTS
   :
 
-  LDA #NO_VIRUSES
+  LDA noViruses
   STA virusCntr
   LDA #$00
   STA virusPointer
@@ -159,7 +159,7 @@ KillVirus:
 
 
 CheckVirusesCollideWithPlayer:
-  LDA #NO_VIRUSES
+  LDA noViruses
   STA virusCntr
   LDA #$00
   STA virusPointer
@@ -235,7 +235,7 @@ RenderViruses:
   STA virusAnimationFrame
 
 InitVirusesRendering:
-  LDA #NO_VIRUSES
+  LDA noViruses
   STA virusCntr
   LDA #$00
   STA virusPointer
