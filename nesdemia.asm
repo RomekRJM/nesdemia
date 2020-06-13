@@ -76,8 +76,11 @@
 .define dashIndex1 $4e
 .define gameMode $4f
 .define refreshBackground $50
-.define dbg1 $51
-.define dbg2 $52
+.define menuCursorTop $51
+.define menuCursorLeft $52
+.define difficultyLevel $53
+.define dbg1 $54
+.define dbg2 $55
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -101,7 +104,7 @@ BUTTON_DOWN   = 1 << 2
 BUTTON_LEFT   = 1 << 1
 BUTTON_RIGHT  = 1 << 0
 
-NO_VIRUSES = $01
+NO_VIRUSES = $0C
 VIRUS_MOVE_INTERVAL = $04
 VIRUS_CHANGE_FRAME_INTERVAL = $0a
 VIRUS_WIDTH = $10
@@ -146,12 +149,16 @@ JSR LoadPalettes
 
 MainGameLoop:
   JSR GetControllerInput
-  JSR ReactOnInput
 
   LDA gameMode
   CMP #MAIN_MENU_MODE
-  BEQ ContinueMainGameLoop
+  BNE :+
+    JSR ReactOnInputInMenu
+    JSR RenderCursor
+    JMP ContinueMainGameLoop
+  :
 
+  JSR ReactOnInput
   JSR ComputeLogic
   JSR RenderGraphics
   JSR ResetIfNeeded
@@ -159,6 +166,7 @@ MainGameLoop:
 ContinueMainGameLoop:
   JSR WaitForNmi
   JMP MainGameLoop
+
 
 ComputeLogic:
   JSR SpawnPill
@@ -209,6 +217,8 @@ RenderGraphics:
   RTS
 
 .include "attributes.asm"
+
+.include "cursor.asm"
 
 .include "player.asm"
 

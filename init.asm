@@ -51,3 +51,9 @@ InitVariables:
 
   LDA #$a0
   STA resetCounter
+
+  LDA #$08
+  STA menuCursorLeft
+
+  LDA #$a0
+  STA menuCursorTop
