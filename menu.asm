@@ -27,7 +27,7 @@ RenderMenuBackgroundLoop3:
   LDA MenuBackground3, X
   STA $2007
   INX
-  CPX #$81
+  CPX #$C1
   BNE RenderMenuBackgroundLoop3
 
   LDA #%10010000 ; enable NMI change background to use second chr set of tiles
