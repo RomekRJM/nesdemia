@@ -95,8 +95,6 @@
 JOYPAD1 = $4016
 JOYPAD2 = $4017
 
-BEGIN_OF_ATTRIBUTES_MEMORY = $0400
-
 BUTTON_A      = 1 << 7
 BUTTON_B      = 1 << 6
 BUTTON_SELECT = 1 << 5
@@ -147,7 +145,7 @@ LUNG_SICK_ATTRIBUTE = %11111111
 
 JSR LoadPalettes
 
-.include "menu.asm"
+.include "menu_background.asm"
 
 MainGameLoop:
   JSR GetControllerInput
@@ -220,6 +218,8 @@ RenderGraphics:
   RTS
 
 .include "attributes.asm"
+
+.include "menu_attributes.asm"
 
 .include "cursor.asm"
 

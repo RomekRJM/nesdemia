@@ -34,19 +34,11 @@ LoadAttributes:
     JSR LoadAttributesLoop4
   :
 
-  LDX #$00
-CopyAttributeData:
-  LDA BEGIN_OF_ATTRIBUTES_MEMORY, X
-  STA $2007
-  INX
-  CPX #$40
-  BNE CopyAttributeData
-  STX dbg2
   RTS
 
 LoadAttributesLoop0:
   LDA Attribute0, X
-  STA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
   INX
   CPX #$40
   BNE LoadAttributesLoop0
@@ -54,7 +46,7 @@ LoadAttributesLoop0:
 
 LoadAttributesLoop1:
   LDA Attribute1, X
-  STA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
   INX
   CPX #$40
   BNE LoadAttributesLoop1
@@ -62,7 +54,7 @@ LoadAttributesLoop1:
 
 LoadAttributesLoop2:
   LDA Attribute2, X
-  STA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
   INX
   CPX #$40
   BNE LoadAttributesLoop2
@@ -70,7 +62,7 @@ LoadAttributesLoop2:
 
 LoadAttributesLoop3:
   LDA Attribute3, X
-  STA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
   INX
   CPX #$40
   BNE LoadAttributesLoop3
@@ -78,7 +70,7 @@ LoadAttributesLoop3:
 
 LoadAttributesLoop4:
   LDA Attribute4, X
-  STA BEGIN_OF_ATTRIBUTES_MEMORY, X
+  STA $2007
   INX
   CPX #$40
   BNE LoadAttributesLoop4
