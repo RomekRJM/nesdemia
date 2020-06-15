@@ -51,3 +51,7 @@ InitVariables:
 
   LDA #$a0
   STA resetCounter
+
+  LDA #$80
+  STA playerTop
+  STA playerLeft

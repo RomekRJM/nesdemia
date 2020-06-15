@@ -104,10 +104,6 @@ RenderPowerupHUD:
   LDY #$00
 LoadAttackPowerupHUDLoop:
   LDA PowerupAttackData, Y
-  CPY #$00
-  BNE :+
-    LDA #$0f
-  :
   CPY #$03
   BNE :+
     LDA #$08
@@ -120,10 +116,6 @@ LoadAttackPowerupHUDLoop:
   LDY #$00
 LoadDashPowerupHUDLoop:
   LDA PowerupDashData, Y
-  CPY #$00
-  BNE :+
-    LDA #$0f
-  :
   CPY #$03
   BNE :+
     LDA #$2f
