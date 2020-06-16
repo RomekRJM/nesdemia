@@ -1,7 +1,4 @@
 AdjustGameMode:
-
-  LDA gameMode
-
   LDA previousGameMode
   CMP #MAIN_MENU_MODE
   BNE :+
@@ -11,10 +8,20 @@ AdjustGameMode:
       JSR ChangeToInGame
   :
 
+  LDA previousGameMode
+  CMP #IN_GAME_MODE
+  BNE :+
+    LDA gameMode
+    CMP #GAME_OVER_MODE
+    BNE :+
+      JSR ChangeToGameOver
+  :
+
   LDA gameMode
   STA previousGameMode
 
   RTS
+
 
 ChangeToInGame:
   LDA difficultyLevel
@@ -37,5 +44,17 @@ ChangeToInGame:
     LDA #$0A
     STA noViruses
   :
+
+  RTS
+
+
+ChangeToGameOver:
+  LDX #$00
+
+ClearSprites:
+  LDA #$ff
+  STA $0200, X
+  INX
+  BNE ClearSprites
 
   RTS

@@ -85,8 +85,9 @@
 .define refreshBackground $57
 .define menuCursorTop $58
 .define difficultyLevel $59
-.define dbg1 $5a
-.define dbg2 $5b
+.define gameOverRendered $5a
+.define dbg1 $5b
+.define dbg2 $5c
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -137,6 +138,7 @@ PLAYER_DASH_MAX = $10
 
 MAIN_MENU_MODE = $00
 IN_GAME_MODE = $01
+GAME_OVER_MODE = $02
 
 COLLISSION = $01
 NO_COLLISSION = $00
@@ -161,13 +163,20 @@ MainGameLoop:
     JSR RenderCursor
     JMP ContinueMainGameLoop
   :
+  LDA gameMode
+  CMP #GAME_OVER_MODE
+  BNE :+
+    JSR AdjustGameMode
+    JSR RenderGameOver
+    JMP ContinueMainGameLoop
+  :
 
   JSR ReactOnInput
   JSR ComputeLogic
   JSR RenderGraphics
-  JSR ResetIfNeeded
 
 ContinueMainGameLoop:
+  JSR ResetIfNeeded
   JSR WaitForNmi
   JMP MainGameLoop
 
@@ -199,6 +208,12 @@ ResetIfNeeded:
   BEQ :+
     DEC resetCounter
     LDA resetCounter
+    CMP #$A0
+    BNE :+
+      LDA #GAME_OVER_MODE
+      STA gameMode
+    :
+    LDA resetCounter
     BNE :+
       JMP ($FFFC)
   :
@@ -218,6 +233,16 @@ RenderGraphics:
   JSR RenderViruses
   JSR RenderHUD
   .include "game_background.asm"
+
+  RTS
+
+RenderGameOver:
+  LDA gameOverRendered
+
+  BNE :+
+    .include "game_over_background.asm"
+    INC gameOverRendered
+  :
 
   RTS
 

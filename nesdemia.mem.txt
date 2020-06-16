@@ -1,4 +1,3 @@
-44 playerPallete
 45 playerAnimationFrame
 46 playerAnimationChangeFrame
 47 playerAttacks
@@ -20,5 +19,6 @@
 57 refreshBackground
 58 menuCursorTop
 59 difficultyLevel
-5a dbg1
-5b dbg2
+5a gameOverRendered
+5b dbg1
+5c dbg2
