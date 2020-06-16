@@ -2,7 +2,9 @@ NextRandomByte:
   LDA randomByte
   ROL
   ROL
+  CLC
   ADC randomByte
+  CLC
   ADC #$17
   STA randomByte
   RTS
@@ -51,5 +53,5 @@ NextRandom16To206:
   ADC $00
   CLC
   ADC #$10
-  
+
   RTS
