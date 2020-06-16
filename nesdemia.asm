@@ -81,8 +81,10 @@
 .define refreshBackground $53
 .define menuCursorTop $54
 .define difficultyLevel $55
-.define dbg1 $56
-.define dbg2 $57
+.define backgroundPointerLo $56
+.define backgroundPointerHi $57
+.define dbg1 $58
+.define dbg2 $59
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -216,6 +218,8 @@ RenderGraphics:
   .include "game_background.asm"
 
   RTS
+
+.include "background.asm"
 
 .include "game_attributes.asm"
 

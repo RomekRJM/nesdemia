@@ -1,34 +1,10 @@
 RenderMenuBackground:
-  LDA $2002             ; read PPU status to reset the high/low latch
-  LDA #$20
-  STA $2006             ; write the high byte of $3000 address
-  LDA #$00
-  STA $2006             ; write the low byte of $3000 address
-  LDX #$00
-RenderMenuBackgroundLoop0:
-  LDA MenuBackground0, X
-  STA $2007
-  INX
-  BNE RenderMenuBackgroundLoop0
-  LDX #$00
-RenderMenuBackgroundLoop1:
-  LDA MenuBackground1, X
-  STA $2007
-  INX
-  BNE RenderMenuBackgroundLoop1
-  LDX #$00
-RenderMenuBackgroundLoop2:
-  LDA MenuBackground2, X
-  STA $2007
-  INX
-  BNE RenderMenuBackgroundLoop2
-  LDX #$00
-RenderMenuBackgroundLoop3:
-  LDA MenuBackground3, X
-  STA $2007
-  INX
-  CPX #$C1
-  BNE RenderMenuBackgroundLoop3
+
+  LDA #.LOBYTE(MenuBackground)
+  STA backgroundPointerLo
+  LDA #.HIBYTE(MenuBackground)
+  STA backgroundPointerHi
+  JSR RenderBackground
 
   JSR LoadMenuAttributes
 

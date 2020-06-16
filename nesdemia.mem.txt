@@ -1,5 +1,3 @@
-40 playerPallete
-41 playerAnimationFrame
 42 playerAnimationChangeFrame
 43 playerAttacks
 44 health
@@ -20,5 +18,7 @@
 53 refreshBackground
 54 menuCursorTop
 55 difficultyLevel
-56 dbg1
-57 dbg2
+56 backgroundPointerLo
+57 backgroundPointerHi
+58 dbg1
+59 dbg2
