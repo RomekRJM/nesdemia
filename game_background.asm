@@ -10,10 +10,9 @@ RenderGameBackground:
   STA backgroundPointerLo       ; put the low byte of the address of background into pointer
   LDA #.HIBYTE(Background)
   STA backgroundPointerHi       ; put the high byte of the address into pointer
-
   JSR RenderBackground
 
-  JSR LoadAttributes
+  JSR LoadGameAttributes
 
   LDA #$00
   STA $2005
