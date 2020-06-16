@@ -213,11 +213,11 @@ RenderGraphics:
   JSR RenderPowerup
   JSR RenderViruses
   JSR RenderHUD
-  .include "background.asm"
+  .include "game_background.asm"
 
   RTS
 
-.include "attributes.asm"
+.include "game_attributes.asm"
 
 .include "menu_attributes.asm"
 
