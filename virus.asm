@@ -27,13 +27,16 @@ LoadVirus:
   LDA $0100 ,Y
   STA virusAlive
   INY
+  LDA $0100 ,Y
+  STA virusSmart
+  INY
   STY virusPointer
   RTS
 
 StoreVirus:
   LDA virusPointer
   SEC
-  SBC #$09
+  SBC #$0A
   TAY
   LDA virusLeft
   STA $0100 ,Y
@@ -60,6 +63,9 @@ StoreVirus:
   STA $0100 ,Y
   INY
   LDA virusAlive
+  STA $0100 ,Y
+  INY
+  LDA virusSmart
   STA $0100 ,Y
   INY
   STY virusPointer
@@ -275,6 +281,15 @@ LoadVirusSprites:
     CLC
     ADC virusTop
   :
+  CPX #$02
+  BNE SetVirusFrame
+  STA $02
+  LDA virusSmart
+  BEQ :+
+    LDA #$03
+    STA $02
+  :
+  LDA $02
 
 SetVirusFrame:
   INX
@@ -295,6 +310,15 @@ SetVirusFrame:
   RTS
 
 SpawnNewVirus:
+  LDA #$00
+  STA virusSmart
+  JSR NextRandom3Bits
+  CMP #$05
+  BCS :+
+    LDA #$01
+    STA virusSmart
+  :
+
   JSR NextRandom1or2
   STA virusXSpeed
   JSR NextRandom1or2
