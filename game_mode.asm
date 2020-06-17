@@ -10,13 +10,21 @@ AdjustGameMode:
 
   LDA previousGameMode
   CMP #IN_GAME_MODE
+  BNE SavePreviousGameMode
+
+  LDA gameMode
+  CMP #GAME_OVER_MODE
   BNE :+
-    LDA gameMode
-    CMP #GAME_OVER_MODE
-    BNE :+
-      JSR ChangeToGameOver
+    JSR ClearSprites
+    JMP SavePreviousGameMode
   :
 
+  CMP #GAME_COMPLETED_MODE
+  BNE :+
+    JSR ClearSprites
+  :
+
+SavePreviousGameMode:
   LDA gameMode
   STA previousGameMode
 
@@ -48,13 +56,13 @@ ChangeToInGame:
   RTS
 
 
-ChangeToGameOver:
+ClearSprites:
   LDX #$00
 
-ClearSprites:
+ClearSpritesLoop:
   LDA #$ff
   STA $0200, X
   INX
-  BNE ClearSprites
+  BNE ClearSpritesLoop
 
   RTS

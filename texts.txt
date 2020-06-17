@@ -17,10 +17,10 @@ G 10
 H 11
 I 12
 J 13
-K 14                G  A  M  E   O  V  E  R
-L 15                10 0A 16 0E  18 1F 0E 1B
-M 16                Y  O  U  R   P  A  T  I  E  N  T   D  I  E  D
-N 17                22 18 1E 1B  19 0A 1D 12 0E 17 1D  0D 12 0E 0D
+K 14                C  O  N  G  R  A  T  U  L  A  T  I  O  N  S
+L 15                0C 18 17 10 1B 0A 1D 1E 15 0A 1D 12 18 17 1C
+M 16                Y  O  U   H  A  V  E   C  U  R  E  D   T  H  E   P  A  T  I  E  N  T
+N 17                22 18 1E  11 0A 1F 0E  0C 1E 1B 0E 0D 19 0A 1D 12 0E 17 1D
 O 18
 P 19
 Q 1A

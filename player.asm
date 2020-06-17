@@ -122,14 +122,23 @@ CheckCollisionWithPill:
 
   LDA playerCollidesWithObject
   CMP #COLLISSION
-  BNE :+
-    INC points
-    JSR PointsToDecimal
-    JSR ForcePillRespawn
-    LDA #NO_COLLISSION
-    STA playerCollidesWithObject
-  :
+  BNE EndCheckCollisionWithPill
 
+  INC points
+  LDA points
+  CMP #POINTS_TO_WIN
+  BNE :+
+    LDA #GAME_COMPLETED_MODE
+    STA gameMode
+    LDA #$01
+    STA initReset
+  :
+  JSR PointsToDecimal
+  JSR ForcePillRespawn
+  LDA #NO_COLLISSION
+  STA playerCollidesWithObject
+
+EndCheckCollisionWithPill:
   RTS
 
 

@@ -85,7 +85,7 @@
 .define refreshBackground $57
 .define menuCursorTop $58
 .define difficultyLevel $59
-.define gameOverRendered $5a
+.define gameEndRendered $5a
 .define dbg1 $5b
 .define dbg2 $5c
 
@@ -139,12 +139,15 @@ PLAYER_DASH_MAX = $10
 MAIN_MENU_MODE = $00
 IN_GAME_MODE = $01
 GAME_OVER_MODE = $02
+GAME_COMPLETED_MODE = $03
 
 COLLISSION = $01
 NO_COLLISSION = $00
 
 LUNG_HEALTHY_ATTRIBUTE = %10101010
 LUNG_SICK_ATTRIBUTE = %11111111
+
+POINTS_TO_WIN = $03
 
 
 .include "init.asm"
@@ -168,6 +171,13 @@ MainGameLoop:
   BNE :+
     JSR AdjustGameMode
     JSR RenderGameOver
+    JMP ContinueMainGameLoop
+  :
+  LDA gameMode
+  CMP #GAME_COMPLETED_MODE
+  BNE :+
+    JSR AdjustGameMode
+    JSR RenderGameCompleted
     JMP ContinueMainGameLoop
   :
 
@@ -237,11 +247,21 @@ RenderGraphics:
   RTS
 
 RenderGameOver:
-  LDA gameOverRendered
+  LDA gameEndRendered
 
   BNE :+
     .include "game_over_background.asm"
-    INC gameOverRendered
+    INC gameEndRendered
+  :
+
+  RTS
+
+RenderGameCompleted:
+  LDA gameEndRendered
+
+  BNE :+
+    .include "game_completed_background.asm"
+    INC gameEndRendered
   :
 
   RTS

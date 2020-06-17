@@ -19,6 +19,6 @@
 57 refreshBackground
 58 menuCursorTop
 59 difficultyLevel
-5a gameOverRendered
+5a gameEndRendered
 5b dbg1
 5c dbg2
