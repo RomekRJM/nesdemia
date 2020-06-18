@@ -116,6 +116,7 @@ MoveVirus:
   BNE :+
     LDA #$00
     STA virusXDirection
+    STA virusXSpeed
   :
   BCS :+
     LDA #$01
@@ -134,6 +135,7 @@ MoveVirus:
   BNE :+
     LDA #$00
     STA virusYDirection
+    STA virusYSpeed
   :
   BCS :+
     LDA #$01
