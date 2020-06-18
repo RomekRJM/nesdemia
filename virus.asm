@@ -105,6 +105,45 @@ MoveVirus:
     JSR SpawnNewVirus
   :
 
+  LDA virusSmart
+  BEQ MoveVirusOnX
+
+  LDA #$01
+  STA virusXSpeed
+  LDA playerLeft
+  SEC
+  SBC virusLeft
+  BNE :+
+    LDA #$00
+    STA virusXDirection
+  :
+  BCS :+
+    LDA #$01
+    STA virusXDirection
+  :
+  BCC :+
+    LDA #$00
+    STA virusXDirection
+  :
+
+  LDA #$01
+  STA virusYSpeed
+  LDA playerTop
+  SEC
+  SBC virusTop
+  BNE :+
+    LDA #$00
+    STA virusYDirection
+  :
+  BCS :+
+    LDA #$01
+    STA virusYDirection
+  :
+  BCC :+
+    LDA #$00
+    STA virusYDirection
+  :
+
 MoveVirusOnX:
   LDA virusXDirection
   BNE :+
