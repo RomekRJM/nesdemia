@@ -108,7 +108,7 @@ MoveVirus:
   LDA virusSmart
   BEQ MoveVirusOnX
 
-  LDA #$01
+  LDA #$03
   STA virusXSpeed
   LDA playerLeft
   SEC
@@ -127,7 +127,7 @@ MoveVirus:
     STA virusXDirection
   :
 
-  LDA #$01
+  LDA #$03
   STA virusYSpeed
   LDA playerTop
   SEC
@@ -327,7 +327,7 @@ LoadVirusSprites:
   STA $02
   LDA virusSmart
   BEQ :+
-    LDA #$03
+    LDA #$00
     STA $02
   :
   LDA $02
