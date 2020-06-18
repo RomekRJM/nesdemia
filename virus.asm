@@ -108,11 +108,14 @@ MoveVirus:
   LDA virusSmart
   BEQ MoveVirusOnX
 
-  LDA #$03
+  JSR NextRandom3Bits
   STA virusXSpeed
+  STA virusYSpeed
+
   LDA playerLeft
   SEC
   SBC virusLeft
+  STA $00 ; how far on x virus is from the player
   BNE :+
     LDA #$00
     STA virusXDirection
@@ -126,12 +129,17 @@ MoveVirus:
     LDA #$00
     STA virusXDirection
   :
+  LDA virusXSpeed
+  CMP $00
+  BCC :+
+    LDA $00
+    STA virusXSpeed
+  :
 
-  LDA #$03
-  STA virusYSpeed
   LDA playerTop
   SEC
   SBC virusTop
+  STA $00 ; how far on y virus is from the player
   BNE :+
     LDA #$00
     STA virusYDirection
@@ -144,6 +152,12 @@ MoveVirus:
   BCC :+
     LDA #$00
     STA virusYDirection
+  :
+  LDA virusYSpeed
+  CMP $00
+  BCC :+
+    LDA $00
+    STA virusYSpeed
   :
 
 MoveVirusOnX:
