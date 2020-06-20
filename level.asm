@@ -106,3 +106,4 @@ EndCheckWinCondition:
 ; Chance for attack ( 0 - chance for powerup )
 Level:
   .byte $01, $00, $03, $10, $01, $00, $03, $01  ; 1st level
+  .byte $02, $01, $03, $10, $02, $00, $03, $01  ; 2nd level

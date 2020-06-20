@@ -264,15 +264,20 @@ CheckVirusCollidesWithPlayer:
 
   LDA playerCollidesWithObject
   CMP #COLLISSION
-  BNE :+
-    JSR KillVirus
-    LDA #NO_COLLISSION
-    STA playerCollidesWithObject
-    LDA playerInvincible
-    BNE :+
-    JSR LowerHealth
+  BNE EndCheckVirusCollidesWithPlayer
+
+  JSR KillVirus
+  LDA #NO_COLLISSION
+  STA playerCollidesWithObject
+  LDA playerInvincible
+  BEQ :+
+    INC kills
+    JMP EndCheckVirusCollidesWithPlayer
   :
 
+  JSR LowerHealth
+
+EndCheckVirusCollidesWithPlayer:
   RTS
 
 RenderViruses:

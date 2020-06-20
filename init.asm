@@ -48,6 +48,8 @@ InitVariables:
   LDA #$01
   STA nmiTimer
   STA refreshBackground
+
+  LDA #$02
   STA levelNo
 
   LDA #$c0
