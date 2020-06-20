@@ -20,7 +20,7 @@ J 13
 K 14                C  O  N  G  R  A  T  U  L  A  T  I  O  N  S
 L 15                0C 18 17 10 1B 0A 1D 1E 15 0A 1D 12 18 17 1C
 M 16                Y  O  U   H  A  V  E   C  U  R  E  D   T  H  E   P  A  T  I  E  N  T
-N 17                22 18 1E  11 0A 1F 0E  0C 1E 1B 0E 0D 19 0A 1D 12 0E 17 1D
+N 17                22 18 1E  11 0A 1F 0E  0C 1E 1B 0E 0D  1D 11 0E  19 0A 1D 12 0E 17 1D
 O 18
 P 19
 Q 1A

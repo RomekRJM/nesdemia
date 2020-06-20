@@ -5,7 +5,7 @@ AdjustGameMode:
     LDA gameMode
     CMP #IN_GAME_MODE
     BNE :+
-      JSR ChangeToInGame
+      JSR LoadLevel
   :
 
   LDA previousGameMode
@@ -29,32 +29,6 @@ SavePreviousGameMode:
   STA previousGameMode
 
   RTS
-
-
-ChangeToInGame:
-  LDA difficultyLevel
-  CMP #$00
-  BNE :+
-    LDA #$01
-    STA noViruses
-  :
-
-  LDA difficultyLevel
-  CMP #$01
-  BNE :+
-    LDA #$05
-    STA noViruses
-  :
-
-  LDA difficultyLevel
-  CMP #$02
-  BNE :+
-    LDA #$0A
-    STA noViruses
-  :
-
-  RTS
-
 
 ClearSprites:
   LDX #$00

@@ -11,84 +11,95 @@
 .byte $00, $00, $00, $00, $00 ; filler bytes
 .segment "ZEROPAGE" ; LSB 0 - FF
 
-.define nmiTimer $10
-.define buttons $11
-.define previousButtons $12
-.define frame   $13
-.define randomByte $14
-.define spriteCounter $15
-.define backgroundPointerLo $16
-.define backgroundPointerHi $17
-.define attributePointerLo $18
-.define attributePointerHi $19
-.define pointIndex0 $1a
-.define pointIndex1 $1b
-.define pointIndex2 $1c
-.define points $1d
-.define renderedNumber $1e
-.define renderedNumberOffset $1f
-.define playerCollidesWithObject $20
-.define dim1Source $21
-.define dim2Source $22
-.define dim1Destination $23
-.define dim2Destination $24
-.define pillLeft $25
-.define pillTop $26
-.define pillRight $27
-.define pillBottom $28
-.define pillTimer $29
-.define pillLifeTime $2a
-.define playerLeft $2b
-.define playerTop $2c
-.define playerRight $2d
-.define playerBottom $2e
-.define playerNucleusLeft $2f
-.define playerNucleusTop $30
-.define playerInvincible $31
-.define playerDashing $32
-.define playerDashCount $33
-.define playerSpeed $34
-.define playerPallete $35
-.define playerAnimationFrame $36
-.define playerAnimationChangeFrame $37
-.define playerAttacks $38
-.define health $39
-.define initReset $3a
-.define resetCounter $3b
-.define powerupLeft $3c
-.define powerupTop $3d
-.define powerupRight $3e
-.define powerupBottom $3f
-.define powerupTimer $40
-.define powerupLifeTime $41
-.define powerupType $42
-.define powerupActive $43
-.define dashIndex0 $44
-.define dashIndex1 $45
-.define gameMode $46
-.define previousGameMode $47
-.define refreshBackground $48
-.define menuCursorTop $49
-.define difficultyLevel $4a
-.define gameEndRendered $4b
-.define virusLeft $4c
-.define virusTop $4d
-.define virusRight $4e
-.define virusBottom $4f
-.define virusXSpeed $50
-.define virusYSpeed $51
-.define virusXDirection $52
-.define virusYDirection $53
-.define virusAlive $54
-.define virusMoveFrame $55
-.define virusAnimationFrame $56
-.define virusAnimationChangeFrame $57
-.define virusSmart $58
-.define noViruses $59
-.define virusCntr $5a
-.define virusPointer $5b
-.define dbg1 $5c
-.define dbg2 $5d
+.define nmiTimer $04
+.define buttons $05
+.define previousButtons $06
+.define frame   $07
+.define randomByte $08
+.define spriteCounter $09
+.define backgroundPointerLo $0a
+.define backgroundPointerHi $0b
+.define attributePointerLo $0c
+.define attributePointerHi $0d
+.define pointIndex0 $0e
+.define pointIndex1 $0f
+.define pointIndex2 $10
+.define renderedNumber $11
+.define renderedNumberOffset $12
+.define playerCollidesWithObject $13
+.define dim1Source $14
+.define dim2Source $15
+.define dim1Destination $16
+.define dim2Destination $17
+.define pillLeft $18
+.define pillTop $19
+.define pillRight $1a
+.define pillBottom $1b
+.define pillTimer $1c
+.define pillLifeTime $1d
+.define playerLeft $1e
+.define playerTop $1f
+.define playerRight $20
+.define playerBottom $21
+.define playerNucleusLeft $22
+.define playerNucleusTop $23
+.define playerInvincible $24
+.define playerDashing $25
+.define playerDashCount $26
+.define playerSpeed $27
+.define playerPallete $28
+.define playerAnimationFrame $29
+.define playerAnimationChangeFrame $2a
+.define playerAttacks $2b
+.define health $2c
+.define initReset $2d
+.define resetCounter $2e
+.define powerupLeft $2f
+.define powerupTop $30
+.define powerupRight $31
+.define powerupBottom $32
+.define powerupTimer $33
+.define powerupLifeTime $34
+.define powerupType $35
+.define powerupActive $36
+.define dashIndex0 $37
+.define dashIndex1 $38
+.define gameMode $39
+.define previousGameMode $3a
+.define refreshBackground $3b
+.define menuCursorTop $3c
+.define difficultyLevel $3d
+.define gameEndRendered $3e
+.define virusLeft $3f
+.define virusTop $40
+.define virusRight $41
+.define virusBottom $42
+.define virusXSpeed $43
+.define virusYSpeed $44
+.define virusXDirection $45
+.define virusYDirection $46
+.define virusAlive $47
+.define virusMoveFrame $48
+.define virusAnimationFrame $49
+.define virusAnimationChangeFrame $4a
+.define virusSmart $4b
+.define virusCntr $4c
+.define virusPointer $4d
+.define dbg1 $4e
+.define dbg2 $4f
+; level specific
+.define levelNo $50
+.define winCondition $51
+.define winThreshold $52
+.define points $53
+.define kills $54
+.define smartKills $55
+.define usedPowerups $56
+.define timeLimit $57
+.define noViruses $58
+.define smartVirusChance $59
+.define powerupChance $5a
+.define attackChance $5b
 
 ; 0x70 - 0x78 - virus1
 ; 0x79 - 0x80 - virus2
@@ -150,7 +161,6 @@ LUNG_SICK_ATTRIBUTE = %11111111
 
 POINTS_TO_WIN = $1A
 
-
 .include "init.asm"
 
 JSR LoadPalettes
@@ -199,6 +209,7 @@ ComputeLogic:
   JSR CheckCollisions
   JSR MoveViruses
   JSR DashToDecimal
+  JSR CheckWinCondition
   RTS
 
 CheckCollisions:
@@ -294,6 +305,8 @@ RenderGameCompleted:
 .include "utils.asm"
 
 .include "gfx.asm"
+
+.include "level.asm"
 
 .segment "VECTORS"
   .word NMI

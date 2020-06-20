@@ -125,14 +125,6 @@ CheckCollisionWithPill:
   BNE EndCheckCollisionWithPill
 
   INC points
-  LDA points
-  CMP #POINTS_TO_WIN
-  BNE :+
-    LDA #GAME_COMPLETED_MODE
-    STA gameMode
-    LDA #$01
-    STA initReset
-  :
   JSR PointsToDecimal
   JSR ForcePillRespawn
   LDA #NO_COLLISSION
