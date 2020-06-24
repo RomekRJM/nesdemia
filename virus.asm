@@ -272,6 +272,9 @@ CheckVirusCollidesWithPlayer:
   LDA playerInvincible
   BEQ :+
     INC kills
+    LDA virusSmart
+    BEQ EndCheckVirusCollidesWithPlayer
+    INC smartKills
     JMP EndCheckVirusCollidesWithPlayer
   :
 
