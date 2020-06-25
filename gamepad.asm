@@ -32,6 +32,10 @@ ReactOnInput:
   :
 
   DEC playerDashing
+  LDA playerDashing
+  BNE :+
+    INC usedPowerups
+  :
   LDA #PLAYER_DASH_SPEED
   STA playerSpeed
 
@@ -121,12 +125,11 @@ CheckButtons:
   :
 
   LDA playerInvincible
-  BNE :+
-    LDA #$00
-    STA playerInvincible
-  :
   BEQ :+
     DEC playerInvincible
+    LDA playerInvincible
+    BNE :+
+    INC usedPowerups
   :
 
   RTS
