@@ -7,4 +7,9 @@ NMI:
   INC frame
   INC nmiTimer
 
+  LDA frame
+  BNE :+
+    DEC timeLimit
+  :
+
   RTI
