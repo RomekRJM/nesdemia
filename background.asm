@@ -16,8 +16,18 @@ RenderBackgroundLoop:
   INX
   INC backgroundPointerHi
 RenderBackgroundLoopCheck:
-  CPX #.HIBYTE(960)
+  CPX #.HIBYTE(928)
   BNE RenderBackgroundLoop
-  CPY #.LOBYTE(960)
+  CPY #.LOBYTE(928)
   BNE RenderBackgroundLoop
+  
+  LDY #$00
+  LDX #$20
+RenderBackgroundLastLineLoop:
+  DEX
+  LDA (backgroundLLPointerLo), y
+  STA $2007
+  INY
+  TXA
+  BNE RenderBackgroundLastLineLoop
   RTS

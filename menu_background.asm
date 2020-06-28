@@ -4,6 +4,11 @@ RenderMenuBackground:
   STA backgroundPointerLo
   LDA #.HIBYTE(MenuBackground)
   STA backgroundPointerHi
+  LDA #.LOBYTE(BackgroundLLClear)
+  STA backgroundLLPointerLo       ; put the low byte of the address of background's last line into pointer
+  LDA #.HIBYTE(BackgroundLLClear)
+  STA backgroundLLPointerHi       ; put the high byte of the address into pointer
+  
   JSR RenderBackground
 
   JSR LoadMenuAttributes

@@ -8,6 +8,11 @@ RenderGameOverBackground:
   STA backgroundPointerLo
   LDA #.HIBYTE(GameOverBackground)
   STA backgroundPointerHi
+  LDA #.LOBYTE(BackgroundLLClear)
+  STA backgroundLLPointerLo
+  LDA #.HIBYTE(BackgroundLLClear)
+  STA backgroundLLPointerHi
+
   JSR RenderBackground
 
   JSR LoadMenuAttributes

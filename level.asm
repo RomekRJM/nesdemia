@@ -5,7 +5,7 @@ LoadLevelOffset:
   DEX
   BEQ LoadLevelVariables
   CLC
-  ADC #$08 ; number of level variables
+  ADC #$0b ; number of level variables
   JMP LoadLevelOffset
 
 LoadLevelVariables:
@@ -20,9 +20,6 @@ LoadLevelVariables:
   STA winThreshold
   INX
   LDA Level, X
-  STA timeLimit
-  INX
-  LDA Level, X
   STA noViruses
   INX
   LDA Level, X
@@ -33,6 +30,9 @@ LoadLevelVariables:
   INX
   LDA Level, X
   STA attackChance
+  INX
+  LDA Level, X
+  STA timeLimit
 
   RTS
 
@@ -95,8 +95,6 @@ EndCheckWinCondition:
 
 ; Points reqired to win
 
-; Max allowed time ( 1 unit = 256 game frames )
-
 ; Number of virues ( 1 - 11 )
 
 ; Chance for smart virus ( 0 - number of viruses )
@@ -104,9 +102,17 @@ EndCheckWinCondition:
 ; Chance for powerup ( 0 - 8 )
 
 ; Chance for attack ( 0 - chance for powerup )
+
+; Max allowed time ( 1 unit = 256 game frames )
+
+; Time digit 2
+
+; Time digit 1
+
+; Time digit 0
 Level:
-  .byte $01, $00, $03, $10, $01, $00, $03, $01  ; 1st level
-  .byte $02, $01, $03, $10, $02, $00, $03, $01  ; 2nd level
-  .byte $03, $02, $02, $10, $02, $00, $03, $01  ; 3rd level
-  .byte $04, $03, $04, $10, $02, $00, $03, $01  ; 4th level
-  .byte $05, $04, $04, $05, $02, $00, $03, $01  ; 5th level
+  .byte $01, $00, $03, $01, $00, $03, $01, $10, $02, $00, $00  ; 1st level
+  .byte $02, $01, $03, $02, $00, $03, $01, $10, $02, $00, $00  ; 2nd level
+  .byte $03, $02, $02, $02, $00, $03, $01, $10, $02, $00, $00  ; 3rd level
+  .byte $04, $03, $04, $02, $00, $03, $01, $10, $02, $00, $00  ; 4th level
+  .byte $05, $04, $04, $02, $00, $03, $01, $10, $02, $00, $00  ; 5th level
