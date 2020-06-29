@@ -102,12 +102,12 @@
 .define smartVirusChance $5b
 .define powerupChance $5c
 .define attackChance $5d
+.define lastLineTextLo $5e
+.define lastLineTextHi $5f
+; takes 32 bits - needs to be at the end
+.define backgroundLastLineTmp $60
 
-; 0x70 - 0x78 - virus1
-; 0x79 - 0x80 - virus2
-; 0x81 - 0x89 - virus3
-; 0x8a - 0x92 - virus4
-; and so on..
+; 0x0100 - ... - viruses
 
 .segment "STARTUP"
 

@@ -10,9 +10,27 @@ RenderGameBackground:
   STA backgroundPointerLo       ; put the low byte of the address of background into pointer
   LDA #.HIBYTE(Background)
   STA backgroundPointerHi       ; put the high byte of the address into pointer
-  LDA #.LOBYTE(BackgroundLLBlack)
+
+  LDA #.LOBYTE(BackgroundLLPils)
+  STA lastLineTextLo
+  LDA #.HIBYTE(BackgroundLLPils)
+  STA lastLineTextHi
+
+  LDY #$00
+PopulateLastLineLoop:
+  LDA #$03 ; #$27 - empty tile
+  CPY #$16
+  BCS :+
+    LDA (lastLineTextLo), Y
+  :
+  STA backgroundLastLineTmp, Y
+  INY
+  CPY #$20
+  BNE PopulateLastLineLoop
+
+  LDA #.LOBYTE(backgroundLastLineTmp)
   STA backgroundLLPointerLo       ; put the low byte of the address of background's last line into pointer
-  LDA #.HIBYTE(BackgroundLLBlack)
+  LDA #.HIBYTE(backgroundLastLineTmp)
   STA backgroundLLPointerHi       ; put the high byte of the address into pointer
 
   JSR RenderBackground

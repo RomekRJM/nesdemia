@@ -1,6 +1,3 @@
-46 virusYSpeed
-47 virusXDirection
-48 virusYDirection
 49 virusAlive
 4a virusMoveFrame
 4b virusAnimationFrame
@@ -22,3 +19,6 @@
 5b smartVirusChance
 5c powerupChance
 5d attackChance
+5e lastLineTextLo
+5f lastLineTextHi
+60 backgroundLastLineTmp
