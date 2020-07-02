@@ -13,8 +13,8 @@ C 0C
 D 0D
 E 0E
 F 0F
-G 10
-H 11
+G 10                U  S  E    P  O  W  E  R  U  P  S
+H 11                1E 1C 0E   19 18 20 0E 1B 1E 19 1C
 I 12
 J 13
 K 14                C  O  N  G  R  A  T  U  L  A  T  I  O  N  S
@@ -28,8 +28,8 @@ R 1B                10 0E 1D 27 19 12 15 15 1C
 S 1C
 T 1D                S  U  R  V  I  V  E    T  I  L  L    T  I  M  E    E  N  D  S
 U 1E
-V 1F
-W 20
+V 1F                K  I  L  L     V  I  R  U  S  E  S
+W 20                14 12 15 15    1F 12 1B 1E 1C 0E 1C
 X 21
-Y 22
-Z 23
+Y 22                S  M  A  R  T
+Z 23                1C 16 0A 1B 1D

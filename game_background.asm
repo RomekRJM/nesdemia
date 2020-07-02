@@ -11,10 +11,41 @@ RenderGameBackground:
   LDA #.HIBYTE(Background)
   STA backgroundPointerHi       ; put the high byte of the address into pointer
 
-  LDA #.LOBYTE(BackgroundLLPils)
-  STA lastLineTextLo
-  LDA #.HIBYTE(BackgroundLLPils)
-  STA lastLineTextHi
+  LDA winCondition
+
+  CMP #$00
+  BNE :+
+    LDX #.LOBYTE(BackgroundLLPils)
+    LDY #.HIBYTE(BackgroundLLPils)
+    JMP AssignLL
+  :
+  CMP #$01
+  BNE :+
+    LDX #.LOBYTE(BackgroundLLViruses)
+    LDY #.HIBYTE(BackgroundLLViruses)
+    JMP AssignLL
+  :
+  CMP #$02
+  BNE :+
+    LDX #.LOBYTE(BackgroundLLSmartViruses)
+    LDY #.HIBYTE(BackgroundLLSmartViruses)
+    JMP AssignLL
+  :
+  CMP #$03
+  BNE :+
+    LDX #.LOBYTE(BackgroundLLUsePowerups)
+    LDY #.HIBYTE(BackgroundLLUsePowerups)
+    JMP AssignLL
+  :
+  CMP #$04
+  BNE :+
+    LDX #.LOBYTE(BackgroundLLSurvive)
+    LDY #.HIBYTE(BackgroundLLSurvive)
+  :
+
+AssignLL:
+  STX lastLineTextLo
+  STY lastLineTextHi
 
   LDY #$00
 PopulateLastLineLoop:
