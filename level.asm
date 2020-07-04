@@ -50,6 +50,12 @@ LoadLevelVariables:
 
 
 CheckWinCondition:
+  LDA timeLimit
+  BNE :+
+    LDA #$01
+    STA initReset
+  :
+
   LDX winCondition
   CPX #$00
   BNE :+
@@ -105,11 +111,11 @@ EndCheckWinCondition:
 ; 3 - use x powerups
 ; 4 - survive till the end of the level
 
-; Points reqired to win
+; Win threshold
 
-; Points digit 1
+; Win threshold digit 1
 
-; Points digit 0
+; Win threshold digit 0
 
 ; Number of virues ( 1 - 11 )
 
@@ -125,8 +131,8 @@ EndCheckWinCondition:
 
 ; Time digit 0
 Level:
-  .byte $01, $00, $03, $00, $03, $01, $00, $03, $01, $10, $01, $00  ; 1st level
-  .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $10, $01, $00  ; 2nd level
-  .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $10, $01, $00  ; 3rd level
-  .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $10, $01, $00  ; 4th level
-  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $10, $01, $00  ; 5th level
+  .byte $01, $00, $03, $00, $03, $01, $00, $03, $01, $0a, $01, $00  ; 1st level
+  .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $0a, $01, $00  ; 2nd level
+  .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $0a, $01, $00  ; 3rd level
+  .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 4th level
+  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level

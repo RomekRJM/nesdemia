@@ -108,8 +108,9 @@
 .define winThresholdDigit0 $7d
 .define timeDigit1 $7e
 .define timeDigit0 $7f
+.define countdownTimer $80
 ; takes 32 bits - needs to be at the end
-.define backgroundLastLineTmp $80
+.define backgroundLastLineTmp $81
 
 ; 0x0100 - ... - viruses
 
@@ -166,6 +167,8 @@ LUNG_HEALTHY_ATTRIBUTE = %10101010
 LUNG_SICK_ATTRIBUTE = %11111111
 
 POINTS_TO_WIN = $1A
+
+GAME_TIME_UNIT = $44
 
 .include "init.asm"
 

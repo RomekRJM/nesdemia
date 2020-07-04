@@ -57,12 +57,15 @@ AssignLL:
   STA $00, Y
   INY
 
-  .repeat 6
+  .repeat 5
   LDA #$27 ; whitespace
   STA $00, Y
   INY
   .endrepeat
 
+  LDA #$1D ; T
+  STA $00, Y
+  INY
   LDA timeDigit1
   STA $00, Y
   INY

@@ -58,3 +58,6 @@ InitVariables:
   LDA #$80
   STA playerTop
   STA playerLeft
+
+  LDA #GAME_TIME_UNIT
+  STA countdownTimer

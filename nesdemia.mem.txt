@@ -1,4 +1,3 @@
-69 virusSmart
 6a virusCntr
 6b virusPointer
 6c dbg1
@@ -21,4 +20,5 @@
 7d winThresholdDigit0
 7e timeDigit1
 7f timeDigit0
-80 backgroundLastLineTmp
+80 countdownTimer
+81 backgroundLastLineTmp
