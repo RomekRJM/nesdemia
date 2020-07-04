@@ -20,6 +20,12 @@ LoadLevelVariables:
   STA winThreshold
   INX
   LDA Level, X
+  STA winThresholdDigit1
+  INX
+  LDA Level, X
+  STA winThresholdDigit0
+  INX
+  LDA Level, X
   STA noViruses
   INX
   LDA Level, X
@@ -33,6 +39,12 @@ LoadLevelVariables:
   INX
   LDA Level, X
   STA timeLimit
+  INX
+  LDA Level, X
+  STA timeDigit1
+  INX
+  LDA Level, X
+  STA timeDigit0
 
   RTS
 
@@ -95,6 +107,10 @@ EndCheckWinCondition:
 
 ; Points reqired to win
 
+; Points digit 1
+
+; Points digit 0
+
 ; Number of virues ( 1 - 11 )
 
 ; Chance for smart virus ( 0 - number of viruses )
@@ -105,14 +121,12 @@ EndCheckWinCondition:
 
 ; Max allowed time ( 1 unit = 256 game frames )
 
-; Time digit 2
-
 ; Time digit 1
 
 ; Time digit 0
 Level:
-  .byte $01, $00, $03, $01, $00, $03, $01, $10, $02, $00, $00  ; 1st level
-  .byte $02, $01, $03, $02, $00, $03, $01, $10, $02, $00, $00  ; 2nd level
-  .byte $03, $02, $02, $02, $00, $03, $01, $10, $02, $00, $00  ; 3rd level
-  .byte $04, $03, $04, $02, $00, $03, $01, $10, $02, $00, $00  ; 4th level
-  .byte $05, $04, $04, $02, $00, $03, $01, $10, $02, $00, $00  ; 5th level
+  .byte $01, $00, $03, $00, $03, $01, $00, $03, $01, $10, $01, $00  ; 1st level
+  .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $10, $01, $00  ; 2nd level
+  .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $10, $01, $00  ; 3rd level
+  .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $10, $01, $00  ; 4th level
+  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $10, $01, $00  ; 5th level

@@ -1,7 +1,9 @@
 RenderGameBackground:
   ; reload attribute table
   LDA refreshBackground
-  BEQ RenderBackgroundFinished
+  BNE :+
+    JMP RenderBackgroundFinished
+  :
   LDA #$00
 	STA $2000
 	STA $2001
@@ -47,9 +49,29 @@ AssignLL:
   STX lastLineTextLo
   STY lastLineTextHi
 
+  LDY #$16
+  LDA winThresholdDigit1
+  STA $00, Y
+  INY
+  LDA winThresholdDigit0
+  STA $00, Y
+  INY
+
+  .repeat 6
+  LDA #$27 ; whitespace
+  STA $00, Y
+  INY
+  .endrepeat
+
+  LDA timeDigit1
+  STA $00, Y
+  INY
+  LDA timeDigit0
+  STA $00, Y
+
   LDY #$00
 PopulateLastLineLoop:
-  LDA #$03 ; #$27 - empty tile
+  LDA $00, Y
   CPY #$16
   BCS :+
     LDA (lastLineTextLo), Y

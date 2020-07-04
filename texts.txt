@@ -27,7 +27,7 @@ Q 1A                G  E  T     P  I  L  L  S
 R 1B                10 0E 1D 27 19 12 15 15 1C
 S 1C
 T 1D                S  U  R  V  I  V  E    T  I  L  L    T  I  M  E    E  N  D  S
-U 1E
+U 1E                1C 1E 1B 1F 12 1F 0E   1D 12 15 15   1D 12 16 0E   0E 17 0D 1C
 V 1F                K  I  L  L     V  I  R  U  S  E  S
 W 20                14 12 15 15    1F 12 1B 1E 1C 0E 1C
 X 21
