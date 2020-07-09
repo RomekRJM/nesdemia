@@ -87,34 +87,34 @@
 .define virusSmart $69
 .define virusCntr $6a
 .define virusPointer $6b
-.define dbg1 $6c
-.define dbg2 $6d
 ; level specific
-.define levelNo $6e
-.define winCondition $6f
-.define winThreshold $70
-.define points $71
-.define kills $72
-.define smartKills $73
-.define usedPowerups $74
-.define timeLimit $75
-.define noViruses $76
-.define smartVirusChance $77
-.define powerupChance $78
-.define attackChance $79
-.define lastLineTextLo $7a
-.define lastLineTextHi $7b
-.define winThresholdDigit1 $7c
-.define winThresholdDigit0 $7d
-.define timeDigit1 $7e
-.define timeDigit0 $7f
-.define countdownTimer $80
-; takes 32 bits - needs to be at the end
-.define backgroundLastLineTmp $81
-
-; 0x0100 - ... - viruses
+.define levelNo $6c
+.define winCondition $6d
+.define winThreshold $6e
+.define points $6f
+.define kills $70
+.define smartKills $71
+.define usedPowerups $72
+.define timeLimit $73
+.define noViruses $74
+.define smartVirusChance $75
+.define powerupChance $76
+.define attackChance $77
+.define lastLineTextLo $78
+.define lastLineTextHi $79
+.define winThresholdDigit1 $7a
+.define winThresholdDigit0 $7b
+.define timeDigit1 $7c
+.define timeDigit0 $7d
+.define countdownTimer $7e
+; takes 32 bits
+.define backgroundLastLineTmp $7f ; 32
+.define dbg1 $9f
+.define dbg2 $a0
 
 .segment "STARTUP"
+
+; 0x0100 - ... - viruses
 
 JOYPAD1 = $4016
 JOYPAD2 = $4017

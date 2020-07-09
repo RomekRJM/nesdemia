@@ -15,11 +15,21 @@ class VariableEnumerator():
                 adjusted_line = line
 
                 if line.startswith('.define'):
-                    _, name, addr = line.split()
+                    line_content = line.split()
+
+                    if len(line_content) == 3:
+                        _, name, addr = line.split()
+                        counter_increment = 1
+                    elif len(line_content) == 5:
+                        _, name, addr, _, counter_increment = line.split()
+                        counter_increment = int(counter_increment)
+                    else:
+                        raise InvalidArgumentException()
+
                     adjusted_line = line.replace(addr, self.__hex_counter_in6502format())
                     variables.append((self.__hex_counter(), name))
 
-                    self.counter += 1
+                    self.counter += counter_increment
 
                 s.write(adjusted_line)
                 s.write("\n")
