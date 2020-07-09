@@ -9,7 +9,7 @@ RenderBackground:
   LDY #$00
 
 RenderBackgroundLoop:
-  LDA (backgroundPointerLo), y
+  LDA (backgroundPointerLo), Y
   STA $2007
   INY
   BNE RenderBackgroundLoopCheck
@@ -20,12 +20,12 @@ RenderBackgroundLoopCheck:
   BNE RenderBackgroundLoop
   CPY #.LOBYTE(928)
   BNE RenderBackgroundLoop
-  
+
   LDY #$00
   LDX #$20
 RenderBackgroundLastLineLoop:
   DEX
-  LDA (backgroundLLPointerLo), y
+  LDA (backgroundLLPointerLo), Y
   STA $2007
   INY
   TXA

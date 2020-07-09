@@ -116,6 +116,8 @@
 
 ; 0x0100 - ... - viruses
 .define backgroundMemory $0300 ; 1024
+.define backgroundLLMemory $03A0 ; 32
+.define attributeMemory $03C0 ; 64
 
 JOYPAD1 = $4016
 JOYPAD2 = $4017
