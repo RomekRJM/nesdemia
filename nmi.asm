@@ -1,4 +1,11 @@
 NMI:
+  ; back up registers
+  PHA
+  TXA
+  PHA
+  TYA
+  PHA
+
   ; copy sprite data from $0200 => PPU memory for display
   LDA #$02
   STA $4014
@@ -21,5 +28,12 @@ NMI:
     STA timeDigit0
     DEC timeDigit1
   :
+
+  ; restore registers
+  PLA
+  TAY
+  PLA
+  TAX
+  PLA
 
   RTI
