@@ -7,6 +7,8 @@ class VariableEnumerator():
     def enumerate_variables_in_file(self, file_name):
         variables = []
         filedata = None
+        in_zero_page_segment = False
+
         with open(file_name, 'r') as s:
             filedata = s.read()
 
@@ -14,7 +16,13 @@ class VariableEnumerator():
             for line in filedata.splitlines():
                 adjusted_line = line
 
-                if line.startswith('.define'):
+                if '.segment' in line.lower():
+                    if 'zeropage' in line.lower():
+                        in_zero_page_segment = True
+                    else:
+                        in_zero_page_segment = False
+
+                if in_zero_page_segment and line.startswith('.define'):
                     line_content = line.split()
 
                     if len(line_content) == 3:

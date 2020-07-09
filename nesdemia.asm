@@ -115,6 +115,7 @@
 .segment "STARTUP"
 
 ; 0x0100 - ... - viruses
+.define backgroundMemory $0300 ; 1024
 
 JOYPAD1 = $4016
 JOYPAD2 = $4017
