@@ -51,7 +51,15 @@ NextRandom16To206:
   JSR NextRandom6Bits
   CLC
   ADC $00
-  CLC
-  ADC #$10
+  CMP #$20
+  BCS :+
+    CLC
+    ADC #$20
+  :
+  CMP #$C8
+  BCC :+
+    SEC
+    SBC #$20
+  :
 
   RTS
