@@ -12,13 +12,13 @@
 75 smartVirusChance
 76 powerupChance
 77 attackChance
-78 lastLineTextLo
-79 lastLineTextHi
+78 LastLinesTextLo
+79 LastLinesTextHi
 7a winThresholdDigit1
 7b winThresholdDigit0
 7c timeDigit1
 7d timeDigit0
 7e countdownTimer
-7f backgroundLastLineTmp
+7f backgroundLastLinesTmp
 9f dbg1
 a0 dbg2

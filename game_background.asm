@@ -46,8 +46,8 @@ RenderGameBackground:
   :
 
 AssignLL:
-  STX lastLineTextLo
-  STY lastLineTextHi
+  STX LastLinesTextLo
+  STY LastLinesTextHi
 
   LDY #$16
   LDA winThresholdDigit1
@@ -73,20 +73,27 @@ AssignLL:
   STA $00, Y
 
   LDY #$00
-PopulateLastLineLoop:
+PopulateSecondToLastLinesLoop:
   LDA $00, Y
   CPY #$16
   BCS :+
-    LDA (lastLineTextLo), Y
+    LDA (LastLinesTextLo), Y
   :
-  STA backgroundLastLineTmp, Y
+  STA backgroundLastLinesTmp, Y
   INY
   CPY #$20
-  BNE PopulateLastLineLoop
+  BNE PopulateSecondToLastLinesLoop
 
-  LDA #.LOBYTE(backgroundLastLineTmp)
+  ; populate last line of footer
+  .repeat 32
+  LDA #$27 ; whitespace
+  STA backgroundLastLinesTmp, Y
+  INY
+  .endrepeat
+
+  LDA #.LOBYTE(backgroundLastLinesTmp)
   STA backgroundLLPointerLo       ; put the low byte of the address of background's last line into pointer
-  LDA #.HIBYTE(backgroundLastLineTmp)
+  LDA #.HIBYTE(backgroundLastLinesTmp)
   STA backgroundLLPointerHi       ; put the high byte of the address into pointer
 
   JSR RenderBackground

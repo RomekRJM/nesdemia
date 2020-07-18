@@ -100,15 +100,15 @@
 .define smartVirusChance $75
 .define powerupChance $76
 .define attackChance $77
-.define lastLineTextLo $78
-.define lastLineTextHi $79
+.define LastLinesTextLo $78
+.define LastLinesTextHi $79
 .define winThresholdDigit1 $7a
 .define winThresholdDigit0 $7b
 .define timeDigit1 $7c
 .define timeDigit0 $7d
 .define countdownTimer $7e
 ; takes 32 bits
-.define backgroundLastLineTmp $7f ; 32
+.define backgroundLastLinesTmp $7f ; 32
 .define dbg1 $9f
 .define dbg2 $a0
 
