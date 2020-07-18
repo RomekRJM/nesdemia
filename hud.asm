@@ -108,6 +108,11 @@ LoadAttackPowerupHUDLoop:
   BNE :+
     LDA #$08
   :
+  CPY #$00
+  BNE :+
+    CLC
+    ADC #$08
+  :
   STA $0200, X
   INX
   INY
@@ -119,6 +124,11 @@ LoadDashPowerupHUDLoop:
   CPY #$03
   BNE :+
     LDA #$2f
+  :
+  CPY #$00
+  BNE :+
+    CLC
+    ADC #$08
   :
   STA $0200, X
   INX
