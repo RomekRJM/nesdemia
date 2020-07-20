@@ -1,5 +1,4 @@
 RenderGameCompletedBackground:
-
   LDA #$00
   STA $2000
   STA $2001

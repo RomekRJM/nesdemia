@@ -197,3 +197,23 @@ ContinueDashToDecimalLoop:
   BCC DashToDecimalLoop
 
   RTS
+
+
+UpdateTimer:
+  DEC countdownTimer
+  LDA countdownTimer
+  BNE :+
+    LDA #GAME_TIME_UNIT
+    STA countdownTimer
+    INC refreshBackground
+    DEC timeLimit
+    DEC timeDigit0
+    LDA timeDigit0
+    CMP #$ff
+    BNE :+
+    LDA #$09
+    STA timeDigit0
+    DEC timeDigit1
+  :
+
+  RTS
