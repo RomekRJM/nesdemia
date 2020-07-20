@@ -72,45 +72,46 @@
 .define menuCursorTop $5a
 .define difficultyLevel $5b
 .define gameEndRendered $5c
-.define virusLeft $5d
-.define virusTop $5e
-.define virusRight $5f
-.define virusBottom $60
-.define virusXSpeed $61
-.define virusYSpeed $62
-.define virusXDirection $63
-.define virusYDirection $64
-.define virusAlive $65
-.define virusMoveFrame $66
-.define virusAnimationFrame $67
-.define virusAnimationChangeFrame $68
-.define virusSmart $69
-.define virusCntr $6a
-.define virusPointer $6b
+.define gameRendered $5d
+.define virusLeft $5e
+.define virusTop $5f
+.define virusRight $60
+.define virusBottom $61
+.define virusXSpeed $62
+.define virusYSpeed $63
+.define virusXDirection $64
+.define virusYDirection $65
+.define virusAlive $66
+.define virusMoveFrame $67
+.define virusAnimationFrame $68
+.define virusAnimationChangeFrame $69
+.define virusSmart $6a
+.define virusCntr $6b
+.define virusPointer $6c
 ; level specific
-.define levelNo $6c
-.define winCondition $6d
-.define winThreshold $6e
-.define points $6f
-.define kills $70
-.define smartKills $71
-.define usedPowerups $72
-.define timeLimit $73
-.define noViruses $74
-.define smartVirusChance $75
-.define powerupChance $76
-.define attackChance $77
-.define LastLinesTextLo $78
-.define LastLinesTextHi $79
-.define winThresholdDigit1 $7a
-.define winThresholdDigit0 $7b
-.define timeDigit1 $7c
-.define timeDigit0 $7d
-.define countdownTimer $7e
+.define levelNo $6d
+.define winCondition $6e
+.define winThreshold $6f
+.define points $70
+.define kills $71
+.define smartKills $72
+.define usedPowerups $73
+.define timeLimit $74
+.define noViruses $75
+.define smartVirusChance $76
+.define powerupChance $77
+.define attackChance $78
+.define LastLinesTextLo $79
+.define LastLinesTextHi $7a
+.define winThresholdDigit1 $7b
+.define winThresholdDigit0 $7c
+.define timeDigit1 $7d
+.define timeDigit0 $7e
+.define countdownTimer $7f
 ; takes 32 bits
-.define backgroundLastLinesTmp $7f ; 32
-.define dbg1 $9f
-.define dbg2 $a0
+.define backgroundLastLinesTmp $80 ; 32
+.define dbg1 $a0
+.define dbg2 $a1
 
 .segment "STARTUP"
 
@@ -266,7 +267,19 @@ RenderGraphics:
   JSR RenderPowerup
   JSR RenderViruses
   JSR RenderHUD
+  JSR RenderGame
+
+  RTS
+
+RenderGame:
+  LDA gameRendered
+
+  BEQ :+
+    RTS
+  :
+
   .include "game_background.asm"
+  INC gameRendered
 
   RTS
 
