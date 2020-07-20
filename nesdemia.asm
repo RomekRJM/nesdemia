@@ -54,64 +54,65 @@
 .define playerAnimationChangeFrame $48
 .define playerAttacks $49
 .define health $4a
-.define initReset $4b
-.define resetCounter $4c
-.define powerupLeft $4d
-.define powerupTop $4e
-.define powerupRight $4f
-.define powerupBottom $50
-.define powerupTimer $51
-.define powerupLifeTime $52
-.define powerupType $53
-.define powerupActive $54
-.define dashIndex0 $55
-.define dashIndex1 $56
-.define gameMode $57
-.define previousGameMode $58
-.define refreshBackground $59
-.define menuCursorTop $5a
-.define difficultyLevel $5b
-.define gameEndRendered $5c
-.define gameRendered $5d
-.define virusLeft $5e
-.define virusTop $5f
-.define virusRight $60
-.define virusBottom $61
-.define virusXSpeed $62
-.define virusYSpeed $63
-.define virusXDirection $64
-.define virusYDirection $65
-.define virusAlive $66
-.define virusMoveFrame $67
-.define virusAnimationFrame $68
-.define virusAnimationChangeFrame $69
-.define virusSmart $6a
-.define virusCntr $6b
-.define virusPointer $6c
+.define healthUpdated $4b
+.define initReset $4c
+.define resetCounter $4d
+.define powerupLeft $4e
+.define powerupTop $4f
+.define powerupRight $50
+.define powerupBottom $51
+.define powerupTimer $52
+.define powerupLifeTime $53
+.define powerupType $54
+.define powerupActive $55
+.define dashIndex0 $56
+.define dashIndex1 $57
+.define gameMode $58
+.define previousGameMode $59
+.define refreshBackground $5a
+.define menuCursorTop $5b
+.define difficultyLevel $5c
+.define gameEndRendered $5d
+.define gameRendered $5e
+.define virusLeft $5f
+.define virusTop $60
+.define virusRight $61
+.define virusBottom $62
+.define virusXSpeed $63
+.define virusYSpeed $64
+.define virusXDirection $65
+.define virusYDirection $66
+.define virusAlive $67
+.define virusMoveFrame $68
+.define virusAnimationFrame $69
+.define virusAnimationChangeFrame $6a
+.define virusSmart $6b
+.define virusCntr $6c
+.define virusPointer $6d
 ; level specific
-.define levelNo $6d
-.define winCondition $6e
-.define winThreshold $6f
-.define points $70
-.define kills $71
-.define smartKills $72
-.define usedPowerups $73
-.define timeLimit $74
-.define noViruses $75
-.define smartVirusChance $76
-.define powerupChance $77
-.define attackChance $78
-.define LastLinesTextLo $79
-.define LastLinesTextHi $7a
-.define winThresholdDigit1 $7b
-.define winThresholdDigit0 $7c
-.define timeDigit1 $7d
-.define timeDigit0 $7e
-.define countdownTimer $7f
+.define levelNo $6e
+.define winCondition $6f
+.define winThreshold $70
+.define points $71
+.define kills $72
+.define smartKills $73
+.define usedPowerups $74
+.define timeLimit $75
+.define noViruses $76
+.define smartVirusChance $77
+.define powerupChance $78
+.define attackChance $79
+.define LastLinesTextLo $7a
+.define LastLinesTextHi $7b
+.define winThresholdDigit1 $7c
+.define winThresholdDigit0 $7d
+.define timeDigit1 $7e
+.define timeDigit0 $7f
+.define countdownTimer $80
 ; takes 32 bits
-.define backgroundLastLinesTmp $80 ; 32
-.define dbg1 $a0
-.define dbg2 $a1
+.define backgroundLastLinesTmp $81 ; 32
+.define dbg1 $a1
+.define dbg2 $a2
 
 .segment "STARTUP"
 
@@ -284,7 +285,7 @@ RenderGame:
   RTS
 
 RenderGamePartialUpdate:
-  .include "game_partial_update.asm"
+  .include "game_background_partial_update.asm"
   RTS
 
 RenderGameOver:

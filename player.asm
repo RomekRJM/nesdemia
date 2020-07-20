@@ -233,6 +233,7 @@ LowerHealth:
   CMP #$04
   BCS :+
     INC health
+    INC healthUpdated
     INC refreshBackground
   :
 
