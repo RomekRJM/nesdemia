@@ -1,9 +1,4 @@
 RenderGameBackground:
-  ; reload attribute table
-  LDA refreshBackground
-  BNE :+
-    JMP RenderBackgroundFinished
-  :
   LDA #$00
 	STA $2000
 	STA $2001
@@ -110,7 +105,3 @@ PopulateSecondToLastLinesLoop:
   ; Enable sprites and background
   LDA #%00011110
   STA $2001
-
-RenderBackgroundFinished:
-  LDA #$00
-  STA refreshBackground

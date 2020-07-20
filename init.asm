@@ -45,6 +45,9 @@ CLEARMEM:
 .endrepeat
 
 InitVariables:
+  LDA #$00
+  STA gameRendered
+
   LDA #$01
   STA nmiTimer
   STA refreshBackground

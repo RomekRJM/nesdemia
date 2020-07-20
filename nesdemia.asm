@@ -119,6 +119,7 @@
 .define backgroundMemory $0300 ; 1024
 .define backgroundLLMemory $03A0 ; 32
 .define attributeMemory $03C0 ; 64
+.define partialUpdateMemory $0400 ; 256
 
 JOYPAD1 = $4016
 JOYPAD2 = $4017
@@ -216,6 +217,7 @@ ContinueMainGameLoop:
 
 
 ComputeLogic:
+  JSR UpdateTimer
   JSR AdjustGameMode
   JSR SpawnPill
   JSR SpawnPowerup
@@ -273,14 +275,16 @@ RenderGraphics:
 
 RenderGame:
   LDA gameRendered
-
   BEQ :+
-    RTS
+    JMP RenderGamePartialUpdate
   :
 
   .include "game_background.asm"
   INC gameRendered
+  RTS
 
+RenderGamePartialUpdate:
+  .include "game_partial_update.asm"
   RTS
 
 RenderGameOver:

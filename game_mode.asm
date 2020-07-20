@@ -15,13 +15,13 @@ AdjustGameMode:
   LDA gameMode
   CMP #GAME_OVER_MODE
   BNE :+
-    JSR ClearSprites
+    JSR ClearGfx
     JMP SavePreviousGameMode
   :
 
   CMP #GAME_COMPLETED_MODE
   BNE :+
-    JSR ClearSprites
+    JSR ClearGfx
   :
 
 SavePreviousGameMode:
@@ -30,8 +30,9 @@ SavePreviousGameMode:
 
   RTS
 
-ClearSprites:
+ClearGfx:
   LDX #$00
+  STX refreshBackground
 
 ClearSpritesLoop:
   LDA #$ff
