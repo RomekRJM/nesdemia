@@ -50,18 +50,18 @@ LoadLevelVariables:
 
 
 CheckWinCondition:
-  LDA timeLimit
-  BNE :+
-    LDA #$01
-    STA initReset
-  :
-
   LDX winCondition
   CPX #$04
   BNE :+
     LDA timeLimit
     BEQ RoundWon
     BNE EndCheckWinCondition
+  :
+
+  LDA timeLimit
+  BNE :+
+    LDA #$01
+    STA initReset
   :
 
   LDX winThreshold
@@ -110,4 +110,4 @@ Level:
   .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $3c, $06, $00  ; 2nd level
   .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
   .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
-  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $3c, $06, $00  ; 5th level
+  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
