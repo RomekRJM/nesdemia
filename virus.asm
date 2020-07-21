@@ -270,14 +270,26 @@ CheckVirusCollidesWithPlayer:
   LDA #NO_COLLISSION
   STA playerCollidesWithObject
   LDA playerInvincible
-  BEQ :+
-    INC kills
-    LDA virusSmart
-    BEQ EndCheckVirusCollidesWithPlayer
-    INC smartKills
-    JMP EndCheckVirusCollidesWithPlayer
+  BEQ LowerPlayerHealth
+
+  INC kills
+  LDX winCondition
+  CPX #WIN_ON_KILLS
+  BNE :+
+    JSR UpdateWinThreshold
   :
 
+  LDA virusSmart
+  BEQ EndCheckVirusCollidesWithPlayer
+  INC smartKills
+  LDX winCondition
+  CPX #WIN_ON_SMART_KILLS
+  BNE :+
+    JSR UpdateWinThreshold
+  :
+  JMP EndCheckVirusCollidesWithPlayer
+
+LowerPlayerHealth:
   JSR LowerHealth
 
 EndCheckVirusCollidesWithPlayer:

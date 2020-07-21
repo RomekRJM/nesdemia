@@ -217,3 +217,17 @@ UpdateTimer:
   :
 
   RTS
+
+
+UpdateWinThreshold:
+  INC refreshBackground
+  DEC winThreshold
+  DEC winThresholdDigit0
+  LDA winThresholdDigit0
+  CMP #$ff
+  BNE :+
+  LDA #$09
+  STA winThresholdDigit0
+  DEC winThresholdDigit1
+
+  RTS

@@ -35,6 +35,10 @@ ReactOnInput:
   LDA playerDashing
   BNE :+
     INC usedPowerups
+    LDX winCondition
+    CPX #WIN_ON_POWERUPS
+    BNE :+
+      JSR UpdateWinThreshold
   :
   LDA #PLAYER_DASH_SPEED
   STA playerSpeed
@@ -130,6 +134,10 @@ CheckButtons:
     LDA playerInvincible
     BNE :+
     INC usedPowerups
+    LDX winCondition
+    CPX #WIN_ON_POWERUPS
+    BNE :+
+      JSR UpdateWinThreshold
   :
 
   RTS

@@ -9,6 +9,38 @@ RenderPartialGameBackground:
   STA partialUpdateMemory, Y
   INY
 
+  LDA #$96
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA winThresholdDigit1
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$97
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA winThresholdDigit0
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
   LDA #$9e
   STA partialUpdateMemory, Y
   INY

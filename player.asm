@@ -125,6 +125,12 @@ CheckCollisionWithPill:
   BNE EndCheckCollisionWithPill
 
   INC points
+  LDX winCondition
+  CPX #WIN_ON_POINTS
+  BNE :+
+    JSR UpdateWinThreshold
+  :
+
   JSR PointsToDecimal
   JSR ForcePillRespawn
   LDA #NO_COLLISSION

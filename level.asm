@@ -57,40 +57,15 @@ CheckWinCondition:
   :
 
   LDX winCondition
-  CPX #$00
-  BNE :+
-    LDA points
-    CMP winThreshold
-    BNE EndCheckWinCondition
-    BEQ RoundWon
-  :
-  CPX #$01
-  BNE :+
-    LDA kills
-    CMP winThreshold
-    BNE EndCheckWinCondition
-    BEQ RoundWon
-  :
-  CPX #$02
-  BNE :+
-    LDA smartKills
-    CMP winThreshold
-    BNE EndCheckWinCondition
-    BEQ RoundWon
-  :
-  CPX #$03
-  BNE :+
-    LDA usedPowerups
-    CMP winThreshold
-    BNE EndCheckWinCondition
-    BEQ RoundWon
-  :
   CPX #$04
   BNE :+
     LDA timeLimit
     BEQ RoundWon
     BNE EndCheckWinCondition
   :
+
+  LDX winThreshold
+  BNE EndCheckWinCondition
 
 RoundWon:
   LDA #GAME_COMPLETED_MODE
@@ -132,7 +107,7 @@ EndCheckWinCondition:
 ; Time digit 0
 Level:
   .byte $01, $00, $09, $00, $09, $01, $00, $03, $01, $3c, $06, $00  ; 1st level
-  .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $0a, $01, $00  ; 2nd level
-  .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $0a, $01, $00  ; 3rd level
-  .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 4th level
-  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
+  .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $3c, $06, $00  ; 2nd level
+  .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
+  .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
+  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $3c, $06, $00  ; 5th level
