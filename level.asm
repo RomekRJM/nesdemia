@@ -5,7 +5,7 @@ LoadLevelOffset:
   DEX
   BEQ LoadLevelVariables
   CLC
-  ADC #$0b ; number of level variables
+  ADC #$0c ; number of level variables
   JMP LoadLevelOffset
 
 LoadLevelVariables:
@@ -106,7 +106,7 @@ EndCheckWinCondition:
 
 ; Time digit 0
 Level:
-  .byte $01, $00, $09, $00, $09, $01, $00, $03, $01, $3c, $06, $00  ; 1st level
+  .byte $01, $00, $05, $00, $05, $01, $00, $03, $01, $3c, $06, $00  ; 1st level
   .byte $02, $01, $03, $00, $03, $02, $00, $03, $01, $3c, $06, $00  ; 2nd level
   .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
   .byte $04, $03, $04, $00, $04, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
