@@ -1,6 +1,10 @@
 RenderPartialGameBackground:
   LDY #$00
 
+  LDA winCondition
+  CMP #WIN_BY_SURVIVING
+  BEQ ContinueRenderPartialGameBackground
+
   LDA #$01
   STA partialUpdateMemory, Y
   INY
@@ -33,6 +37,7 @@ RenderPartialGameBackground:
   STA partialUpdateMemory, Y
   INY
 
+ContinueRenderPartialGameBackground:
   LDA #$01
   STA partialUpdateMemory, Y
   INY

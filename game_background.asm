@@ -45,6 +45,18 @@ AssignLL:
   STY LastLinesTextHi
 
   LDY #$16
+
+  LDA winCondition
+  CMP #WIN_BY_SURVIVING
+  BNE :+
+    .repeat 2
+    LDA #$27 ; whitespace
+    STA $00, Y
+    INY
+    .endrepeat
+    JMP ContinueOnLL
+  :
+
   LDA winThresholdDigit1
   STA $00, Y
   INY
@@ -52,6 +64,7 @@ AssignLL:
   STA $00, Y
   INY
 
+ContinueOnLL:
   .repeat 5
   LDA #$27 ; whitespace
   STA $00, Y
