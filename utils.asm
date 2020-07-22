@@ -68,6 +68,11 @@ InitVariables:
   LDA #$00
   STA gameRendered
   STA gameEndRendered
+  STA health
+  STA playerAttacks
+  STA playerInvincible
+  STA playerDashCount
+  STA playerDashing
 
   LDA #$01
   STA nmiTimer
