@@ -21,10 +21,17 @@ AdjustGameMode:
   :
 
   LDA gameMode
-  CMP #GAME_COMPLETED_MODE
+  CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR ClearGfx
     INC levelNo
+  :
+
+  LDA gameMode
+  CMP #GAME_COMPLETED_MODE
+  BNE :+
+    LDA #$01
+    STA initReset
   :
 
 SavePreviousGameMode:

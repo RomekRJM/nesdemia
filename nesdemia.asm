@@ -165,7 +165,10 @@ PLAYER_DASH_MAX = $10
 MAIN_MENU_MODE = $00
 IN_GAME_MODE = $01
 GAME_OVER_MODE = $02
-GAME_COMPLETED_MODE = $03
+LEVEL_COMPLETED_MODE = $03
+GAME_COMPLETED_MODE = $04
+
+LAST_LEVEL = $06
 
 COLLISSION = $01
 NO_COLLISSION = $00
@@ -205,12 +208,21 @@ MainGameLoop:
     JMP ContinueMainGameLoop
   :
   LDA gameMode
-  CMP #GAME_COMPLETED_MODE
+  CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode
     JSR RenderGameCompleted
     JSR NextLevelIfNeeded
     JMP ContinueMainGameLoop
+  :
+  LDA gameMode
+  CMP #GAME_COMPLETED_MODE
+  BNE :+
+    JSR AdjustGameMode
+    JSR RenderGameCompleted
+    JMP ContinueMainGameLoop
+    LDA #$06
+    STA dbg1
   :
 
   JSR ReactOnInput
@@ -266,15 +278,24 @@ ResetIfNeeded:
 
 NextLevelIfNeeded:
   LDA initNextLevel
-  BEQ :+
-    DEC resetCounter
-    LDA resetCounter
-    CMP #$A0
-    BNE :+
-      LDA #IN_GAME_MODE
-      STA gameMode
+  BEQ EndNextLevelIfNeeded
+  DEC resetCounter
+  LDA resetCounter
+  CMP #$A0
+  BNE EndNextLevelIfNeeded
+
+  LDA levelNo
+  CMP #LAST_LEVEL
+  BCC :+
+    LDA #GAME_COMPLETED_MODE
+    STA gameMode
+    JMP EndNextLevelIfNeeded
   :
 
+  LDA #IN_GAME_MODE
+  STA gameMode
+
+EndNextLevelIfNeeded:
   RTS
 
 .include "nmi.asm"

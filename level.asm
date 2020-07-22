@@ -68,7 +68,7 @@ CheckWinCondition:
   BNE EndCheckWinCondition
 
 RoundWon:
-  LDA #GAME_COMPLETED_MODE
+  LDA #LEVEL_COMPLETED_MODE
   STA gameMode
   LDA #$01
   STA initNextLevel
@@ -111,4 +111,3 @@ Level:
   .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
   .byte $04, $03, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
   .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
-  .byte $00

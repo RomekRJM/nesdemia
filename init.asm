@@ -44,7 +44,7 @@ CLEARMEM:
   BPL :-
 .endrepeat
 
-LDA #$01
+LDA #$04
 STA levelNo
 
 JSR InitVariables
