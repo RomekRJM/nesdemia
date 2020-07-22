@@ -1,7 +1,7 @@
 AdjustGameMode:
   LDA previousGameMode
-  CMP #MAIN_MENU_MODE
-  BNE :+
+  CMP #IN_GAME_MODE
+  BEQ :+
     LDA gameMode
     CMP #IN_GAME_MODE
     BNE :+
@@ -19,9 +19,11 @@ AdjustGameMode:
     JMP SavePreviousGameMode
   :
 
+  LDA gameMode
   CMP #GAME_COMPLETED_MODE
   BNE :+
     JSR ClearGfx
+    INC levelNo
   :
 
 SavePreviousGameMode:

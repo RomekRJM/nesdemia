@@ -63,3 +63,27 @@ NextRandom16To206:
   :
 
   RTS
+
+InitVariables:
+  LDA #$00
+  STA gameRendered
+  STA gameEndRendered
+
+  LDA #$01
+  STA nmiTimer
+  STA refreshBackground
+
+  LDA #$01
+  STA levelNo
+
+  LDA #$c0
+  STA resetCounter
+
+  LDA #$80
+  STA playerTop
+  STA playerLeft
+
+  LDA #GAME_TIME_UNIT
+  STA countdownTimer
+
+  RTS

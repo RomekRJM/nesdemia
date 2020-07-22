@@ -44,23 +44,4 @@ CLEARMEM:
   BPL :-
 .endrepeat
 
-InitVariables:
-  LDA #$00
-  STA gameRendered
-
-  LDA #$01
-  STA nmiTimer
-  STA refreshBackground
-
-  LDA #$05
-  STA levelNo
-
-  LDA #$c0
-  STA resetCounter
-
-  LDA #$80
-  STA playerTop
-  STA playerLeft
-
-  LDA #GAME_TIME_UNIT
-  STA countdownTimer
+JSR InitVariables
