@@ -6,6 +6,7 @@ AdjustGameMode:
     CMP #IN_GAME_MODE
     BNE :+
       JSR LoadLevel
+      JSR InitVariables
   :
 
   LDA previousGameMode
