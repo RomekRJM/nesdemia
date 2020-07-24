@@ -78,40 +78,55 @@ ContinueRenderPartialGameBackground:
 
   LDX health
   CPX #$01
-  BNE :+
+  BCC :+
     LDA #$d2
     STA $01
     LDA #%11111111
     STA $02
+    JSR UpdateLungsBackground
   :
 
   LDX health
   CPX #$02
-  BNE :+
+  BCC :+
     LDA #$db
     STA $01
     LDA #%10101111
     STA $02
+    JSR UpdateLungsBackground
   :
 
   LDX health
   CPX #$03
-  BNE :+
+  BCC :+
     LDA #$db
     STA $01
     LDA #%11111111
     STA $02
+    JSR UpdateLungsBackground
   :
 
   LDX health
   CPX #$04
-  BNE :+
+  BCC :+
     LDA #$e3
     STA $01
     LDA #%11111111
     STA $02
+    JSR UpdateLungsBackground
   :
 
+
+EndRenderPartialGameBackground:
+  LDA #$00
+  STA healthUpdated
+  STA partialUpdateMemory, Y
+  INY
+
+  RTS
+
+
+UpdateLungsBackground:
   LDA #$03
   STA partialUpdateMemory, Y
   INY
@@ -130,8 +145,4 @@ ContinueRenderPartialGameBackground:
   INY
   .endrepeat
 
-EndRenderPartialGameBackground:
-  LDA #$00
-  STA healthUpdated
-  STA partialUpdateMemory, Y
-  INY
+  RTS

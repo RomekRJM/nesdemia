@@ -325,7 +325,7 @@ RenderGame:
   RTS
 
 RenderGamePartialUpdate:
-  .include "game_background_partial_update.asm"
+  JSR RenderPartialGameBackground
   RTS
 
 RenderGameOver:
@@ -351,6 +351,8 @@ RenderGameCompleted:
 .include "attributes.asm"
 
 .include "background.asm"
+
+.include "game_background_partial_update.asm"
 
 .include "game_attributes.asm"
 
