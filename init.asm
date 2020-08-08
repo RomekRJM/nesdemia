@@ -48,3 +48,28 @@ LDA #$01
 STA levelNo
 
 JSR InitVariables
+
+LDA #$00
+STA sound_param_byte_0
+LDA #<song_list
+STA sound_param_word_0
+LDA #>song_list
+STA sound_param_word_0+1
+LDA #<sfx_list
+STA sound_param_word_1
+LDA #>sfx_list
+STA sound_param_word_1+1
+LDA #<instrument_list
+STA sound_param_word_2
+LDA #>instrument_list
+STA sound_param_word_2+1
+LDA #<dpcm_list
+STA sound_param_word_3
+LDA #>dpcm_list
+STA sound_param_word_3+1
+JSR sound_initialize
+
+;load a song
+LDA #$01
+STA sound_param_byte_0
+JSR play_song

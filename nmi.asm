@@ -49,7 +49,7 @@ AfterPartialUpdate:
 
 EndNMI:
 
-  ; soundengine_update
+  soundengine_update
 
   ; restore registers
   PLA
