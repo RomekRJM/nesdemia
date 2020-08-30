@@ -184,6 +184,7 @@ WIN_BY_SURVIVING = $04
 
 GAME_TIME_UNIT = $44
 
+.include "music/tracks.asm"
 .include "init.asm"
 
 JSR LoadPalettes
