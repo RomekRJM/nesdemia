@@ -48,6 +48,9 @@ AfterPartialUpdate:
   STA refreshBackground
 
 EndNMI:
+
+  soundengine_update
+
   ; restore registers
   PLA
   TAY
