@@ -6,7 +6,4 @@
 
 .align 64
 .include "track_dpcm.inc"
-
-.segment "ROM0"
-
 .include "track_data.inc"
