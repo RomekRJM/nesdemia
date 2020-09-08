@@ -88,4 +88,8 @@ InitVariables:
   LDA #GAME_TIME_UNIT
   STA countdownTimer
 
+  ; silence all APU channels
+  LDX #$00
+  STX $4015
+
   RTS
