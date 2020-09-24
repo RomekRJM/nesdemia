@@ -1,15 +1,15 @@
-1 01
-2 02
+1 01                N  E  S  D  E  M  I  A
+2 02                17 0E 1C 0D 0E 16 12 0A
 3 03
-4 04
-5 05
+4 04                N  E  W     G  A  M  E
+5 05                17 0E 20 27 10 0A 16 0E
 6 06
-7 07
-8 08
+7 07                C  R  E  D  I  T  S
+8 08                0C 1B 0E 0D 12 1D 1C
 9 09
 A 0A
-B 0B
-C 0C
+B 0B                P  A  S  S  W  O  R  D
+C 0C                19 0A 1C 1C 20 18 1B 0D
 D 0D
 E 0E
 F 0F
