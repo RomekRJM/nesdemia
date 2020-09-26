@@ -40,6 +40,21 @@ class TestGeneration(unittest.TestCase):
 
       self.assertListEqual([sp, lu, at, lv], list(decode(encoded)))
 
+  def test_decode_wrong_passphrase(self):
+    self.assertRaises(AttributeError, decode, '0x1ab9c')
+
+  def test_most_pastphrases_are_wrong(self):
+    all = 2 ** 20
+    wrong = 0
+
+    for i in range(all):
+      try:
+        decode(hex(i))
+      except AttributeError:
+        wrong += 1
+
+    self.assertTrue(float(wrong) / all > 0.75)
+
 
 if __name__ == '__main__':
     unittest.main()
