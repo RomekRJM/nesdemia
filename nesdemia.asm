@@ -189,7 +189,7 @@ GAME_TIME_UNIT = $44
 
 JSR LoadPalettes
 
-.include "menu_background.asm"
+.include "background/menu_background.asm"
 
 MainGameLoop:
   JSR GetControllerInput
@@ -321,7 +321,7 @@ RenderGame:
     JMP RenderGamePartialUpdate
   :
 
-  .include "game_background.asm"
+  .include "background/game_background.asm"
   INC gameRendered
   RTS
 
@@ -333,7 +333,7 @@ RenderGameOver:
   LDA gameEndRendered
 
   BNE :+
-    .include "game_over_background.asm"
+    .include "background/game_over_background.asm"
     INC gameEndRendered
   :
 
@@ -343,43 +343,43 @@ RenderGameCompleted:
   LDA gameEndRendered
 
   BNE :+
-    .include "game_completed_background.asm"
+    .include "background/game_completed_background.asm"
     INC gameEndRendered
   :
 
   RTS
 
-.include "attributes.asm"
+.include "background/attributes.asm"
 
-.include "background.asm"
+.include "background/background.asm"
 
-.include "game_background_partial_update.asm"
+.include "background/game_background_partial_update.asm"
 
-.include "game_attributes.asm"
+.include "background/game_attributes.asm"
 
-.include "menu_attributes.asm"
+.include "background/menu_attributes.asm"
 
-.include "cursor.asm"
+.include "actor/cursor.asm"
 
-.include "game_mode.asm"
+.include "state/game_mode.asm"
 
-.include "player.asm"
+.include "actor/player.asm"
 
-.include "pallete.asm"
+.include "gfx/pallete.asm"
 
-.include "virus.asm"
+.include "actor/virus.asm"
 
-.include "hud.asm"
+.include "gfx/hud.asm"
 
-.include "pill.asm"
+.include "actor/pill.asm"
 
-.include "powerup.asm"
+.include "actor/powerup.asm"
 
 .include "utils.asm"
 
-.include "gfx.asm"
+.include "gfx/gfx.asm"
 
-.include "level.asm"
+.include "state/level.asm"
 
 .segment "VECTORS"
   .word NMI
