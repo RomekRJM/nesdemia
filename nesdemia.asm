@@ -211,6 +211,13 @@ MainGameLoop:
     JMP ContinueMainGameLoop
   :
   LDA gameMode
+  CMP #PASSWORD_GAME_MODE
+  BNE :+
+    JSR AdjustGameMode
+    JSR RenderPasswordBackground
+    JMP ContinueMainGameLoop
+  :
+  LDA gameMode
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode

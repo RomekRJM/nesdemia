@@ -1,4 +1,4 @@
-RenderGameOverBackground:
+RenderPasswordBackground:
 
   LDA #$00
   STA $2000
