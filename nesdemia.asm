@@ -72,7 +72,7 @@
 .define previousGameMode $5a
 .define refreshBackground $5b
 .define menuCursorTop $5c
-.define difficultyLevel $5d
+.define menuOption $5d
 .define gameEndRendered $5e
 .define gameRendered $5f
 .define virusLeft $60
@@ -162,11 +162,13 @@ PLAYER_INVINCIBLE_DURATION = $ff
 PLAYER_DASH_INCREMENT = $02
 PLAYER_DASH_MAX = $10
 
-MAIN_MENU_MODE = $00
-IN_GAME_MODE = $01
-GAME_OVER_MODE = $02
-LEVEL_COMPLETED_MODE = $03
-GAME_COMPLETED_MODE = $04
+IN_GAME_MODE = $00
+PASSWORD_GAME_MODE = $01
+CREDITS_GAME_MODE = $02
+GAME_OVER_MODE = $03
+LEVEL_COMPLETED_MODE = $04
+GAME_COMPLETED_MODE = $05
+MAIN_MENU_MODE = $06
 
 LAST_LEVEL = $06
 

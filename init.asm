@@ -47,6 +47,10 @@ CLEARMEM:
 LDA #$01
 STA levelNo
 
+LDA #MAIN_MENU_MODE
+STA gameMode
+STA previousGameMode
+
 JSR InitVariables
 
 LDA #$00

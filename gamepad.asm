@@ -150,7 +150,7 @@ ReactOnInputInMenu:
     LDA previousButtons
     AND #BUTTON_SELECT
     BNE :+
-    INC difficultyLevel
+    INC menuOption
     LDA menuCursorTop
     CLC
     ADC #$10
@@ -159,7 +159,7 @@ ReactOnInputInMenu:
     BCC :+
       LDA #$00
       STA menuCursorTop
-      STA difficultyLevel
+      STA menuOption
   :
 
   LDA buttons
