@@ -110,10 +110,13 @@
 .define timeDigit1 $7f
 .define timeDigit0 $80
 .define countdownTimer $81
-; takes 32 bits
-.define backgroundLastLinesTmp $82 ; 32
-.define dbg1 $a2
-.define dbg2 $a3
+.define passwordCurrentDigit $82
+; takes 4 bytes
+.define passwordArray $83 ; 4
+; takes 32 bytes
+.define backgroundLastLinesTmp $87 ; 32
+.define dbg1 $a7
+.define dbg2 $a8
 
 .segment "STARTUP"
 
@@ -214,6 +217,7 @@ MainGameLoop:
   CMP #PASSWORD_GAME_MODE
   BNE :+
     JSR AdjustGameMode
+    JSR ReactOnInputInPassword
     JSR RenderPassword
     JMP ContinueMainGameLoop
   :
