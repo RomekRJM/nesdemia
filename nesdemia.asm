@@ -312,7 +312,13 @@ EndNextLevelIfNeeded:
 
 .include "nmi.asm"
 
-.include "gamepad.asm"
+.include "gamepad/capture_input.asm"
+
+.include "gamepad/in_game.asm"
+
+.include "gamepad/main_menu.asm"
+
+.include "gamepad/password.asm"
 
 RenderGraphics:
   LDA #$00
