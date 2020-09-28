@@ -165,7 +165,7 @@ ReactOnInputInMenu:
   LDA buttons
   AND #BUTTON_START
   BEQ EndReactOnInputInMenu
-  LDA #IN_GAME_MODE
+  LDA menuOption
   STA gameMode
 
 EndReactOnInputInMenu:

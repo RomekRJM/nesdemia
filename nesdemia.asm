@@ -214,7 +214,7 @@ MainGameLoop:
   CMP #PASSWORD_GAME_MODE
   BNE :+
     JSR AdjustGameMode
-    JSR RenderPasswordBackground
+    JSR RenderPassword
     JMP ContinueMainGameLoop
   :
   LDA gameMode
@@ -231,8 +231,6 @@ MainGameLoop:
     JSR AdjustGameMode
     JSR RenderGameCompleted
     JMP ContinueMainGameLoop
-    LDA #$06
-    STA dbg1
   :
 
   JSR ReactOnInput
@@ -344,6 +342,16 @@ RenderGameOver:
   BNE :+
     .include "background/game_over_background.asm"
     INC gameEndRendered
+  :
+
+  RTS
+
+RenderPassword:
+  LDA gameRendered
+
+  BNE :+
+    .include "background/password_background.asm"
+    INC gameRendered
   :
 
   RTS
