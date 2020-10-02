@@ -237,7 +237,7 @@ MainGameLoop:
     JMP ContinueMainGameLoop
   :
 
-  JSR ReactOnInput
+  JSR ReactOnInputInGame
   JSR ComputeLogic
   JSR RenderGraphics
 
@@ -312,14 +312,6 @@ EndNextLevelIfNeeded:
 
 .include "nmi.asm"
 
-.include "gamepad/capture_input.asm"
-
-.include "gamepad/in_game.asm"
-
-.include "gamepad/main_menu.asm"
-
-.include "gamepad/password.asm"
-
 RenderGraphics:
   LDA #$00
   STA spriteCounter
@@ -375,6 +367,14 @@ RenderGameCompleted:
   :
 
   RTS
+
+.include "gamepad/capture_input.asm"
+
+.include "gamepad/game.asm"
+
+.include "gamepad/main_menu.asm"
+
+.include "gamepad/password.asm"
 
 .include "background/attributes.asm"
 
