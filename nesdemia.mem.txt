@@ -1,4 +1,3 @@
-6f levelNo
 70 winCondition
 71 winThreshold
 72 points
@@ -18,7 +17,8 @@
 80 timeDigit0
 81 countdownTimer
 82 passwordCurrentDigit
-83 passwordArray
-87 backgroundLastLinesTmp
-a7 dbg1
-a8 dbg2
+83 passwordRendered
+84 passwordArray
+88 backgroundLastLinesTmp
+a8 dbg1
+a9 dbg2

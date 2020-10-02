@@ -111,11 +111,12 @@
 .define timeDigit0 $80
 .define countdownTimer $81
 .define passwordCurrentDigit $82
-.define passwordArray $83 ; 4
+.define passwordRendered $83
+.define passwordArray $84 ; 4
 ; takes 32 bits
-.define backgroundLastLinesTmp $87 ; 32
-.define dbg1 $a7
-.define dbg2 $a8
+.define backgroundLastLinesTmp $88 ; 32
+.define dbg1 $a8
+.define dbg2 $a9
 
 .segment "STARTUP"
 
@@ -348,11 +349,14 @@ RenderGameOver:
   RTS
 
 RenderPassword:
-  LDA gameRendered
+  LDA passwordRendered
+  BEQ :+
+    JMP RenderPartialPasswordBackground
+  :
 
   BNE :+
     .include "background/password_background.asm"
-    INC gameRendered
+    INC passwordRendered
   :
 
   RTS
@@ -380,6 +384,8 @@ RenderGameCompleted:
 .include "background/background.asm"
 
 .include "background/game_background_partial_update.asm"
+
+.include "background/password_background_partial_update.asm"
 
 .include "background/game_attributes.asm"
 
