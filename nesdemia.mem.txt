@@ -1,3 +1,5 @@
+6d virusCntr
+6e virusPointer
 6f levelNo
 70 winCondition
 71 winThreshold
@@ -17,8 +19,6 @@
 7f timeDigit1
 80 timeDigit0
 81 countdownTimer
-82 passwordCurrentDigit
-83 passwordArray
-87 backgroundLastLinesTmp
-a7 dbg1
-a8 dbg2
+82 backgroundLastLinesTmp
+a2 dbg1
+a3 dbg2
