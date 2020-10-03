@@ -59,7 +59,12 @@ ReactOnInputInPassword:
 
   LDA buttons
   AND #BUTTON_START
-  BEQ EndReactOnInputInPassword
+  BEQ :+
+    LDA previousButtons
+    AND #BUTTON_START
+    BNE :+
+    JSR LoadPassword
+  :
 
 EndReactOnInputInPassword:
   LDA buttons

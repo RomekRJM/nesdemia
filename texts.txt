@@ -7,11 +7,11 @@
 7 07                C  R  E  D  I  T  S
 8 08                0C 1B 0E 0D 12 1D 1C
 9 09
-A 0A
-B 0B                P  A  S  S  W  O  R  D
-C 0C                19 0A 1C 1C 20 18 1B 0D
-D 0D
-E 0E
+A 0A                P  A  S  S  W  O  R  D
+B 0B                19 0A 1C 1C 20 18 1B 0D
+C 0C
+D 0D                W  R  O  N  G
+E 0E                20 1B 18 17 10
 F 0F
 G 10                U  S  E    P  O  W  E  R  U  P  S
 H 11                1E 1C 0E   19 18 20 0E 1B 1E 19 1C

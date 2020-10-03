@@ -1,9 +1,9 @@
-73 winThreshold
-74 points
-75 kills
-76 smartKills
-77 usedPowerups
-78 timeLimit
+45 speed
+46 attack
+47 luck
+71 level
+86 valid
+ab controlsum
 79 noViruses
 7a smartVirusChance
 7b powerupChance

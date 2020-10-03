@@ -264,6 +264,79 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
+  LDA passwordValid
+  BNE :+
+    ; Print WRONG
+    LDA #$09
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA $02
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA $b8
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$20
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$1b
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$18
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$17
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$10
+    STA partialUpdateMemory, Y
+    INY
+
+    JMP EndRenderPartialPasswordBackground
+  :
+
+  ; clear WRONG
+  LDA #$09
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $02
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $b8
+  STA partialUpdateMemory, Y
+  INY
+
+.repeat 9
+  LDA #$88
+  STA partialUpdateMemory, Y
+  INY
+.endrepeat
+
 EndRenderPartialPasswordBackground:
   LDA #$00
   STA partialUpdateMemory, Y

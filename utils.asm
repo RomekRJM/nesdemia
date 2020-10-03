@@ -64,6 +64,81 @@ NextRandom16To206:
 
   RTS
 
+
+LoadPassword:
+  LDX #$00
+  STX passwordValid
+  LDA passwordArray, X
+
+  LSR
+  STA playerSpeed
+
+  LDA passwordArray, X
+  AND #%00000001
+  ASL
+  ASL
+  STA $00
+  INX
+  LDA passwordArray, X
+  LSR
+  LSR
+  ORA $00
+  STA playerLuck
+
+  LDA passwordArray, X
+  ASL
+  AND #%00000110
+  STA $00
+  INX
+  LDA passwordArray, X
+  LSR
+  LSR
+  LSR
+  ORA $00
+  STA playerAttack
+
+  LDA passwordArray, X
+  AND #%00000111
+  ASL
+  ASL
+  STA $00
+  INX
+  LDA passwordArray, X
+  LSR
+  LSR
+  ORA $00
+  STA levelNo
+
+  LDA passwordArray, X
+  AND #%00000011
+  ASL
+  ASL
+  ASL
+  ASL
+  STA $00
+  INX
+  LDA passwordArray, X
+  ORA $00
+  ; control sum
+  STA $00
+
+  LDA playerSpeed
+  CLC
+  ADC playerLuck
+  CLC
+  ADC playerAttack
+  CLC
+  ADC levelNo
+
+  CMP $00
+  BNE :+
+    LDA #$01
+    STA passwordValid
+  :
+
+  RTS
+
+
 InitVariables:
   LDA #$00
   STA gameRendered
@@ -73,6 +148,7 @@ InitVariables:
   STA playerInvincible
   STA playerDashCount
   STA playerDashing
+  STA passwordValid
 
   LDA #$01
   STA nmiTimer
