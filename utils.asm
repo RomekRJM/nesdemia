@@ -178,6 +178,9 @@ InitVariables:
   LDA #$00
   STA gameRendered
   STA gameEndRendered
+  STA creditsRendered
+  STA mainMenuRendered
+  STA passwordRendered
   STA health
   STA playerAttacks
   STA playerInvincible
