@@ -1,11 +1,11 @@
 45 speed
 46 attack
 47 luck
-71 level
+71 levelNo
 86 valid
 ab controlsum
 74 points
-7a smartVirusChance
+ae dbg
 7b powerupChance
 7c attackChance
 7d LastLinesTextLo

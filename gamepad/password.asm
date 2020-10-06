@@ -64,6 +64,8 @@ ReactOnInputInPassword:
     AND #BUTTON_START
     BNE :+
     JSR LoadPassword
+    LDA #IN_GAME_MODE
+    STA gameMode
   :
 
 EndReactOnInputInPassword:

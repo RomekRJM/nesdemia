@@ -5,6 +5,7 @@ AdjustGameMode:
     LDA gameMode
     CMP #IN_GAME_MODE
     BNE :+
+      STA dbg1
       JSR LoadLevel
       JSR InitVariables
   :

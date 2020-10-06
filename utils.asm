@@ -152,6 +152,11 @@ LoadPassword:
     STA passwordValid
   :
 
+  INC playerSpeed
+  INC playerLuck
+  INC playerAttack
+  INC levelNo
+
   RTS
 
 

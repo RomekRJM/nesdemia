@@ -44,7 +44,7 @@ CLEARMEM:
   BPL :-
 .endrepeat
 
-LDA #$01
+LDA #$00
 STA levelNo
 
 LDA #MAIN_MENU_MODE
