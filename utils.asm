@@ -82,6 +82,7 @@ LoadPassword:
   STA points
   INX
 
+
   LDA passwordArray, X
   LSR
   STA playerSpeed
@@ -157,6 +158,19 @@ LoadPassword:
   INC playerAttack
   INC levelNo
 
+  JSR InitPoints
+  LDA points
+  BEQ EndLoadPassword
+  STA $00
+  INC $00
+
+  :
+    JSR PointsToDecimal
+    DEC $00
+    LDA $00
+  BNE :-
+
+EndLoadPassword:
   RTS
 
 

@@ -1,6 +1,6 @@
 45 speed
-46 attack
-47 luck
+46 luck
+47 attack
 71 levelNo
 86 valid
 ab controlsum
