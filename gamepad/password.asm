@@ -21,9 +21,9 @@ ReactOnInputInPassword:
     BNE :+
     INC passwordCurrentDigit
     LDA passwordCurrentDigit
-    CMP #$04
+    CMP #$06
     BCC :+
-      LDA #$04
+      LDA #$06
       STA passwordCurrentDigit
   :
 

@@ -12,6 +12,23 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
+  LDA #$e6
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA passwordArray, X
+  STA partialUpdateMemory, Y
+  INY
+  INX
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$21
+  STA partialUpdateMemory, Y
+  INY
+
   LDA #$e9
   STA partialUpdateMemory, Y
   INY
@@ -88,11 +105,8 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
   INX
-; End update password digits
 
-; Clear previous arrows up
-
-  LDA #$0f
+  LDA #$01
   STA partialUpdateMemory, Y
   INY
 
@@ -100,11 +114,31 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$a9
+  LDA #$f8
   STA partialUpdateMemory, Y
   INY
 
-.repeat 15
+  LDA passwordArray, X
+  STA partialUpdateMemory, Y
+  INY
+  INX
+; End update password digits
+
+; Clear previous arrows up
+
+  LDA #$15
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$21
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$a6
+  STA partialUpdateMemory, Y
+  INY
+
+.repeat 21
   LDA #$88
   STA partialUpdateMemory, Y
   INY
@@ -112,7 +146,7 @@ RenderPartialPasswordBackground:
 
 ; Clear previous arrows down
 
-  LDA #$0f
+  LDA #$15
   STA partialUpdateMemory, Y
   INY
 
@@ -120,11 +154,11 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$29
+  LDA #$26
   STA partialUpdateMemory, Y
   INY
 
-.repeat 15
+.repeat 21
   LDA #$88
   STA partialUpdateMemory, Y
   INY
@@ -132,6 +166,26 @@ RenderPartialPasswordBackground:
 
 ; Begin update arrow up/down
   LDA passwordCurrentDigit
+  BNE :+
+    ; high byte of arrow up position
+    LDA #$21
+    STA $00
+
+    ; low byte of arrow up position
+    LDA #$a6
+    STA $01
+
+    ; high byte of arrow down position
+    LDA #$22
+    STA $02
+
+    ; low byte of arrow down position
+    LDA #$26
+    STA $03
+  :
+
+  LDA passwordCurrentDigit
+  CMP #$01
   BNE :+
     ; high byte of arrow up position
     LDA #$21
@@ -151,7 +205,7 @@ RenderPartialPasswordBackground:
   :
 
   LDA passwordCurrentDigit
-  CMP #$01
+  CMP #$02
   BNE :+
     ; high byte of arrow up position
     LDA #$21
@@ -171,7 +225,7 @@ RenderPartialPasswordBackground:
   :
 
   LDA passwordCurrentDigit
-  CMP #$02
+  CMP #$03
   BNE :+
     ; high byte of arrow up position
     LDA #$21
@@ -191,7 +245,7 @@ RenderPartialPasswordBackground:
   :
 
   LDA passwordCurrentDigit
-  CMP #$03
+  CMP #$04
   BNE :+
     ; high byte of arrow up position
     LDA #$21
@@ -211,7 +265,7 @@ RenderPartialPasswordBackground:
   :
 
   LDA passwordCurrentDigit
-  CMP #$04
+  CMP #$05
   BNE :+
     ; high byte of arrow up position
     LDA #$21
@@ -227,6 +281,26 @@ RenderPartialPasswordBackground:
 
     ; low byte of arrow down position
     LDA #$35
+    STA $03
+  :
+
+  LDA passwordCurrentDigit
+  CMP #$06
+  BNE :+
+    ; high byte of arrow up position
+    LDA #$21
+    STA $00
+
+    ; low byte of arrow up position
+    LDA #$b8
+    STA $01
+
+    ; high byte of arrow down position
+    LDA #$22
+    STA $02
+
+    ; low byte of arrow down position
+    LDA #$38
     STA $03
   :
 

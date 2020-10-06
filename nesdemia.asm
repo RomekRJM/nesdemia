@@ -115,11 +115,11 @@
 .define passwordCurrentDigit $84
 .define passwordRendered $85
 .define passwordValid $86
-.define passwordArray $87 ; 4
+.define passwordArray $87 ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $8b ; 32
-.define dbg1 $ab
-.define dbg2 $ac
+.define backgroundLastLinesTmp $8e ; 32
+.define dbg1 $ae
+.define dbg2 $af
 
 .segment "STARTUP"
 

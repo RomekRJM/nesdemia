@@ -4,7 +4,7 @@
 71 level
 86 valid
 ab controlsum
-79 noViruses
+74 points
 7a smartVirusChance
 7b powerupChance
 7c attackChance

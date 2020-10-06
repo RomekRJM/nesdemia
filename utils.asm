@@ -70,6 +70,19 @@ LoadPassword:
   STX passwordValid
   LDA passwordArray, X
 
+  ASL
+  ASL
+  ASL
+  ASL
+  STA $00
+  INX
+
+  LDA passwordArray, X
+  ORA $00
+  STA points
+  INX
+
+  LDA passwordArray, X
   LSR
   STA playerSpeed
 
@@ -122,13 +135,16 @@ LoadPassword:
   ; control sum
   STA $00
 
-  LDA playerSpeed
+  LDA points
+  CLC
+  ADC playerSpeed
   CLC
   ADC playerLuck
   CLC
   ADC playerAttack
   CLC
   ADC levelNo
+  AND #%00111111
 
   CMP $00
   BNE :+

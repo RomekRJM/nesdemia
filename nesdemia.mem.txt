@@ -19,6 +19,6 @@
 85 passwordRendered
 86 passwordValid
 87 passwordArray
-8b backgroundLastLinesTmp
-ab dbg1
-ac dbg2
+8e backgroundLastLinesTmp
+ae dbg1
+af dbg2
