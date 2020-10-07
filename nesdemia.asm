@@ -210,6 +210,7 @@ MainGameLoop:
     JSR RenderCursor
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #GAME_OVER_MODE
   BNE :+
@@ -217,6 +218,7 @@ MainGameLoop:
     JSR RenderGameOver
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #PASSWORD_GAME_MODE
   BNE :+
@@ -225,6 +227,7 @@ MainGameLoop:
     JSR RenderPassword
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #CREDITS_GAME_MODE
   BNE :+
@@ -233,6 +236,7 @@ MainGameLoop:
     JSR RenderCredits
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
@@ -241,6 +245,7 @@ MainGameLoop:
     JSR NextLevelIfNeeded
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #GAME_COMPLETED_MODE
   BNE :+

@@ -24,6 +24,16 @@ AdjustGameMode:
   :
 
   LDA previousGameMode
+  CMP #MAIN_MENU_MODE
+  BEQ :+
+    LDA gameMode
+    CMP #MAIN_MENU_MODE
+    BNE :+
+      JSR ClearGfx
+      JSR InitVariables
+  :
+
+  LDA previousGameMode
   CMP #IN_GAME_MODE
   BNE SavePreviousGameMode
 
@@ -46,15 +56,6 @@ AdjustGameMode:
   BNE :+
     LDA #$01
     STA initReset
-  :
-
-  LDA previousGameMode
-  CMP #MAIN_MENU_MODE
-  BEQ :+
-    LDA gameMode
-    CMP #MAIN_MENU_MODE
-    BNE :+
-      JSR InitVariables
   :
 
 SavePreviousGameMode:
