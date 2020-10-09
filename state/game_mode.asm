@@ -10,31 +10,9 @@ AdjustGameMode:
       JSR InitVariables
   :
 
-  LDA gameMode
-  CMP #PASSWORD_GAME_MODE
-  BNE :+
-    JSR ClearGfx
-  :
-
-  LDA gameMode
-  CMP #CREDITS_GAME_MODE
-  BNE :+
-    JSR ClearGfx
-  :
-
   LDA previousGameMode
-  CMP #IN_GAME_MODE
-  BNE SavePreviousGameMode
-
-  LDA gameMode
-  CMP #GAME_OVER_MODE
-  BNE :+
-    JSR ClearGfx
-  :
-
-  LDA gameMode
-  CMP #LEVEL_COMPLETED_MODE
-  BNE :+
+  CMP gameMode
+  BEQ :+
     JSR ClearGfx
   :
 
