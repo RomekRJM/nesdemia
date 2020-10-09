@@ -6,7 +6,7 @@
 ab controlsum
 74 points
 ae dbg
-7b powerupChance
+5b gameMode
 7c attackChance
 7d LastLinesTextLo
 7e LastLinesTextHi
