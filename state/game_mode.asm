@@ -14,7 +14,12 @@ AdjustGameMode:
   CMP #PASSWORD_GAME_MODE
   BNE :+
     JSR ClearGfx
-    JMP SavePreviousGameMode
+  :
+
+  LDA gameMode
+  CMP #CREDITS_GAME_MODE
+  BNE :+
+    JSR ClearGfx
   :
 
   LDA previousGameMode
@@ -25,14 +30,12 @@ AdjustGameMode:
   CMP #GAME_OVER_MODE
   BNE :+
     JSR ClearGfx
-    JMP SavePreviousGameMode
   :
 
   LDA gameMode
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR ClearGfx
-    INC levelNo
   :
 
   LDA gameMode
