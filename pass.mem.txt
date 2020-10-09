@@ -5,9 +5,9 @@
 86 valid
 ab controlsum
 74 points
-b0 dbg
+ae dbg
 5b gameMode
-63 mmrendered
+7c attackChance
 7d LastLinesTextLo
 7e LastLinesTextHi
 21 buttons

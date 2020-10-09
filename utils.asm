@@ -156,7 +156,6 @@ LoadPassword:
   INC playerSpeed
   INC playerLuck
   INC playerAttack
-  INC levelNo
 
   JSR InitPoints
   LDA points
