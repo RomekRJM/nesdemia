@@ -20,6 +20,9 @@ ReactOnInputInMenu:
   LDA buttons
   AND #BUTTON_START
   BEQ EndReactOnInputInMenu
+  LDA previousButtons
+  AND #BUTTON_START
+  BNE EndReactOnInputInMenu
   LDA menuOption
   STA gameMode
 

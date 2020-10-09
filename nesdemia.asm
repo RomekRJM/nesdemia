@@ -208,6 +208,7 @@ MainGameLoop:
     JSR ReactOnInputInMenu
     JSR RenderMainMenu
     JSR RenderCursor
+    JSR AdjustGameMode
     JMP ContinueMainGameLoop
   :
 
