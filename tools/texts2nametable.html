@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form id="frm1">
+  Text: <input type="text" id="text"><br><br>
+  <input type="button" onclick="toNesMap()" value="Encode" maxlength="32">
+</form>
+
+<br><br>
+
+<p id="encoded"></p>
+
+<script>
+function toNesMap() {
+  var text = document.getElementById("text").value.toUpperCase();
+  var encoded = [];
+  var lines
+
+  for (var i=0; i<text.length; ++i) {
+    encoded.push(encode(text.charAt(i)));
+  }
+
+  var start = Math.ceil((32 - encoded.length) / 2);
+
+  document.getElementById("encoded").innerText = ".byte\xa0";
+
+  for (var i=0; i<32; ++i) {
+    if (i < start || encoded.length == 0) {
+      document.getElementById("encoded").innerText += "$88";
+    } else if (encoded.length > 0) {
+      document.getElementById("encoded").innerText += "$" + encoded.shift();
+    }
+
+    if (i == 15) {
+      document.getElementById("encoded").innerText += "\n.byte\xa0";
+    } else if (i != 31) {
+      document.getElementById("encoded").innerText += ",";
+    }
+  }
+}
+
+function encode(c) {
+  if (c === '1')
+    return "01";
+  else if (c === '2')
+    return "02";
+  else if (c === '3')
+    return "03";
+  else if (c === '4')
+    return "04";
+  else if (c === '5')
+    return "05";
+  else if (c === '6')
+    return "06";
+  else if (c === '7')
+    return "07";
+  else if (c === '8')
+    return "08";
+  else if (c === '9')
+    return "09";
+  else if (c === 'A')
+    return "0A";
+  else if (c === 'B')
+    return "0B";
+  else if (c === 'C')
+    return "0C";
+  else if (c === 'D')
+    return "0D";
+  else if (c === 'E')
+    return "0E";
+  else if (c === 'F')
+    return "0F";
+  else if (c === 'G')
+    return "10";
+  else if (c === 'H')
+    return "11";
+  else if (c === 'I')
+    return "12";
+  else if (c === 'J')
+    return "13";
+  else if (c === 'K')
+    return "14";
+  else if (c === 'L')
+    return "15";
+  else if (c === 'M')
+    return "16";
+  else if (c === 'N')
+    return "17";
+  else if (c === 'O')
+    return "18";
+  else if (c === 'P')
+    return "19";
+  else if (c === 'Q')
+    return "1A";
+  else if (c === 'R')
+    return "1B";
+  else if (c === 'S')
+    return "1C";
+  else if (c === 'T')
+    return "1D";
+  else if (c === 'U')
+    return "1E";
+  else if (c === 'V')
+    return "1F";
+  else if (c === 'W')
+    return "20";
+  else if (c === 'X')
+    return "21";
+  else if (c === 'Y')
+    return "22";
+  else if (c === 'Z')
+    return "23";
+  else if (c === '^')
+    return "2A";
+  else if (c === '>')
+    return "2C";
+  else if (c === '.')
+    return "2D";
+  return "88";
+}
+</script>
+
+</body>
+</html>

@@ -1,17 +1,17 @@
-RenderMenuBackground:
+RenderCreditsBackground:
 
   LDA #$00
   STA $2000
   STA $2001
 
-  LDA #.LOBYTE(MenuBackground)
+  LDA #.LOBYTE(CreditsBackground)
   STA backgroundPointerLo
-  LDA #.HIBYTE(MenuBackground)
+  LDA #.HIBYTE(CreditsBackground)
   STA backgroundPointerHi
   LDA #.LOBYTE(BackgroundLLClear)
-  STA backgroundLLPointerLo       ; put the low byte of the address of background's last line into pointer
+  STA backgroundLLPointerLo
   LDA #.HIBYTE(BackgroundLLClear)
-  STA backgroundLLPointerHi       ; put the high byte of the address into pointer
+  STA backgroundLLPointerHi
 
   JSR RenderBackground
 

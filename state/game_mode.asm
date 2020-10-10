@@ -11,6 +11,15 @@ AdjustGameMode:
   :
 
   LDA previousGameMode
+  CMP #CREDITS_GAME_MODE
+  BNE :+
+    LDA gameMode
+    CMP #MAIN_MENU_MODE
+    BNE :+
+      JSR InitVariables
+  :
+
+  LDA previousGameMode
   CMP gameMode
   BEQ :+
     JSR ClearGfx

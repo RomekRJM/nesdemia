@@ -77,49 +77,51 @@
 .define menuOption $5f
 .define gameEndRendered $60
 .define gameRendered $61
-.define virusLeft $62
-.define virusTop $63
-.define virusRight $64
-.define virusBottom $65
-.define virusXSpeed $66
-.define virusYSpeed $67
-.define virusXDirection $68
-.define virusYDirection $69
-.define virusAlive $6a
-.define virusMoveFrame $6b
-.define virusAnimationFrame $6c
-.define virusAnimationChangeFrame $6d
-.define virusSmart $6e
-.define virusCntr $6f
-.define virusPointer $70
+.define creditsRendered $62
+.define mainMenuRendered $63
+.define virusLeft $64
+.define virusTop $65
+.define virusRight $66
+.define virusBottom $67
+.define virusXSpeed $68
+.define virusYSpeed $69
+.define virusXDirection $6a
+.define virusYDirection $6b
+.define virusAlive $6c
+.define virusMoveFrame $6d
+.define virusAnimationFrame $6e
+.define virusAnimationChangeFrame $6f
+.define virusSmart $70
+.define virusCntr $71
+.define virusPointer $72
 ; level specific
-.define levelNo $71
-.define winCondition $72
-.define winThreshold $73
-.define points $74
-.define kills $75
-.define smartKills $76
-.define usedPowerups $77
-.define timeLimit $78
-.define noViruses $79
-.define smartVirusChance $7a
-.define powerupChance $7b
-.define attackChance $7c
-.define LastLinesTextLo $7d
-.define LastLinesTextHi $7e
-.define winThresholdDigit1 $7f
-.define winThresholdDigit0 $80
-.define timeDigit1 $81
-.define timeDigit0 $82
-.define countdownTimer $83
-.define passwordCurrentDigit $84
-.define passwordRendered $85
-.define passwordValid $86
-.define passwordArray $87 ; 7
+.define levelNo $73
+.define winCondition $74
+.define winThreshold $75
+.define points $76
+.define kills $77
+.define smartKills $78
+.define usedPowerups $79
+.define timeLimit $7a
+.define noViruses $7b
+.define smartVirusChance $7c
+.define powerupChance $7d
+.define attackChance $7e
+.define LastLinesTextLo $7f
+.define LastLinesTextHi $80
+.define winThresholdDigit1 $81
+.define winThresholdDigit0 $82
+.define timeDigit1 $83
+.define timeDigit0 $84
+.define countdownTimer $85
+.define passwordCurrentDigit $86
+.define passwordRendered $87
+.define passwordValid $88
+.define passwordArray $89 ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $8e ; 32
-.define dbg1 $ae
-.define dbg2 $af
+.define backgroundLastLinesTmp $90 ; 32
+.define dbg1 $b0
+.define dbg2 $b1
 
 .segment "STARTUP"
 
@@ -197,8 +199,6 @@ GAME_TIME_UNIT = $44
 
 JSR LoadPalettes
 
-.include "background/menu_background.asm"
-
 MainGameLoop:
   JSR GetControllerInput
 
@@ -206,9 +206,12 @@ MainGameLoop:
   CMP #MAIN_MENU_MODE
   BNE :+
     JSR ReactOnInputInMenu
+    JSR RenderMainMenu
     JSR RenderCursor
+    JSR AdjustGameMode
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #GAME_OVER_MODE
   BNE :+
@@ -216,6 +219,7 @@ MainGameLoop:
     JSR RenderGameOver
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #PASSWORD_GAME_MODE
   BNE :+
@@ -224,6 +228,16 @@ MainGameLoop:
     JSR RenderPassword
     JMP ContinueMainGameLoop
   :
+
+  LDA gameMode
+  CMP #CREDITS_GAME_MODE
+  BNE :+
+    JSR ReactOnInputInCredits
+    JSR AdjustGameMode
+    JSR RenderCredits
+    JMP ContinueMainGameLoop
+  :
+
   LDA gameMode
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
@@ -232,6 +246,7 @@ MainGameLoop:
     JSR NextLevelIfNeeded
     JMP ContinueMainGameLoop
   :
+
   LDA gameMode
   CMP #GAME_COMPLETED_MODE
   BNE :+
@@ -364,6 +379,15 @@ RenderPassword:
 
   RTS
 
+RenderCredits:
+  LDA creditsRendered
+  BNE :+
+    .include "background/credits_background.asm"
+    INC creditsRendered
+  :
+
+  RTS
+
 RenderGameCompleted:
   LDA gameEndRendered
 
@@ -374,11 +398,23 @@ RenderGameCompleted:
 
   RTS
 
+RenderMainMenu:
+  LDA mainMenuRendered
+
+  BNE :+
+    .include "background/menu_background.asm"
+    INC mainMenuRendered
+  :
+
+  RTS
+
 .include "gamepad/capture_input.asm"
 
 .include "gamepad/game.asm"
 
 .include "gamepad/main_menu.asm"
+
+.include "gamepad/credits.asm"
 
 .include "gamepad/password.asm"
 

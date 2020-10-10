@@ -5,13 +5,13 @@
 86 valid
 ab controlsum
 74 points
-ae dbg
+b0 dbg
 5b gameMode
-7c attackChance
+5c previousGameMode
 7d LastLinesTextLo
 7e LastLinesTextHi
-7f winThresholdDigit1
-80 winThresholdDigit0
+21 buttons
+22 previousButtons
 81 timeDigit1
 82 timeDigit0
 83 countdownTimer
