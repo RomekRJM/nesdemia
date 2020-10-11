@@ -117,11 +117,12 @@
 .define passwordCurrentDigit $86
 .define passwordRendered $87
 .define passwordValid $88
-.define passwordArray $89 ; 7
+.define creditsScroll $89
+.define passwordArray $8a ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $90 ; 32
-.define dbg1 $b0
-.define dbg2 $b1
+.define backgroundLastLinesTmp $91 ; 32
+.define dbg1 $b1
+.define dbg2 $b2
 
 .segment "STARTUP"
 
@@ -384,6 +385,18 @@ RenderCredits:
   BNE :+
     .include "background/credits_background.asm"
     INC creditsRendered
+  :
+
+  LDA creditsRendered
+  BEQ :+
+    LDA frame
+    AND #$01
+    BEQ :+
+    LDA #$00
+    STA $2005
+    LDA creditsScroll
+    STA $2005
+    INC creditsScroll
   :
 
   RTS
