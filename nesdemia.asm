@@ -118,11 +118,13 @@
 .define passwordRendered $87
 .define passwordValid $88
 .define creditsScroll $89
-.define passwordArray $8a ; 7
+.define ppuHigh $8a
+.define ppuLow $8b
+.define passwordArray $8c ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $91 ; 32
-.define dbg1 $b1
-.define dbg2 $b2
+.define backgroundLastLinesTmp $93 ; 32
+.define dbg1 $b3
+.define dbg2 $b4
 
 .segment "STARTUP"
 
@@ -389,14 +391,7 @@ RenderCredits:
 
   LDA creditsRendered
   BEQ :+
-    LDA frame
-    AND #$01
-    BEQ :+
-    LDA #$00
-    STA $2005
-    LDA creditsScroll
-    STA $2005
-    INC creditsScroll
+    JSR SlowlyScrollDown
   :
 
   RTS

@@ -1,8 +1,8 @@
 RenderBackground:
   LDA $2002             ; read PPU status to reset the high/low latch
-  LDA #$20
+  LDA ppuHigh
   STA $2006             ; write the high byte of $2000 address
-  LDA #$00
+  LDA ppuLow
   STA $2006             ; write the low byte of $2000 address
 
   LDX #$00            ; start at pointer + 0

@@ -3,6 +3,11 @@ RenderGameBackground:
 	STA $2000
 	STA $2001
 
+  LDA #$20
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
+
   LDA #.LOBYTE(Background)
   STA backgroundPointerLo       ; put the low byte of the address of background into pointer
   LDA #.HIBYTE(Background)
@@ -105,7 +110,6 @@ PopulateSecondToLastLinesLoop:
   STA backgroundLLPointerHi       ; put the high byte of the address into pointer
 
   JSR RenderBackground
-
   JSR LoadGameAttributes
 
   LDA #$00

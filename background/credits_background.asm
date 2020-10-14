@@ -1,8 +1,12 @@
 RenderCreditsBackground:
-
   LDA #$00
   STA $2000
   STA $2001
+
+  LDA #$20
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
 
   LDA #.LOBYTE(CreditsBackground)
   STA backgroundPointerLo
@@ -14,7 +18,23 @@ RenderCreditsBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
+  JSR LoadMenuAttributes
 
+  LDA #$28
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
+
+  LDA #.LOBYTE(CreditsBackgroundContinued)
+  STA backgroundPointerLo
+  LDA #.HIBYTE(CreditsBackgroundContinued)
+  STA backgroundPointerHi
+  LDA #.LOBYTE(BackgroundLLClear)
+  STA backgroundLLPointerLo
+  LDA #.HIBYTE(BackgroundLLClear)
+  STA backgroundLLPointerHi
+
+  JSR RenderBackground
   JSR LoadMenuAttributes
 
   LDA #$00

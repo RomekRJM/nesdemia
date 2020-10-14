@@ -1,8 +1,12 @@
 RenderGameOverBackground:
-
   LDA #$00
   STA $2000
   STA $2001
+
+  LDA #$20
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
 
   LDA #.LOBYTE(GameOverBackground)
   STA backgroundPointerLo
@@ -14,7 +18,6 @@ RenderGameOverBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-
   JSR LoadMenuAttributes
 
   LDA #$00
