@@ -3,6 +3,11 @@ RenderGameCompletedBackground:
   STA $2000
   STA $2001
 
+  LDA #$20
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
+
   LDA #.LOBYTE(GameCompletedBackground)
   STA backgroundPointerLo
   LDA #.HIBYTE(GameCompletedBackground)
@@ -13,7 +18,6 @@ RenderGameCompletedBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-
   JSR LoadMenuAttributes
 
   LDA #$00

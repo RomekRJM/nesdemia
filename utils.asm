@@ -206,3 +206,31 @@ InitVariables:
   STX $4015
 
   RTS
+
+
+SlowlyScrollDown:
+  LDA frame
+  AND #%00000001
+  BEQ :+
+    LDA #$00
+    STA $2005
+    LDA creditsScroll
+    STA $2005
+
+    LDA creditsScroll
+    CMP #$ef
+    BCS :+
+      INC creditsScroll
+    :
+
+    LDA creditsScroll
+    CMP #$ef
+    BNE :+
+      LDA frame
+      CMP #$51
+      BNE :+
+        LDA #$00
+        STA creditsScroll
+    :
+
+  RTS

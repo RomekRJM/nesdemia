@@ -7,8 +7,8 @@ ab controlsum
 74 points
 b0 dbg
 5b gameMode
-5c previousGameMode
-7d LastLinesTextLo
+89 creditsScroll
+23 frame
 7e LastLinesTextHi
 21 buttons
 22 previousButtons

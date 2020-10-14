@@ -1,8 +1,12 @@
 RenderMenuBackground:
-
   LDA #$00
   STA $2000
   STA $2001
+
+  LDA #$20
+  STA ppuHigh
+  LDA #$00
+  STA ppuLow
 
   LDA #.LOBYTE(MenuBackground)
   STA backgroundPointerLo
@@ -14,7 +18,6 @@ RenderMenuBackground:
   STA backgroundLLPointerHi       ; put the high byte of the address into pointer
 
   JSR RenderBackground
-
   JSR LoadMenuAttributes
 
   LDA #$00
