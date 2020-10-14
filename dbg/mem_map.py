@@ -78,4 +78,4 @@ def save_to_map_file(file_name, variables):
 if __name__ == '__main__':
     num_to_display = 24
     variables = enumerate_all_variables('.')
-    save_to_map_file('nesdemia.mem.txt', variables[-num_to_display:])
+    save_to_map_file('dbg/nesdemia.mem.txt', variables[-num_to_display:])
