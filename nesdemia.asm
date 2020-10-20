@@ -123,7 +123,7 @@
 .define passwordArray $8c ; 7
 ; takes 32 bits
 .define backgroundLastLinesTmp $93 ; 32
-.define dbg1 $b3
+.define shopRendered $b3
 .define dbg2 $b4
 
 .segment "STARTUP"
@@ -180,6 +180,7 @@ GAME_OVER_MODE = $03
 LEVEL_COMPLETED_MODE = $04
 GAME_COMPLETED_MODE = $05
 MAIN_MENU_MODE = $06
+SHOP_MODE = $07
 
 LAST_LEVEL = $05
 
@@ -229,6 +230,15 @@ MainGameLoop:
     JSR ReactOnInputInPassword
     JSR AdjustGameMode
     JSR RenderPassword
+    JMP ContinueMainGameLoop
+  :
+  
+  LDA gameMode
+  CMP #SHOP_MODE
+  BNE :+
+    JSR ReactOnInputInPassword
+    JSR AdjustGameMode
+    JSR RenderShop
     JMP ContinueMainGameLoop
   :
 
@@ -378,6 +388,15 @@ RenderPassword:
   BNE :+
     .include "background/password_background.asm"
     INC passwordRendered
+  :
+
+  RTS
+
+RenderShop:
+  LDA shopRendered
+  BNE :+
+    .include "background/shop_background.asm"
+    INC shopRendered
   :
 
   RTS
