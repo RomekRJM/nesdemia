@@ -47,7 +47,7 @@ CLEARMEM:
 LDA #$00
 STA levelNo
 
-LDA #MAIN_MENU_MODE
+LDA #SHOP_MODE
 STA gameMode
 STA previousGameMode
 
