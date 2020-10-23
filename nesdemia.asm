@@ -48,9 +48,9 @@
 .define playerInvincible $42
 .define playerDashing $43
 .define playerDashCount $44
-.define playerSpeed $45
 .define playerLuck $46
 .define playerAttack $47
+.define playerSpeed $45
 .define playerPallete $48
 .define playerAnimationFrame $49
 .define playerAnimationChangeFrame $4a
@@ -394,6 +394,11 @@ RenderPassword:
 
 RenderShop:
   LDA shopRendered
+  BEQ :+
+    JSR RenderPartialShopBackground
+  :
+  
+  LDA shopRendered
   BNE :+
     .include "background/shop_background.asm"
     INC shopRendered
@@ -452,6 +457,8 @@ RenderMainMenu:
 .include "background/game_background_partial_update.asm"
 
 .include "background/password_background_partial_update.asm"
+
+.include "background/shop_background_partial_update.asm"
 
 .include "background/game_attributes.asm"
 
