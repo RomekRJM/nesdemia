@@ -11,6 +11,9 @@
 .byte $00, $00, $00, $00, $00 ; filler bytes
 .segment "ZEROPAGE" ; LSB 0 - FF
 
+.define luckBought $10
+.define attackBought $11
+.define speedBought $12
 .define nmiTimer $20
 .define buttons $21
 .define previousButtons $22
@@ -48,9 +51,9 @@
 .define playerInvincible $42
 .define playerDashing $43
 .define playerDashCount $44
-.define playerLuck $46
-.define playerAttack $47
-.define playerSpeed $45
+.define playerLuck $45
+.define playerAttack $46
+.define playerSpeed $47
 .define playerPallete $48
 .define playerAnimationFrame $49
 .define playerAnimationChangeFrame $4a
@@ -124,8 +127,9 @@
 ; takes 32 bits
 .define backgroundLastLinesTmp $93 ; 32
 .define shopRendered $b3
-.define dbg2 $b4
+.define currentShopItem $b4
 
+;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
 
 ; 0x0100 - ... - viruses
@@ -236,7 +240,7 @@ MainGameLoop:
   LDA gameMode
   CMP #SHOP_MODE
   BNE :+
-    JSR ReactOnInputInPassword
+    JSR ReactOnInputInShop
     JSR AdjustGameMode
     JSR RenderShop
     JMP ContinueMainGameLoop
@@ -449,6 +453,8 @@ RenderMainMenu:
 .include "gamepad/credits.asm"
 
 .include "gamepad/password.asm"
+
+.include "gamepad/shop.asm"
 
 .include "background/attributes.asm"
 
