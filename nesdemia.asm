@@ -128,6 +128,8 @@
 .define luckBought $a5
 .define attackBought $a6
 .define speedBought $a7
+.define dbg1 $a8
+.define dbg2 $a9
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"

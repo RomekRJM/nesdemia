@@ -60,33 +60,32 @@ EndReactOnInputInShop:
   LDA buttons
   STA previousButtons
   RTS
-  
-  
+
+
 IncreaseBoughUnits:
   LDX currentShopItem
   LDA playerLuck, X
-  
+
   CLC
   ADC luckBought, X
   CMP #$08
   BCC :+
 	RTS
   :
-  
+
   INC luckBought, X
   ; take money from the account
   RTS
-  
+
 
 DecreaseBoughUnits:
   LDX currentShopItem
   LDA luckBought, X
-  
+
   BNE :+
 	RTS
   :
-  
+
   DEC luckBought, X
   ; return money to the account
   RTS
-  
