@@ -1,5 +1,3 @@
-6b noViruses
-6c smartVirusChance
 6d powerupChance
 6e attackChance
 6f LastLinesTextLo
@@ -22,3 +20,5 @@ a4 currentShopItem
 a5 luckBought
 a6 attackBought
 a7 speedBought
+a8 dbg1
+a9 dbg2

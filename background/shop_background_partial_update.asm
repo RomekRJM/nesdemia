@@ -8,14 +8,14 @@ RenderPartialShopBackground:
   LDA playerLuck
   STA $00
 
-  ; Needs to be incremented. Think about increasing it after load game.
-  INC $00
-
-  LDA #$20
+  LDA luckBought
   STA $01
 
-  LDA #$8c
+  LDA #$20
   STA $02
+
+  LDA #$8c
+  STA $03
 
   JSR RenderShopBar
 
@@ -26,14 +26,14 @@ RenderPartialShopBackground:
   LDA playerAttack
   STA $00
 
-  ; Needs to be incremented. Think about increasing it after load game.
-  INC $00
-
-  LDA #$21
+  LDA attackBought
   STA $01
 
-  LDA #$2c
+  LDA #$21
   STA $02
+
+  LDA #$2c
+  STA $03
 
   JSR RenderShopBar
 
@@ -44,14 +44,14 @@ RenderPartialShopBackground:
   LDA playerSpeed
   STA $00
 
-  ; Needs to be incremented. Think about increasing it after load game.
-  INC $00
-
-  LDA #$21
+  LDA speedBought
   STA $01
 
-  LDA #$cc
+  LDA #$21
   STA $02
+
+  LDA #$cc
+  STA $03
 
   JSR RenderShopBar
 
@@ -65,25 +65,51 @@ RenderPartialShopBackground:
 
 
 RenderShopBar:
-  LDA $00
+  LDA #$08
   STA partialUpdateMemory, Y
   INY
 
-  LDA $01
-  STA partialUpdateMemory, Y
-  INY
+  LDA $00
+  CLC
+  ADC $01
+  STA $04 ; how many bought attributes should we display
+
+  LDA #$08
+  SEC
+  SBC $04
+  STA $05 ; how many empty attributes should we display
 
   LDA $02
   STA partialUpdateMemory, Y
   INY
 
+  LDA $03
+  STA partialUpdateMemory, Y
+  INY
+
+  ; bought attributes
   LDA #$30
   :
     STA partialUpdateMemory, Y
     INY
 
-    DEC $00
-    LDX $00
+    DEC $04
+    LDX $04
+    BNE :-
+
+  LDA $05
+  BNE :+
+    RTS
+  :
+
+  ; empty attributes
+  LDA #$2D
+  :
+    STA partialUpdateMemory, Y
+    INY
+
+    DEC $05
+    LDX $05
     BNE :-
 
   RTS
