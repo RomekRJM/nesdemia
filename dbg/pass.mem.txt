@@ -1,10 +1,10 @@
-45 luck
-46 attack
-47 speed
-b4 currentShopItem
-10 luckBought
-11 attackBought
-12 speedBought
+35 luck
+36 attack
+37 speed
+a4 currentShopItem
+a5 luckBought
+a6 attackBought
+a7 speedBought
 b0 dbg
 5b gameMode
 89 creditsScroll

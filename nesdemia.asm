@@ -11,123 +11,123 @@
 .byte $00, $00, $00, $00, $00 ; filler bytes
 .segment "ZEROPAGE" ; LSB 0 - FF
 
-.define luckBought $10
-.define attackBought $11
-.define speedBought $12
-.define nmiTimer $20
-.define buttons $21
-.define previousButtons $22
-.define frame   $23
-.define randomByte $24
-.define spriteCounter $25
-.define backgroundPointerLo $26
-.define backgroundPointerHi $27
-.define backgroundLLPointerLo $28
-.define backgroundLLPointerHi $29
-.define attributePointerLo $2a
-.define attributePointerHi $2b
-.define pointIndex0 $2c
-.define pointIndex1 $2d
-.define pointIndex2 $2e
-.define renderedNumber $2f
-.define renderedNumberOffset $30
-.define playerCollidesWithObject $31
-.define dim1Source $32
-.define dim2Source $33
-.define dim1Destination $34
-.define dim2Destination $35
-.define pillLeft $36
-.define pillTop $37
-.define pillRight $38
-.define pillBottom $39
-.define pillTimer $3a
-.define pillLifeTime $3b
-.define playerLeft $3c
-.define playerTop $3d
-.define playerRight $3e
-.define playerBottom $3f
-.define playerNucleusLeft $40
-.define playerNucleusTop $41
-.define playerInvincible $42
-.define playerDashing $43
-.define playerDashCount $44
-.define playerLuck $45
-.define playerAttack $46
-.define playerSpeed $47
-.define playerPallete $48
-.define playerAnimationFrame $49
-.define playerAnimationChangeFrame $4a
-.define playerAttacks $4b
-.define health $4c
-.define healthUpdated $4d
-.define initReset $4e
-.define initNextLevel $4f
-.define resetCounter $50
-.define powerupLeft $51
-.define powerupTop $52
-.define powerupRight $53
-.define powerupBottom $54
-.define powerupTimer $55
-.define powerupLifeTime $56
-.define powerupType $57
-.define powerupActive $58
-.define dashIndex0 $59
-.define dashIndex1 $5a
-.define gameMode $5b
-.define previousGameMode $5c
-.define refreshBackground $5d
-.define menuCursorTop $5e
-.define menuOption $5f
-.define gameEndRendered $60
-.define gameRendered $61
-.define creditsRendered $62
-.define mainMenuRendered $63
-.define virusLeft $64
-.define virusTop $65
-.define virusRight $66
-.define virusBottom $67
-.define virusXSpeed $68
-.define virusYSpeed $69
-.define virusXDirection $6a
-.define virusYDirection $6b
-.define virusAlive $6c
-.define virusMoveFrame $6d
-.define virusAnimationFrame $6e
-.define virusAnimationChangeFrame $6f
-.define virusSmart $70
-.define virusCntr $71
-.define virusPointer $72
+.define nmiTimer $10
+.define buttons $11
+.define previousButtons $12
+.define frame   $13
+.define randomByte $14
+.define spriteCounter $15
+.define backgroundPointerLo $16
+.define backgroundPointerHi $17
+.define backgroundLLPointerLo $18
+.define backgroundLLPointerHi $19
+.define attributePointerLo $1a
+.define attributePointerHi $1b
+.define pointIndex0 $1c
+.define pointIndex1 $1d
+.define pointIndex2 $1e
+.define renderedNumber $1f
+.define renderedNumberOffset $20
+.define playerCollidesWithObject $21
+.define dim1Source $22
+.define dim2Source $23
+.define dim1Destination $24
+.define dim2Destination $25
+.define pillLeft $26
+.define pillTop $27
+.define pillRight $28
+.define pillBottom $29
+.define pillTimer $2a
+.define pillLifeTime $2b
+.define playerLeft $2c
+.define playerTop $2d
+.define playerRight $2e
+.define playerBottom $2f
+.define playerNucleusLeft $30
+.define playerNucleusTop $31
+.define playerInvincible $32
+.define playerDashing $33
+.define playerDashCount $34
+.define playerLuck $35
+.define playerAttack $36
+.define playerSpeed $37
+.define playerPallete $38
+.define playerAnimationFrame $39
+.define playerAnimationChangeFrame $3a
+.define playerAttacks $3b
+.define health $3c
+.define healthUpdated $3d
+.define initReset $3e
+.define initNextLevel $3f
+.define resetCounter $40
+.define powerupLeft $41
+.define powerupTop $42
+.define powerupRight $43
+.define powerupBottom $44
+.define powerupTimer $45
+.define powerupLifeTime $46
+.define powerupType $47
+.define powerupActive $48
+.define dashIndex0 $49
+.define dashIndex1 $4a
+.define gameMode $4b
+.define previousGameMode $4c
+.define refreshBackground $4d
+.define menuCursorTop $4e
+.define menuOption $4f
+.define gameEndRendered $50
+.define gameRendered $51
+.define creditsRendered $52
+.define mainMenuRendered $53
+.define virusLeft $54
+.define virusTop $55
+.define virusRight $56
+.define virusBottom $57
+.define virusXSpeed $58
+.define virusYSpeed $59
+.define virusXDirection $5a
+.define virusYDirection $5b
+.define virusAlive $5c
+.define virusMoveFrame $5d
+.define virusAnimationFrame $5e
+.define virusAnimationChangeFrame $5f
+.define virusSmart $60
+.define virusCntr $61
+.define virusPointer $62
 ; level specific
-.define levelNo $73
-.define winCondition $74
-.define winThreshold $75
-.define points $76
-.define kills $77
-.define smartKills $78
-.define usedPowerups $79
-.define timeLimit $7a
-.define noViruses $7b
-.define smartVirusChance $7c
-.define powerupChance $7d
-.define attackChance $7e
-.define LastLinesTextLo $7f
-.define LastLinesTextHi $80
-.define winThresholdDigit1 $81
-.define winThresholdDigit0 $82
-.define timeDigit1 $83
-.define timeDigit0 $84
-.define countdownTimer $85
-.define passwordCurrentDigit $86
-.define passwordRendered $87
-.define passwordValid $88
-.define creditsScroll $89
-.define ppuHigh $8a
-.define ppuLow $8b
-.define passwordArray $8c ; 7
+.define levelNo $63
+.define winCondition $64
+.define winThreshold $65
+.define points $66
+.define kills $67
+.define smartKills $68
+.define usedPowerups $69
+.define timeLimit $6a
+.define noViruses $6b
+.define smartVirusChance $6c
+.define powerupChance $6d
+.define attackChance $6e
+.define LastLinesTextLo $6f
+.define LastLinesTextHi $70
+.define winThresholdDigit1 $71
+.define winThresholdDigit0 $72
+.define timeDigit1 $73
+.define timeDigit0 $74
+.define countdownTimer $75
+.define passwordCurrentDigit $76
+.define passwordRendered $77
+.define passwordValid $78
+.define creditsScroll $79
+.define ppuHigh $7a
+.define ppuLow $7b
+.define passwordArray $7c ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $93 ; 32
-.define shopRendered $b3
-.define currentShopItem $b4
+.define backgroundLastLinesTmp $83 ; 32
+.define shopRendered $a3
+.define currentShopItem $a4
+.define luckBought $a5
+.define attackBought $a6
+.define speedBought $a7
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -236,7 +236,7 @@ MainGameLoop:
     JSR RenderPassword
     JMP ContinueMainGameLoop
   :
-  
+
   LDA gameMode
   CMP #SHOP_MODE
   BNE :+
@@ -401,7 +401,7 @@ RenderShop:
   BEQ :+
     JSR RenderPartialShopBackground
   :
-  
+
   LDA shopRendered
   BNE :+
     .include "background/shop_background.asm"

@@ -2,7 +2,7 @@ import os
 
 class VariableEnumerator():
     def __init__(self):
-        self.counter = 0x20;
+        self.counter = 0x10;
 
     def enumerate_variables_in_file(self, file_name):
         variables = []
