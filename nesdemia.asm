@@ -498,4 +498,4 @@ RenderMainMenu:
   ;
 
 .segment "CHARS"
-  .incbin "nesdemia.chr"
+  .incbin "gfx/nesdemia.chr"
