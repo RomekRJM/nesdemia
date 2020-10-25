@@ -114,9 +114,13 @@ function encode(c) {
   else if (c === '^')
     return "2A";
   else if (c === '>')
-    return "2C";
+    return "32";
+  else if (c === '<')
+    return "31";
   else if (c === '.')
     return "2D";
+  else if (c === '|')
+    return "30";
   return "88";
 }
 </script>

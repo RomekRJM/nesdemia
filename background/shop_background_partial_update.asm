@@ -14,10 +14,11 @@ RenderPartialShopBackground:
   LDA #$20
   STA $02
 
-  LDA #$8c
+  LDA #$e9
   STA $03
 
   JSR RenderShopBar
+
 
   ; test code - remove me
   LDA #$07
@@ -32,10 +33,11 @@ RenderPartialShopBackground:
   LDA #$21
   STA $02
 
-  LDA #$2c
+  LDA #$89
   STA $03
 
   JSR RenderShopBar
+
 
   ; test code - remove me
   LDA #$02
@@ -47,13 +49,14 @@ RenderPartialShopBackground:
   LDA speedBought
   STA $01
 
-  LDA #$21
+  LDA #$22
   STA $02
 
-  LDA #$cc
+  LDA #$29
   STA $03
 
   JSR RenderShopBar
+
 
   LDA #$00
   STA partialUpdateMemory, Y
@@ -65,7 +68,7 @@ RenderPartialShopBackground:
 
 
 RenderShopBar:
-  LDA #$08
+  LDA #$10
   STA partialUpdateMemory, Y
   INY
 
@@ -88,8 +91,12 @@ RenderShopBar:
   INY
 
   ; bought attributes
-  LDA #$30
   :
+    LDA #$30
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
     STA partialUpdateMemory, Y
     INY
 
@@ -103,13 +110,50 @@ RenderShopBar:
   :
 
   ; empty attributes
-  LDA #$2D
   :
+    LDA #$2D
+    STA partialUpdateMemory, Y
+    INY
+
+    LDA #$88
     STA partialUpdateMemory, Y
     INY
 
     DEC $05
     LDX $05
     BNE :-
+
+  ; change attribute table to display newly bought in different color
+  LDA #$01 ; LDA $01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$ca
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #%11110000
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01 ; LDA $01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$da
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #%00001100
+  STA partialUpdateMemory, Y
+  INY
 
   RTS
