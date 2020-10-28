@@ -2,7 +2,7 @@ RenderPartialShopBackground:
   LDY #$00
 
   ; test code - remove me
-  LDA #$06
+  LDA #$03
   STA playerLuck
 
   LDA playerLuck
@@ -17,45 +17,57 @@ RenderPartialShopBackground:
   LDA #$e9
   STA $03
 
-  JSR RenderShopBar
+  ; low nimble attribute table address
+  LDA #$ca
+  STA $04
 
+  ; odd bar attribute
+  LDA #%00110000
+  STA $05
 
-  ; test code - remove me
-  LDA #$07
-  STA playerAttack
-
-  LDA playerAttack
-  STA $00
-
-  LDA attackBought
-  STA $01
-
-  LDA #$21
-  STA $02
-
-  LDA #$89
-  STA $03
+  ; even bar attribute
+  LDA #%11000000
+  STA $06
 
   JSR RenderShopBar
 
 
-  ; test code - remove me
-  LDA #$02
-  STA playerSpeed
-
-  LDA playerSpeed
-  STA $00
-
-  LDA speedBought
-  STA $01
-
-  LDA #$22
-  STA $02
-
-  LDA #$29
-  STA $03
-
-  JSR RenderShopBar
+  ; ; test code - remove me
+  ; LDA #$07
+  ; STA playerAttack
+  ;
+  ; LDA playerAttack
+  ; STA $00
+  ;
+  ; LDA attackBought
+  ; STA $01
+  ;
+  ; LDA #$21
+  ; STA $02
+  ;
+  ; LDA #$89
+  ; STA $03
+  ;
+  ; JSR RenderShopBar
+  ;
+  ;
+  ; ; test code - remove me
+  ; LDA #$02
+  ; STA playerSpeed
+  ;
+  ; LDA playerSpeed
+  ; STA $00
+  ;
+  ; LDA speedBought
+  ; STA $01
+  ;
+  ; LDA #$22
+  ; STA $02
+  ;
+  ; LDA #$29
+  ; STA $03
+  ;
+  ; JSR RenderShopBar
 
 
   LDA #$00
@@ -75,12 +87,14 @@ RenderShopBar:
   LDA $00
   CLC
   ADC $01
-  STA $04 ; how many bought attributes should we display
+  STA $08 ; how many bought attributes should we display
+  STA $0a
 
   LDA #$08
   SEC
-  SBC $04
-  STA $05 ; how many empty attributes should we display
+  SBC $08
+  STA $09 ; how many empty attributes should we display
+  STA $0b
 
   LDA $02
   STA partialUpdateMemory, Y
@@ -100,11 +114,11 @@ RenderShopBar:
     STA partialUpdateMemory, Y
     INY
 
-    DEC $04
-    LDX $04
+    DEC $08
+    LDX $08
     BNE :-
 
-  LDA $05
+  LDA $09
   BNE :+
     RTS
   :
@@ -119,12 +133,16 @@ RenderShopBar:
     STA partialUpdateMemory, Y
     INY
 
-    DEC $05
-    LDX $05
+    DEC $09
+    LDX $09
     BNE :-
 
-  ; change attribute table to display newly bought in different color
-  LDA #$01 ; LDA $01
+  LDA $01
+  BNE :+
+    RTS
+  :
+
+  LDA #$04
   STA partialUpdateMemory, Y
   INY
 
@@ -132,28 +150,44 @@ RenderShopBar:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$ca
+  LDA $04
   STA partialUpdateMemory, Y
   INY
 
-  LDA #%11110000
-  STA partialUpdateMemory, Y
-  INY
+  LDX #$00
+ShopAttributeLoop:
+  LDA #$00
+  STA $0c ; should we move to next attribute ( 0 - yes )
+  TXA
+  ROR
+  AND #$01
+  BNE :+
+    LDA $06 ; even number
+    JMP ColorAttribute
+  :
+  LDA $05 ; odd number
+  INC $0c
+ColorAttribute:
+  CPX $00
+  BCC :+
+  BEQ :+
+    ORA partialUpdateMemory, Y
+    JMP MoveToNextAttribute
+  :
 
-  LDA #$01 ; LDA $01
-  STA partialUpdateMemory, Y
-  INY
+  EOR #%11111111 ; build mask that will clear previously set colors
+  AND partialUpdateMemory, Y
 
-  LDA #$23
+MoveToNextAttribute:
   STA partialUpdateMemory, Y
-  INY
 
-  LDA #$da
-  STA partialUpdateMemory, Y
-  INY
+  LDA $0c
+  BEQ :+
+    INY ; only move to next attribute when current was odd
+  :
 
-  LDA #%00001100
-  STA partialUpdateMemory, Y
-  INY
+  INX
+  CPX #$09
+  BNE ShopAttributeLoop
 
   RTS
