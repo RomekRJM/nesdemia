@@ -21,4 +21,4 @@ b0 dbg
 87 passwordArray
 8b backgroundLastLinesTmp
 ab dbg1
-ac dbg2
+0c dbg2
