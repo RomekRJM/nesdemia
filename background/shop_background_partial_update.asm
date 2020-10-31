@@ -22,11 +22,11 @@ RenderPartialShopBackground:
   STA $04
 
   ; odd bar attribute
-  LDA #%11000000
+  LDA #%10000000
   STA $05
 
   ; even bar attribute
-  LDA #%00110000
+  LDA #%00100000
   STA $06
 
   JSR RenderShopBar
@@ -53,11 +53,11 @@ RenderPartialShopBackground:
   STA $04
 
   ; odd bar attribute
-  LDA #%00001100
+  LDA #%00001000
   STA $05
 
   ; even bar attribute
-  LDA #%00000011
+  LDA #%00000010
   STA $06
 
   JSR RenderShopBar
@@ -84,15 +84,148 @@ RenderPartialShopBackground:
   STA $04
 
   ; odd bar attribute
-  LDA #%00001100
+  LDA #%00001000
   STA $05
 
   ; even bar attribute
-  LDA #%00000011
+  LDA #%00000010
   STA $06
 
   JSR RenderShopBar
 
+
+  LDA currentShopItem
+  BNE :+
+    LDA #%11111111
+    STA $00
+    JMP RenderLuckArrows
+  :
+
+  LDA #%00000000
+  STA $00
+
+RenderLuckArrows:
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$C9
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$ce
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+
+  LDA currentShopItem
+  CMP #$01
+  BNE :+
+    LDA #%11111111
+    STA $00
+    JMP RenderAttackArrows
+  :
+
+  LDA #%00000000
+  STA $00
+
+RenderAttackArrows:
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$d9
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$de
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+
+  LDA currentShopItem
+  CMP #$02
+  BNE :+
+    LDA #%11111111
+    STA $00
+    JMP RenderSpeedArrows
+  :
+
+  LDA #%00000000
+  STA $00
+
+RenderSpeedArrows:
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$e1
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$e6
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
 
   LDA #$00
   STA partialUpdateMemory, Y
