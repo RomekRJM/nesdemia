@@ -19,6 +19,6 @@ b0 dbg
 04 attributesToDisp
 05 emptyAttributes
 87 passwordArray
-8b backgroundLastLinesTmp
-ab dbg1
-0c dbg2
+e0 backgroundLastLinesTmp
+e1 dbg1
+e2 dbg2

@@ -198,6 +198,10 @@ InitVariables:
   STA playerTop
   STA playerLeft
 
+  ; test code !
+  LDA #$c4
+  STA points
+
   LDA #GAME_TIME_UNIT
   STA countdownTimer
 
@@ -236,8 +240,40 @@ SlowlyScrollDown:
   RTS
 
 
-; Returns decimal cost of buing next item
-; tens $00, ones $01, i.e. cost = 15, $00 == #$01, $01 == #$05
+; Takes A reg. hex value and converts it to decimal
+; hundreds $00, tens $01, ones $02,
+; i.e. A = #$c4, $00 == #$01, $01 == #$09, $02 == #$6
+Hex2Dec:
+  LDX #$00
+  STX $00
+  STX $01
+
+Hex2DecHundreds:
+  CMP #$64
+  BCC Hex2DecTens
+  INC $00
+
+  SEC
+  SBC #$64
+  CMP #$64
+  BCS Hex2DecHundreds
+
+Hex2DecTens:
+  CMP #$0a
+  BCC Hex2DecOnes
+  INC $01
+
+  SEC
+  SBC #$0a
+  CMP #$0a
+  BCS Hex2DecTens
+
+Hex2DecOnes:
+  STA $02
+  RTS
+
+
+; Returns cost of buing next item in A
 ComputeCostOfUpgrading:
   LDX currentShopItem
   LDA playerLuck, X
@@ -248,32 +284,15 @@ ComputeCostOfUpgrading:
   CMP #$08
   BNE :+
     LDA #$00  ; already has max level
-    STA $00
-    STA $01
     RTS
   :
 
   LDA #$01
   :
     CLC
-    ADC #$02
+    ADC #ATTRIBUTE_COST_INCREASE
     DEC $00
     LDX $00
     BNE :-
 
-  CMP #$0a
-  BCC :+
-    SEC
-    SBC #$0a
-    STA $01
-
-    LDA #$01
-    STA $00
-    RTS
-  :
-
-  STA $01
-
-  LDA #$00
-  STA $00
   RTS
