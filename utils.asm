@@ -234,3 +234,46 @@ SlowlyScrollDown:
     :
 
   RTS
+
+
+; Returns decimal cost of buing next item
+; tens $00, ones $01, i.e. cost = 15, $00 == #$01, $01 == #$05
+ComputeCostOfUpgrading:
+  LDX currentShopItem
+  LDA playerLuck, X
+  CLC
+  ADC luckBought, X
+  STA $00
+  DEC $00
+  CMP #$08
+  BNE :+
+    LDA #$00  ; already has max level
+    STA $00
+    STA $01
+    RTS
+  :
+
+  LDA #$01
+  :
+    CLC
+    ADC #$02
+    DEC $00
+    LDX $00
+    BNE :-
+
+  CMP #$0a
+  BCC :+
+    SEC
+    SBC #$0a
+    STA $01
+
+    LDA #$01
+    STA $00
+    RTS
+  :
+
+  STA $01
+
+  LDA #$00
+  STA $00
+  RTS

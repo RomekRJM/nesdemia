@@ -129,6 +129,39 @@ RenderPartialShopBackground:
 
   JSR RenderShopArrows
 
+  JSR ComputeCostOfUpgrading
+
+  LDA currentShopItem
+  BNE :+
+    LDA #$20
+    STA $02
+
+    LDA #$b6
+    STA $03
+  :
+
+  LDA currentShopItem
+  CMP #$01
+  BNE :+
+    LDA #$21
+    STA $02
+
+    LDA #$56
+    STA $03
+  :
+
+  LDA currentShopItem
+  CMP #$02
+  BNE :+
+    LDA #$21
+    STA $02
+
+    LDA #$f6
+    STA $03
+  :
+
+  JSR RenderCosts
+
   LDA #$00
   STA partialUpdateMemory, Y
 
@@ -292,6 +325,30 @@ RenderArrows:
   INY
 
   LDA $03
+  STA partialUpdateMemory, Y
+  INY
+
+  RTS
+
+
+RenderCosts:
+  LDA #$02
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $02
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $03
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $00
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $01
   STA partialUpdateMemory, Y
   INY
 
