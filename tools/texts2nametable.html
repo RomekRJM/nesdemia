@@ -41,7 +41,9 @@ function toNesMap() {
 }
 
 function encode(c) {
-  if (c === '1')
+  if (c === '0')
+    return "00";
+  else if (c === '1')
     return "01";
   else if (c === '2')
     return "02";
@@ -121,6 +123,8 @@ function encode(c) {
     return "2D";
   else if (c === '|')
     return "30";
+  else if (c === '+')
+    return "33";
   return "88";
 }
 </script>
