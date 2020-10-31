@@ -183,49 +183,14 @@ RenderAttackArrows:
   INY
 
 
-  LDA currentShopItem
-  CMP #$02
-  BNE :+
-    LDA #%11111111
-    STA $00
-    JMP RenderSpeedArrows
-  :
-
-  LDA #%00000000
+  LDA #$02
   STA $00
 
-RenderSpeedArrows:
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
   LDA #$e1
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
+  STA $01
 
   LDA #$e6
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
+  STA $02
 
   LDA #$00
   STA partialUpdateMemory, Y
@@ -344,5 +309,53 @@ MoveToNextAttribute:
     DEC $09
     LDX $09
     BNE :-
+
+  RTS
+
+
+RenderShopArrows:
+  LDA currentShopItem
+  CMP $00
+  BNE :+
+    LDA #%11111111
+    STA $03
+    JMP RenderArrows
+  :
+
+  LDA #%00000000
+  STA $03
+
+RenderArrows:
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $01 ;#$e1
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $03
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $02
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $03
+  STA partialUpdateMemory, Y
+  INY
 
   RTS
