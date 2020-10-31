@@ -2,7 +2,7 @@ RenderPartialShopBackground:
   LDY #$00
 
   ; test code - remove me
-  LDA #$03
+  LDA #$08
   STA playerLuck
 
   LDA playerLuck
@@ -32,42 +32,66 @@ RenderPartialShopBackground:
   JSR RenderShopBar
 
 
-  ; ; test code - remove me
-  ; LDA #$07
-  ; STA playerAttack
-  ;
-  ; LDA playerAttack
-  ; STA $00
-  ;
-  ; LDA attackBought
-  ; STA $01
-  ;
-  ; LDA #$21
-  ; STA $02
-  ;
-  ; LDA #$89
-  ; STA $03
-  ;
-  ; JSR RenderShopBar
-  ;
-  ;
-  ; ; test code - remove me
-  ; LDA #$02
-  ; STA playerSpeed
-  ;
-  ; LDA playerSpeed
-  ; STA $00
-  ;
-  ; LDA speedBought
-  ; STA $01
-  ;
-  ; LDA #$22
-  ; STA $02
-  ;
-  ; LDA #$29
-  ; STA $03
-  ;
-  ; JSR RenderShopBar
+  ; test code - remove me
+  LDA #$08
+  STA playerAttack
+
+  LDA playerAttack
+  STA $00
+
+  LDA attackBought
+  STA $01
+
+  LDA #$21
+  STA $02
+
+  LDA #$89
+  STA $03
+
+  ; low nimble attribute table address
+  LDA #$da
+  STA $04
+
+  ; odd bar attribute
+  LDA #%00001100
+  STA $05
+
+  ; even bar attribute
+  LDA #%00000011
+  STA $06
+
+  JSR RenderShopBar
+
+
+  ; test code - remove me
+  LDA #$02
+  STA playerSpeed
+
+  LDA playerSpeed
+  STA $00
+
+  LDA speedBought
+  STA $01
+
+  LDA #$22
+  STA $02
+
+  LDA #$29
+  STA $03
+
+  ; low nimble attribute table address
+  LDA #$e2
+  STA $04
+
+  ; odd bar attribute
+  LDA #%00001100
+  STA $05
+
+  ; even bar attribute
+  LDA #%00000011
+  STA $06
+
+  JSR RenderShopBar
 
 
   LDA #$00
