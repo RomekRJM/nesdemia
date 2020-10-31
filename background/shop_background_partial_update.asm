@@ -22,11 +22,11 @@ RenderPartialShopBackground:
   STA $04
 
   ; odd bar attribute
-  LDA #%00110000
+  LDA #%11000000
   STA $05
 
   ; even bar attribute
-  LDA #%11000000
+  LDA #%00110000
   STA $06
 
   JSR RenderShopBar
@@ -159,7 +159,6 @@ ShopAttributeLoop:
   LDA #$00
   STA $0c ; should we move to next attribute ( 0 - yes )
   TXA
-  ROR
   AND #$01
   BNE :+
     LDA $06 ; even number
@@ -170,7 +169,6 @@ ShopAttributeLoop:
 ColorAttribute:
   CPX $00
   BCC :+
-  BEQ :+
     ORA partialUpdateMemory, Y
     JMP MoveToNextAttribute
   :
@@ -187,7 +185,7 @@ MoveToNextAttribute:
   :
 
   INX
-  CPX #$09
+  CPX #$08
   BNE ShopAttributeLoop
 
   RTS
