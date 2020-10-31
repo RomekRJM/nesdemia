@@ -80,21 +80,72 @@ RenderPartialShopBackground:
 
 
 RenderShopBar:
-  LDA #$10
-  STA partialUpdateMemory, Y
-  INY
-
   LDA $00
   CLC
   ADC $01
   STA $08 ; how many bought attributes should we display
-  STA $0a
 
   LDA #$08
   SEC
   SBC $08
   STA $09 ; how many empty attributes should we display
-  STA $0b
+
+  LDA #$04
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA $04
+  STA partialUpdateMemory, Y
+  INY
+
+  LDX #$00
+ShopAttributeLoop:
+  LDA #$00
+  STA $0a ; should we move to next attribute ( 0 - yes )
+  TXA
+  AND #$01
+  BNE :+
+    LDA $06 ; even number
+    JMP ColorAttribute
+  :
+  LDA $05 ; odd number
+  INC $0a
+ColorAttribute:
+  CPX $08
+  BEQ UseStandardColor
+  BCS UseStandardColor
+
+  CPX $00
+  BCC UseStandardColor
+
+
+  ORA partialUpdateMemory, Y
+  JMP MoveToNextAttribute
+
+UseStandardColor:
+  EOR #%11111111 ; build mask that will clear previously set colors
+  AND partialUpdateMemory, Y
+
+MoveToNextAttribute:
+  STA partialUpdateMemory, Y
+
+  LDA $0a
+  BEQ :+
+    INY ; only move to next attribute when current was odd
+  :
+
+  INX
+  CPX #$08
+  BNE ShopAttributeLoop
+
+; Draw bars
+  LDA #$10
+  STA partialUpdateMemory, Y
+  INY
 
   LDA $02
   STA partialUpdateMemory, Y
@@ -136,56 +187,5 @@ RenderShopBar:
     DEC $09
     LDX $09
     BNE :-
-
-  LDA $01
-  BNE :+
-    RTS
-  :
-
-  LDA #$04
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA $04
-  STA partialUpdateMemory, Y
-  INY
-
-  LDX #$00
-ShopAttributeLoop:
-  LDA #$00
-  STA $0c ; should we move to next attribute ( 0 - yes )
-  TXA
-  AND #$01
-  BNE :+
-    LDA $06 ; even number
-    JMP ColorAttribute
-  :
-  LDA $05 ; odd number
-  INC $0c
-ColorAttribute:
-  CPX $00
-  BCC :+
-    ORA partialUpdateMemory, Y
-    JMP MoveToNextAttribute
-  :
-
-  EOR #%11111111 ; build mask that will clear previously set colors
-  AND partialUpdateMemory, Y
-
-MoveToNextAttribute:
-  STA partialUpdateMemory, Y
-
-  LDA $0c
-  BEQ :+
-    INY ; only move to next attribute when current was odd
-  :
-
-  INX
-  CPX #$08
-  BNE ShopAttributeLoop
 
   RTS
