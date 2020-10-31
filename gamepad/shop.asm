@@ -63,6 +63,16 @@ EndReactOnInputInShop:
 
 
 IncreaseBoughUnits:
+  JSR ComputeCostOfUpgrading
+  STA $00
+  LDA points
+  SEC
+  SBC $00
+  BCS :+
+    RTS
+  :
+  STA points
+
   LDX currentShopItem
   LDA playerLuck, X
 
@@ -70,11 +80,10 @@ IncreaseBoughUnits:
   ADC luckBought, X
   CMP #$08
   BCC :+
-	RTS
+    RTS
   :
 
   INC luckBought, X
-  ; take money from the account
   RTS
 
 
@@ -83,9 +92,14 @@ DecreaseBoughUnits:
   LDA luckBought, X
 
   BNE :+
-	RTS
+    RTS
   :
 
   DEC luckBought, X
-  ; return money to the account
+
+  JSR ComputeCostOfUpgrading
+  CLC
+  ADC points
+  STA points
+
   RTS
