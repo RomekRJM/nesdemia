@@ -2,7 +2,7 @@ RenderPartialShopBackground:
   LDY #$00
 
   ; test code - remove me
-  LDA #$08
+  LDA #$01
   STA playerLuck
 
   LDA playerLuck
@@ -33,7 +33,7 @@ RenderPartialShopBackground:
 
 
   ; test code - remove me
-  LDA #$08
+  LDA #$03
   STA playerAttack
 
   LDA playerAttack
@@ -93,96 +93,31 @@ RenderPartialShopBackground:
 
   JSR RenderShopBar
 
-
-  LDA currentShopItem
-  BNE :+
-    LDA #%11111111
-    STA $00
-    JMP RenderLuckArrows
-  :
-
-  LDA #%00000000
+  ; render luck arrows
+  LDA #$00
   STA $00
 
-RenderLuckArrows:
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$C9
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
+  LDA #$c9
+  STA $01
 
   LDA #$ce
-  STA partialUpdateMemory, Y
-  INY
+  STA $02
 
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
+  JSR RenderShopArrows
 
-
-  LDA currentShopItem
-  CMP #$01
-  BNE :+
-    LDA #%11111111
-    STA $00
-    JMP RenderAttackArrows
-  :
-
-  LDA #%00000000
+  ; render attack arrows
+  LDA #$01
   STA $00
 
-RenderAttackArrows:
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
   LDA #$d9
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
+  STA $01
 
   LDA #$de
-  STA partialUpdateMemory, Y
-  INY
+  STA $02
 
-  LDA $00
-  STA partialUpdateMemory, Y
-  INY
+  JSR RenderShopArrows
 
-
+  ; render speed arrows
   LDA #$02
   STA $00
 
@@ -191,6 +126,8 @@ RenderAttackArrows:
 
   LDA #$e6
   STA $02
+
+  JSR RenderShopArrows
 
   LDA #$00
   STA partialUpdateMemory, Y
@@ -334,7 +271,7 @@ RenderArrows:
   STA partialUpdateMemory, Y
   INY
 
-  LDA $01 ;#$e1
+  LDA $01
   STA partialUpdateMemory, Y
   INY
 
