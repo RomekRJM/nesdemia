@@ -6,6 +6,7 @@ ReactOnInputInShop:
     AND #BUTTON_LEFT
     BNE :+
     JSR DecreaseBoughUnits
+    JSR UnconfirmInShop
   :
 
   LDA buttons
@@ -15,16 +16,19 @@ ReactOnInputInShop:
     AND #BUTTON_RIGHT
     BNE :+
     JSR IncreaseBoughUnits
+    JSR UnconfirmInShop
   :
 
   LDA buttons
   AND #BUTTON_UP
   BEQ :+
+    JSR UnconfirmInShop
     LDA previousButtons
     AND #BUTTON_UP
     BNE :+
+    JSR UnconfirmInShop
     DEC currentShopItem
-	LDA currentShopItem
+    LDA currentShopItem
     CMP #$ff
     BNE :+
       LDA #$02
@@ -37,8 +41,9 @@ ReactOnInputInShop:
     LDA previousButtons
     AND #BUTTON_DOWN
     BNE :+
+    JSR UnconfirmInShop
     INC currentShopItem
-	LDA currentShopItem
+    LDA currentShopItem
     CMP #$03
     BNE :+
       LDA #$00
@@ -51,6 +56,12 @@ ReactOnInputInShop:
     LDA previousButtons
     AND #BUTTON_START
     BNE :+
+    INC shopConfirm
+    LDA shopConfirm
+    CMP #$02
+    BNE :+
+    LDA #$00
+    STA shopConfirm
     JSR LoadPassword
     LDA #IN_GAME_MODE
     STA gameMode
@@ -102,4 +113,10 @@ DecreaseBoughUnits:
   ADC points
   STA points
 
+  RTS
+
+
+UnconfirmInShop:
+  LDA #$00
+  STA shopConfirm
   RTS

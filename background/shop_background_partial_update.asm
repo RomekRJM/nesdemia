@@ -33,7 +33,7 @@ RenderPartialShopBackground:
 
 
   ; test code - remove me
-  LDA #$03
+  LDA #$08
   STA playerAttack
 
   LDA playerAttack
@@ -164,6 +164,8 @@ RenderPartialShopBackground:
   JSR RenderCosts
 
   JSR RenderMoney
+
+  JSR RenderConfirmDialog
 
 
   LDA #$00
@@ -386,5 +388,48 @@ RenderMoney:
   LDA $02
   STA partialUpdateMemory, Y
   INY
+
+  RTS
+
+
+RenderConfirmDialog:
+  LDA #.LOBYTE(ShopConfirmDialog)
+  STA $00
+  LDA #.HIBYTE(ShopConfirmDialog)
+  STA $01
+
+  LDA #$10
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$23
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$09
+  STA partialUpdateMemory, Y
+  INY
+
+  LDX #$00
+WriteConfirmDialogLoop:
+  LDA shopConfirm
+  BEQ ClearConfirmDialog
+
+  STY $03
+  TXA
+  TAY
+  LDA ($00), Y
+  LDY $03
+  JMP WriteConfirmDialog
+
+ClearConfirmDialog:
+  LDA #$88
+
+WriteConfirmDialog:
+  STA partialUpdateMemory, Y
+  INY
+  INX
+  CPX #$10
+  BNE WriteConfirmDialogLoop
 
   RTS

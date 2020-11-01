@@ -737,6 +737,9 @@ BackgroundLLUsePowerups:
 BackgroundLLSurvive:
   .byte $1C,$1E,$1B,$1F,$12,$1F,$0E,$27,$1D,$12,$15,$15,$27,$1D,$12,$16,$0E,$27,$0E,$17,$0D,$1C
 
+ShopConfirmDialog:
+  .byte $1C,$1D,$0A,$1B,$1D,$88,$1D,$18,$88,$0C,$18,$17,$0F,$12,$1B,$16
+
 
 MenuAttribute:
   .byte %00000000, %00000000, %00000000, %00000000, %00000000, %00000000, %00000000, %00000000
