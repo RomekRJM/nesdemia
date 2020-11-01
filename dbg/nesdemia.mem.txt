@@ -1,4 +1,3 @@
-6d powerupChance
 6e attackChance
 6f LastLinesTextLo
 70 LastLinesTextHi
@@ -20,5 +19,6 @@ a4 currentShopItem
 a5 luckBought
 a6 attackBought
 a7 speedBought
-a8 dbg1
-a9 dbg2
+a8 shopConfirm
+a9 dbg1
+aa dbg2

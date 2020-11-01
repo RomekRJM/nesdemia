@@ -11,7 +11,7 @@ b0 dbg
 23 frame
 7e LastLinesTextHi
 21 buttons
-22 previousButtons
+a8 shopConfirm
 00 attributeValue
 01 attributeBought
 02 hi
