@@ -65,6 +65,79 @@ NextRandom16To206:
   RTS
 
 
+; Returns password in mem addresses $00-$06
+SavePassword:
+  LDA points
+.repeat 4
+  ROR
+.endrepeat
+  AND #%00001111
+  STA $00
+
+  LDA points
+  AND #%00001111
+  STA $01
+
+  LDA playerSpeed
+  ASL
+  AND #%00001110
+  STA $02
+
+  LDA playerLuck
+  ROR
+  ROR
+  AND #%00000001
+  ORA $02
+  STA $02
+
+  LDA playerLuck
+  ASL
+  ASL
+  AND #%00001100
+  STA $03
+
+  LDA playerAttack
+  ROR
+  AND #%00000011
+  ORA $03
+  STA $03
+
+  LDA playerAttack
+.repeat 3
+  ASL
+.endrepeat
+  AND #%00001000
+  STA $04
+
+  LDA levelNo
+  ROR
+  ROR
+  AND #%00000111
+  ORA $04
+  STA $04
+
+  LDA levelNo
+  ASL
+  ASL
+  AND #%00001100
+  STA $05
+
+  JSR ComputeControlSum
+  STA $08
+.repeat 4
+  ROR
+.endrepeat
+  AND #%00000011
+  ORA $05
+  STA $05
+
+  LDA $08
+  AND #%00001111
+  STA $06
+
+  RTS
+
+
 LoadPassword:
   LDX #$00
   STX passwordValid
@@ -136,16 +209,7 @@ LoadPassword:
   ; control sum
   STA $00
 
-  LDA points
-  CLC
-  ADC playerSpeed
-  CLC
-  ADC playerLuck
-  CLC
-  ADC playerAttack
-  CLC
-  ADC levelNo
-  AND #%00111111
+  JSR ComputeControlSum
 
   CMP $00
   BNE :+
@@ -153,9 +217,9 @@ LoadPassword:
     STA passwordValid
   :
 
-  INC playerSpeed
-  INC playerLuck
-  INC playerAttack
+  ; INC playerSpeed
+  ; INC playerLuck
+  ; INC playerAttack
 
   JSR InitPoints
   LDA points
@@ -294,5 +358,21 @@ ComputeCostOfUpgrading:
     DEC $00
     LDX $00
     BNE :-
+
+  RTS
+
+
+; Returns control sum for save/load in A
+ComputeControlSum:
+  LDA points
+  CLC
+  ADC playerSpeed
+  CLC
+  ADC playerLuck
+  CLC
+  ADC playerAttack
+  CLC
+  ADC levelNo
+  AND #%00111111
 
   RTS

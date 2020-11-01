@@ -5,8 +5,8 @@ a4 currentShopItem
 a5 luckBought
 a6 attackBought
 a7 speedBought
-b0 dbg
-5b gameMode
+63 levelNo
+66 points
 89 creditsScroll
 23 frame
 7e LastLinesTextHi
@@ -18,7 +18,7 @@ a8 shopConfirm
 03 lo
 04 attributesToDisp
 05 emptyAttributes
-87 passwordArray
+06 passwordArray
 e0 backgroundLastLinesTmp
 e1 dbg1
 e2 dbg2
