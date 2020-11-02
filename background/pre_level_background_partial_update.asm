@@ -154,4 +154,46 @@ WriteWinThresholdLoop:
   CPY #$16
   BNE WriteWinThresholdLoop
 
+  LDA #$03
+  STA $03
+
+  TXA
+  PHA
+  LDA winThreshold
+  JSR Hex2Dec
+  PLA
+  TAX
+
+  LDA $01
+  BNE :+
+    DEC $03
+  :
+
+  LDA $03
+  STA partialUpdateMemory, X
+  INX
+
+  LDA #$21
+  STA partialUpdateMemory, X
+  INX
+
+  LDA #$18
+  STA partialUpdateMemory, X
+  INX
+
+  LDA #$34
+  STA partialUpdateMemory, X
+  INX
+
+  LDA $01
+  BEQ :+
+    LDA $01
+    STA partialUpdateMemory, X
+    INX
+  :
+
+  LDA $02
+  STA partialUpdateMemory, X
+  INX
+
   RTS
