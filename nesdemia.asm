@@ -79,58 +79,59 @@
 .define gameRendered $51
 .define creditsRendered $52
 .define mainMenuRendered $53
-.define virusLeft $54
-.define virusTop $55
-.define virusRight $56
-.define virusBottom $57
-.define virusXSpeed $58
-.define virusYSpeed $59
-.define virusXDirection $5a
-.define virusYDirection $5b
-.define virusAlive $5c
-.define virusMoveFrame $5d
-.define virusAnimationFrame $5e
-.define virusAnimationChangeFrame $5f
-.define virusSmart $60
-.define virusCntr $61
-.define virusPointer $62
+.define preLevelRendered $54
+.define virusLeft $55
+.define virusTop $56
+.define virusRight $57
+.define virusBottom $58
+.define virusXSpeed $59
+.define virusYSpeed $5a
+.define virusXDirection $5b
+.define virusYDirection $5c
+.define virusAlive $5d
+.define virusMoveFrame $5e
+.define virusAnimationFrame $5f
+.define virusAnimationChangeFrame $60
+.define virusSmart $61
+.define virusCntr $62
+.define virusPointer $63
 ; level specific
-.define levelNo $63
-.define winCondition $64
-.define winThreshold $65
-.define points $66
-.define kills $67
-.define smartKills $68
-.define usedPowerups $69
-.define timeLimit $6a
-.define noViruses $6b
-.define smartVirusChance $6c
-.define powerupChance $6d
-.define attackChance $6e
-.define LastLinesTextLo $6f
-.define LastLinesTextHi $70
-.define winThresholdDigit1 $71
-.define winThresholdDigit0 $72
-.define timeDigit1 $73
-.define timeDigit0 $74
-.define countdownTimer $75
-.define passwordCurrentDigit $76
-.define passwordRendered $77
-.define passwordValid $78
-.define creditsScroll $79
-.define ppuHigh $7a
-.define ppuLow $7b
-.define passwordArray $7c ; 7
+.define levelNo $64
+.define winCondition $65
+.define winThreshold $66
+.define points $67
+.define kills $68
+.define smartKills $69
+.define usedPowerups $6a
+.define timeLimit $6b
+.define noViruses $6c
+.define smartVirusChance $6d
+.define powerupChance $6e
+.define attackChance $6f
+.define LastLinesTextLo $70
+.define LastLinesTextHi $71
+.define winThresholdDigit1 $72
+.define winThresholdDigit0 $73
+.define timeDigit1 $74
+.define timeDigit0 $75
+.define countdownTimer $76
+.define passwordCurrentDigit $77
+.define passwordRendered $78
+.define passwordValid $79
+.define creditsScroll $7a
+.define ppuHigh $7b
+.define ppuLow $7c
+.define passwordArray $7d ; 7
 ; takes 32 bits
-.define backgroundLastLinesTmp $83 ; 32
-.define shopRendered $a3
-.define currentShopItem $a4
-.define luckBought $a5
-.define attackBought $a6
-.define speedBought $a7
-.define shopConfirm $a8
-.define dbg1 $a9
-.define dbg2 $aa
+.define backgroundLastLinesTmp $84 ; 32
+.define shopRendered $a4
+.define currentShopItem $a5
+.define luckBought $a6
+.define attackBought $a7
+.define speedBought $a8
+.define shopConfirm $a9
+.define dbg1 $aa
+.define dbg2 $ab
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -188,6 +189,7 @@ LEVEL_COMPLETED_MODE = $04
 GAME_COMPLETED_MODE = $05
 MAIN_MENU_MODE = $06
 SHOP_MODE = $07
+PRE_LEVEL_MODE = $08
 
 LAST_LEVEL = $05
 
@@ -247,6 +249,15 @@ MainGameLoop:
     JSR ReactOnInputInShop
     JSR AdjustGameMode
     JSR RenderShop
+    JMP ContinueMainGameLoop
+  :
+
+  LDA gameMode
+  CMP #PRE_LEVEL_MODE
+  BNE :+
+    JSR ReactOnInputInPreLevel
+    JSR AdjustGameMode
+    JSR RenderPreLevel
     JMP ContinueMainGameLoop
   :
 
@@ -400,6 +411,19 @@ RenderPassword:
 
   RTS
 
+RenderPreLevel:
+  LDA preLevelRendered
+  BEQ :+
+    JMP RenderPartialPreLevelBackground
+  :
+
+  BNE :+
+    .include "background/pre_level_background.asm"
+    INC preLevelRendered
+  :
+
+  RTS
+
 RenderShop:
   LDA shopRendered
   BEQ :+
@@ -460,6 +484,8 @@ RenderMainMenu:
 
 .include "gamepad/shop.asm"
 
+.include "gamepad/pre_level.asm"
+
 .include "background/attributes.asm"
 
 .include "background/background.asm"
@@ -469,6 +495,8 @@ RenderMainMenu:
 .include "background/password_background_partial_update.asm"
 
 .include "background/shop_background_partial_update.asm"
+
+.include "background/pre_level_background_partial_update.asm"
 
 .include "background/game_attributes.asm"
 

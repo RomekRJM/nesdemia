@@ -62,8 +62,7 @@ ReactOnInputInShop:
     BNE :+
     LDA #$00
     STA shopConfirm
-    JSR LoadPassword
-    LDA #IN_GAME_MODE
+    LDA #PRE_LEVEL_MODE
     STA gameMode
   :
 
