@@ -244,6 +244,8 @@ InitVariables:
   STA creditsRendered
   STA mainMenuRendered
   STA passwordRendered
+  STA shopRendered
+  STA preLevelRendered
   STA health
   STA playerAttacks
   STA playerInvincible

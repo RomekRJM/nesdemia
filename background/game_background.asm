@@ -56,38 +56,38 @@ AssignLL:
   BNE :+
     .repeat 2
     LDA #$27 ; whitespace
-    STA $00, Y
+    STA backgroundLLMemory, Y
     INY
     .endrepeat
     JMP ContinueOnLL
   :
 
   LDA winThresholdDigit1
-  STA $00, Y
+  STA backgroundLLMemory, Y
   INY
   LDA winThresholdDigit0
-  STA $00, Y
+  STA backgroundLLMemory, Y
   INY
 
 ContinueOnLL:
   .repeat 5
   LDA #$27 ; whitespace
-  STA $00, Y
+  STA backgroundLLMemory, Y
   INY
   .endrepeat
 
   LDA #$1D ; T
-  STA $00, Y
+  STA backgroundLLMemory, Y
   INY
   LDA timeDigit1
-  STA $00, Y
+  STA backgroundLLMemory, Y
   INY
   LDA timeDigit0
-  STA $00, Y
+  STA backgroundLLMemory, Y
 
   LDY #$00
 PopulateSecondToLastLinesLoop:
-  LDA $00, Y
+  LDA backgroundLLMemory, Y
   CPY #$16
   BCS :+
     LDA (LastLinesTextLo), Y
