@@ -354,7 +354,7 @@ NextLevelIfNeeded:
     JMP EndNextLevelIfNeeded
   :
 
-  LDA #IN_GAME_MODE
+  LDA #SHOP_MODE
   STA gameMode
 
 EndNextLevelIfNeeded:
@@ -377,15 +377,12 @@ RenderGraphics:
 RenderGame:
   LDA gameRendered
   BEQ :+
-    JMP RenderGamePartialUpdate
+    JSR RenderPartialGameBackground
+    RTS
   :
 
   .include "background/game_background.asm"
   INC gameRendered
-  RTS
-
-RenderGamePartialUpdate:
-  JSR RenderPartialGameBackground
   RTS
 
 RenderGameOver:
@@ -401,26 +398,24 @@ RenderGameOver:
 RenderPassword:
   LDA passwordRendered
   BEQ :+
-    JMP RenderPartialPasswordBackground
+    JSR RenderPartialPasswordBackground
+    RTS
   :
 
-  BNE :+
-    .include "background/password_background.asm"
-    INC passwordRendered
-  :
+  .include "background/password_background.asm"
+  INC passwordRendered
 
   RTS
 
 RenderPreLevel:
   LDA preLevelRendered
   BEQ :+
-    JMP RenderPartialPreLevelBackground
+    JSR RenderPartialPreLevelBackground
+    RTS
   :
 
-  BNE :+
-    .include "background/pre_level_background.asm"
-    INC preLevelRendered
-  :
+  .include "background/pre_level_background.asm"
+  INC preLevelRendered
 
   RTS
 

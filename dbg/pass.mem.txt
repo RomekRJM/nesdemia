@@ -1,11 +1,11 @@
-35 luck
-36 attack
+16 luck
+17 attack
 37 speed
 a4 currentShopItem
 a5 luckBought
 a6 attackBought
 a7 speedBought
-63 levelNo
+64 levelNo
 66 points
 89 creditsScroll
 23 frame
@@ -16,7 +16,7 @@ a8 shopConfirm
 01 attributeBought
 02 hi
 03 lo
-04 attributesToDisp
+4b attributesToDisp
 05 emptyAttributes
 06 passwordArray
 e0 backgroundLastLinesTmp
