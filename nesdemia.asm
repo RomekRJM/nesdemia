@@ -122,23 +122,22 @@
 .define ppuHigh $7b
 .define ppuLow $7c
 .define passwordArray $7d ; 7
-; takes 32 bits
-.define backgroundLastLinesTmp $84 ; 32
-.define shopRendered $a4
-.define currentShopItem $a5
-.define luckBought $a6
-.define attackBought $a7
-.define speedBought $a8
-.define shopConfirm $a9
-.define dbg1 $aa
-.define dbg2 $ab
+.define shopRendered $84
+.define currentShopItem $85
+.define luckBought $86
+.define attackBought $87
+.define speedBought $88
+.define shopConfirm $89
+.define dbg1 $8a
+.define dbg2 $8b
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
 
 ; 0x0100 - ... - viruses
 .define backgroundMemory $0300 ; 1024
-.define backgroundLLMemory $03A0 ; 32
+.define backgroundLLMemory $0380 ; 32
+.define backgroundLastLinesTmp $03A0 ; 32
 .define attributeMemory $03C0 ; 64
 .define partialUpdateMemory $0400 ; 256
 
