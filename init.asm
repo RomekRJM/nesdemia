@@ -47,6 +47,11 @@ CLEARMEM:
 LDA #$00
 STA levelNo
 
+LDA #$01
+STA playerLuck
+STA playerAttack
+STA playerSpeed
+
 LDA #MAIN_MENU_MODE
 STA gameMode
 STA previousGameMode

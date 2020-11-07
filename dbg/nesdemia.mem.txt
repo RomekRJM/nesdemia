@@ -1,3 +1,4 @@
+6e powerupChance
 6f attackChance
 70 LastLinesTextLo
 71 LastLinesTextHi
@@ -13,12 +14,11 @@
 7b ppuHigh
 7c ppuLow
 7d passwordArray
-84 backgroundLastLinesTmp
-a4 shopRendered
-a5 currentShopItem
-a6 luckBought
-a7 attackBought
-a8 speedBought
-a9 shopConfirm
-aa dbg1
-ab dbg2
+84 shopRendered
+85 currentShopItem
+86 luckBought
+87 attackBought
+88 speedBought
+89 shopConfirm
+8a dbg1
+8b dbg2

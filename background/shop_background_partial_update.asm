@@ -1,10 +1,6 @@
 RenderPartialShopBackground:
   LDY #$00
 
-  ; test code - remove me
-  LDA #$01
-  STA playerLuck
-
   LDA playerLuck
   STA $00
 
@@ -32,10 +28,6 @@ RenderPartialShopBackground:
   JSR RenderShopBar
 
 
-  ; test code - remove me
-  LDA #$08
-  STA playerAttack
-
   LDA playerAttack
   STA $00
 
@@ -62,10 +54,6 @@ RenderPartialShopBackground:
 
   JSR RenderShopBar
 
-
-  ; test code - remove me
-  LDA #$02
-  STA playerSpeed
 
   LDA playerSpeed
   STA $00
