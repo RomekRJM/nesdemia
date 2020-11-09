@@ -41,12 +41,12 @@ SavePreviousGameMode:
 ClearGfx:
   LDX #$00
   STX refreshBackground
-  LDY #$00
 
 ClearGfxLoop:
   LDA #$ff
   STA $0200, X
-  STY partialUpdateMemory
+  LDA #$00
+  STA partialUpdateMemory, X
   INX
   BNE ClearGfxLoop
 

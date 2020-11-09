@@ -150,11 +150,8 @@ RenderPartialShopBackground:
   :
 
   JSR RenderCosts
-
   JSR RenderMoney
-
   JSR RenderConfirmDialog
-
 
   LDA #$00
   STA partialUpdateMemory, Y
@@ -386,7 +383,7 @@ RenderConfirmDialog:
   LDA #.HIBYTE(ShopConfirmDialog)
   STA $01
 
-  LDA #$10
+  LDA #$08
   STA partialUpdateMemory, Y
   INY
 
@@ -394,7 +391,7 @@ RenderConfirmDialog:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$09
+  LDA #$0d
   STA partialUpdateMemory, Y
   INY
 
@@ -417,7 +414,7 @@ WriteConfirmDialog:
   STA partialUpdateMemory, Y
   INY
   INX
-  CPX #$10
+  CPX #$08
   BNE WriteConfirmDialogLoop
 
   RTS
