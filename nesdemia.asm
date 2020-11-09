@@ -422,13 +422,11 @@ RenderShop:
   LDA shopRendered
   BEQ :+
     JSR RenderPartialShopBackground
+    RTS
   :
 
-  LDA shopRendered
-  BNE :+
-    .include "background/shop_background.asm"
-    INC shopRendered
-  :
+  .include "background/shop_background.asm"
+  INC shopRendered
 
   RTS
 

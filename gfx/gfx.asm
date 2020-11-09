@@ -820,7 +820,7 @@ BackgroundLLSurvive:
   .byte $1C,$1E,$1B,$1F,$12,$1F,$0E,$27,$1D,$12,$16,$0E,$27,$1E,$17,$12,$1D,$1C,$27,$27,$27,$27 ; SURVIVE TIME UNITS
 
 ShopConfirmDialog:
-  .byte $1C,$1D,$0A,$1B,$1D,$88,$1D,$18,$88,$0C,$18,$17,$0F,$12,$1B,$16
+  .byte $0C,$18,$1B,$1B,$0E,$0C,$1D,$35
 
 
 MenuAttribute:
