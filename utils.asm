@@ -252,9 +252,6 @@ InitVariables:
   STA playerDashCount
   STA playerDashing
   STA passwordValid
-  STA luckBought
-  STA attackBought
-  STA speedBought
 
   LDA #$01
   STA nmiTimer

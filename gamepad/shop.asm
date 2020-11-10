@@ -62,6 +62,7 @@ ReactOnInputInShop:
     BNE :+
     LDA #$00
     STA shopConfirm
+    JSR ConfirmOrder
     LDA #PRE_LEVEL_MODE
     STA gameMode
   :
@@ -118,4 +119,21 @@ DecreaseBoughUnits:
 UnconfirmInShop:
   LDA #$00
   STA shopConfirm
+  RTS
+
+
+ConfirmOrder:
+  LDX #$00
+
+  :
+    LDA playerLuck, X
+    CLC
+    ADC luckBought, X
+    STA playerLuck, X
+    LDA #$00
+    STA luckBought, X
+    INX
+    CPX #$03
+    BNE :-
+
   RTS

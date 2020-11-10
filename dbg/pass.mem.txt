@@ -2,12 +2,12 @@
 36 attack
 37 speed
 a4 currentShopItem
-a6 luckBought
-a7 attackBought
-a8 speedBought
+86 luckBought
+87 attackBought
+88 speedBought
 4b gameMode
-66 points
-89 creditsScroll
+67 points
+64 levelNo
 23 frame
 7e LastLinesTextHi
 21 buttons
