@@ -6,7 +6,7 @@ ReactOnInputInGame:
   LDA playerDashing
   BNE :+
     LDA #PLAYER_NORMAL_SPEED
-    STA playerSpeed
+    STA playerCurrentSpeed
     JMP CheckButtons
   :
 
@@ -20,7 +20,7 @@ ReactOnInputInGame:
       JSR UpdateWinThreshold
   :
   LDA #PLAYER_DASH_SPEED
-  STA playerSpeed
+  STA playerCurrentSpeed
 
 CheckButtons:
 	LDA buttons
@@ -28,7 +28,7 @@ CheckButtons:
   BEQ :+
     LDA playerLeft
     SEC
-    SBC playerSpeed
+    SBC playerCurrentSpeed
     STA playerLeft
     CLC
     ADC #PLAYER_WIDTH
@@ -43,7 +43,7 @@ CheckButtons:
   BEQ :+
     LDA playerLeft
     CLC
-    ADC playerSpeed
+    ADC playerCurrentSpeed
     STA playerLeft
     CLC
     ADC #PLAYER_WIDTH
@@ -58,7 +58,7 @@ CheckButtons:
   BEQ :+
     LDA playerTop
     SEC
-    SBC playerSpeed
+    SBC playerCurrentSpeed
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT
@@ -73,7 +73,7 @@ CheckButtons:
   BEQ :+
     LDA playerTop
     CLC
-    ADC playerSpeed
+    ADC playerCurrentSpeed
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT

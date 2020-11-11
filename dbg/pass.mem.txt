@@ -6,8 +6,8 @@ a4 currentShopItem
 87 attackBought
 88 speedBought
 4b gameMode
-67 points
-64 levelNo
+68 points
+65 levelNo
 23 frame
 7e LastLinesTextHi
 21 buttons

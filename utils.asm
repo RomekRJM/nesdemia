@@ -98,7 +98,7 @@ SavePassword:
   ORA $02
   STA $02
 
-  LDX playerSpeed
+  LDX playerLuck
   DEX
   TXA
   ASL
@@ -172,7 +172,6 @@ LoadPassword:
   ORA $00
   STA points
   INX
-
 
   LDA passwordArray, X
   LSR
