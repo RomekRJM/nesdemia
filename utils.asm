@@ -67,56 +67,74 @@ NextRandom16To206:
 
 ; Returns password in mem addresses $00-$06
 SavePassword:
-  LDA points
+  LDX points
+  DEX
+  TXA
 .repeat 4
   ROR
 .endrepeat
   AND #%00001111
   STA $00
 
-  LDA points
+  LDX points
+  DEX
+  TXA
   AND #%00001111
   STA $01
 
-  LDA playerSpeed
+  LDX playerSpeed
+  DEX
+  TXA
   ASL
   AND #%00001110
   STA $02
 
-  LDA playerLuck
+  LDX playerLuck
+  DEX
+  TXA
   ROR
   ROR
   AND #%00000001
   ORA $02
   STA $02
 
-  LDA playerLuck
+  LDX playerSpeed
+  DEX
+  TXA
   ASL
   ASL
   AND #%00001100
   STA $03
 
-  LDA playerAttack
+  LDX playerAttack
+  DEX
+  TXA
   ROR
   AND #%00000011
   ORA $03
   STA $03
 
-  LDA playerAttack
+  LDX playerAttack
+  DEX
+  TXA
 .repeat 3
   ASL
 .endrepeat
   AND #%00001000
   STA $04
 
-  LDA levelNo
+  LDX levelNo
+  DEX
+  TXA
   ROR
   ROR
   AND #%00000111
   ORA $04
   STA $04
 
-  LDA levelNo
+  LDX levelNo
+  DEX
+  TXA
   ASL
   ASL
   AND #%00001100
@@ -217,9 +235,11 @@ LoadPassword:
     STA passwordValid
   :
 
-  ; INC playerSpeed
-  ; INC playerLuck
-  ; INC playerAttack
+  INC playerSpeed
+  INC playerLuck
+  INC playerAttack
+  INC levelNo
+  INC points
 
   JSR InitPoints
   LDA points
@@ -263,10 +283,6 @@ InitVariables:
   LDA #$80
   STA playerTop
   STA playerLeft
-
-  ; test code !
-  LDA #$c4
-  STA points
 
   LDA #GAME_TIME_UNIT
   STA countdownTimer

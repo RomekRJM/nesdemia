@@ -52,6 +52,10 @@ STA playerLuck
 STA playerAttack
 STA playerSpeed
 
+; test code !
+LDA #$c4
+STA points
+
 LDA #MAIN_MENU_MODE
 STA gameMode
 STA previousGameMode

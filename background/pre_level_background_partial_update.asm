@@ -67,7 +67,12 @@ RenderPreLevelPassword:
   STA partialUpdateMemory, X
   INX
 
+  TXA
+  PHA
   JSR SavePassword
+  PLA
+  TAX
+
   LDY #$00
   :
     LDA $00, Y
