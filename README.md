@@ -5,6 +5,7 @@ Using #stayathome as an opportunity to write retro NES game about battling pande
 ## Version history
 
 **0.2 - 11.11.2020**
+
 Enhancements
 * Added support for GGSound engine by Derek Andrews.
 * Game has music composed by ‪Håvard Handergård.
@@ -17,7 +18,7 @@ Balance
 * Removed difficulty levels as they did not have much sense at this stage.
 
 
-**0.1 - 27.07.2020**
-* First playable version with 5 levels. 
-* Can be completed.
 
+**0.1 - 27.07.2020**
+* First playable version with 5 levels.
+* Can be completed.
