@@ -282,7 +282,15 @@ InitVariables:
 
   LDA #$80
   STA playerTop
+  CLC
+  ADC #PLAYER_HEIGHT
+  STA playerBottom
+
+  LDA #$80
   STA playerLeft
+  CLC
+  ADC #PLAYER_WIDTH
+  STA playerRight
 
   LDA #GAME_TIME_UNIT
   STA countdownTimer
