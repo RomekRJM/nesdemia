@@ -265,8 +265,8 @@ MainGameLoop:
   CMP #CREDITS_GAME_MODE
   BNE :+
     JSR ReactOnInputInCredits
-    JSR AdjustGameMode
     JSR RenderCredits
+    JSR AdjustGameMode
     JMP ContinueMainGameLoop
   :
 

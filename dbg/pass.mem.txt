@@ -5,7 +5,7 @@ a4 currentShopItem
 86 luckBought
 87 attackBought
 88 speedBought
-4b gameMode
+4c gameMode
 68 points
 65 levelNo
 23 frame
@@ -16,7 +16,7 @@ a8 shopConfirm
 01 attributeBought
 02 hi
 03 lo
-4b attributesToDisp
+53 creditsRendered
 05 emptyAttributes
 06 passwordArray
 08 backgroundLastLinesTmp

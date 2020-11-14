@@ -271,6 +271,7 @@ InitVariables:
   STA playerDashCount
   STA playerDashing
   STA passwordValid
+  STA creditsScroll
 
   LDA #$01
   STA nmiTimer
