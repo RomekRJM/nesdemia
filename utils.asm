@@ -402,3 +402,20 @@ ComputeControlSum:
   AND #%00111111
 
   RTS
+
+
+; Swaps music track to the one in A, if it's not playing already
+ChangeMusicTrack:
+  TAX
+
+  LDA initCompleted
+  BEQ PlayNewTrack
+
+  CPX sound_param_byte_0
+  BNE PlayNewTrack
+  RTS
+
+PlayNewTrack:
+  STX sound_param_byte_0
+  JSR play_song
+  RTS

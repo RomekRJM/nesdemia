@@ -82,8 +82,8 @@ STA sound_param_word_3
 LDA #>dpcm_list
 STA sound_param_word_3+1
 JSR sound_initialize
+LDA #song_index_Main20Menu
+JSR ChangeMusicTrack
 
-;load a song
-LDA #MAIN_MENU_SONG
-STA sound_param_byte_0
-JSR play_song
+LDA #$01
+STA initCompleted
