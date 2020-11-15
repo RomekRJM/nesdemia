@@ -8,15 +8,25 @@ AdjustGameMode:
       INC levelNo
       JSR LoadLevel
       JSR InitVariables
+
+      ;load an in game song
+      LDA #IN_GAME_SONG
+      STA sound_param_byte_0
+      JSR play_song
   :
 
   LDA previousGameMode
-  CMP #CREDITS_GAME_MODE
-  BNE :+
+  CMP #MAIN_MENU_MODE
+  BEQ :+
     LDA gameMode
     CMP #MAIN_MENU_MODE
     BNE :+
       JSR InitVariables
+
+      ;load a menu song
+      LDA #MAIN_MENU_SONG
+      STA sound_param_byte_0
+      JSR play_song
   :
 
   LDA previousGameMode

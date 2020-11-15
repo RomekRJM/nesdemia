@@ -84,6 +84,6 @@ STA sound_param_word_3+1
 JSR sound_initialize
 
 ;load a song
-LDA #$01
+LDA #MAIN_MENU_SONG
 STA sound_param_byte_0
 JSR play_song

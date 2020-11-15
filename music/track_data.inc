@@ -1,3 +1,6 @@
+MAIN_MENU_SONG = $00
+IN_GAME_SONG = $01
+
 song_list:
   .word _Main20Menu
   .word _In20Game
