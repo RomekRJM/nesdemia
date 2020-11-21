@@ -86,7 +86,7 @@ EndCheckWinCondition:
 ; 3 - use x powerups
 ; 4 - survive till the end of the level
 
-; Win threshold
+; Win threshold ( has to be equal to Max allowed time in survive time mode)
 
 ; Win threshold digit 1
 
@@ -110,4 +110,4 @@ Level:
   .byte $02, $01, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 2nd level
   .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
   .byte $04, $03, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
-  .byte $05, $04, $04, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
+  .byte $05, $04, $0a, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
