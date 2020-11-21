@@ -1,6 +1,8 @@
 # nesdemia
 Using #stayathome as an opportunity to write retro NES game about battling pandemic.
 
+<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/scr02.png" width="400px" height="340px">
+
 
 ## Version history
 
