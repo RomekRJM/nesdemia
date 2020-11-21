@@ -18,9 +18,6 @@ RenderPartialPreLevelBackground:
 
 RenderPreLevelNo:
   LDA levelNo
-  STA $00
-  INC $00
-  LDA $00
   JSR Hex2Dec
 
   LDA #$02

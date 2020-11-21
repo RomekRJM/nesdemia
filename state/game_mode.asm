@@ -5,11 +5,19 @@ AdjustGameMode:
     LDA gameMode
     CMP #IN_GAME_MODE
     BNE :+
-      INC levelNo
-      JSR LoadLevel
       JSR InitVariables
       LDA #song_index_In20Game
       JSR ChangeMusicTrack
+  :
+
+  LDA previousGameMode
+  CMP #PRE_LEVEL_MODE
+  BEQ :+
+    LDA gameMode
+    CMP #PRE_LEVEL_MODE
+    BNE :+
+      INC levelNo
+      JSR LoadLevel
   :
 
   LDA previousGameMode
