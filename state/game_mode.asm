@@ -18,6 +18,7 @@ AdjustGameMode:
     BNE :+
       INC levelNo
       JSR LoadLevel
+      JSR InitVariables
   :
 
   LDA previousGameMode
