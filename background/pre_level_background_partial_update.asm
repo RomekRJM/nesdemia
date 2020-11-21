@@ -18,12 +18,15 @@ RenderPartialPreLevelBackground:
 
 RenderPreLevelNo:
   LDA levelNo
+  STA $00
+  INC $00
+  LDA $00
   JSR Hex2Dec
 
   LDA #$02
   STA $03 ; how many numbers to write ( Level 1 rather than Level 01)
 
-  LDA $00
+  LDA $01
   BNE :+
     DEC $03
   :
@@ -40,14 +43,14 @@ RenderPreLevelNo:
   STA partialUpdateMemory, X
   INX
 
-  LDA $00
+  LDA $01
   BEQ :+
     LDA $00
     STA partialUpdateMemory, X
     INX
   :
 
-  LDA $01
+  LDA $02
   STA partialUpdateMemory, X
   INX
 
