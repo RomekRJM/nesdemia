@@ -5,7 +5,7 @@ RenderPartialGameBackground:
   CMP #WIN_BY_SURVIVING
   BEQ ContinueRenderPartialGameBackground
 
-  LDA #$01
+  LDA #$02
   STA partialUpdateMemory, Y
   INY
 
@@ -21,24 +21,12 @@ RenderPartialGameBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$97
-  STA partialUpdateMemory, Y
-  INY
-
   LDA winThresholdDigit0
   STA partialUpdateMemory, Y
   INY
 
 ContinueRenderPartialGameBackground:
-  LDA #$01
+  LDA #$02
   STA partialUpdateMemory, Y
   INY
 
@@ -46,23 +34,11 @@ ContinueRenderPartialGameBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$9e
+  LDA #$9d
   STA partialUpdateMemory, Y
   INY
 
   LDA timeDigit1
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$01
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$23
-  STA partialUpdateMemory, Y
-  INY
-
-  LDA #$9f
   STA partialUpdateMemory, Y
   INY
 

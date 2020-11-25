@@ -70,7 +70,7 @@ AssignLL:
   INY
 
 ContinueOnLL:
-  .repeat 5
+  .repeat 4
   LDA #$27 ; whitespace
   STA backgroundLLMemory, Y
   INY
@@ -84,6 +84,10 @@ ContinueOnLL:
   INY
   LDA timeDigit0
   STA backgroundLLMemory, Y
+  INY
+  LDA #$27 ; whitespace
+  STA backgroundLLMemory, Y
+  INY
 
   LDY #$00
 PopulateSecondToLastLinesLoop:
