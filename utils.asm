@@ -226,19 +226,21 @@ LoadPassword:
   ; control sum
   STA $00
 
+  INC playerSpeed
+  INC playerLuck
+  INC playerAttack
+  INC levelNo
+  INC points
+
   JSR ComputeControlSum
+
+  DEC levelNo
 
   CMP $00
   BNE :+
     LDA #$01
     STA passwordValid
   :
-
-  INC playerSpeed
-  INC playerLuck
-  INC playerAttack
-  INC levelNo
-  INC points
 
   JSR InitPoints
   LDA points
