@@ -59,6 +59,7 @@ CheckButtons:
     LDA playerTop
     SEC
     SBC playerCurrentSpeed
+    JSR NormaliseYPosition
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT
@@ -74,6 +75,7 @@ CheckButtons:
     LDA playerTop
     CLC
     ADC playerCurrentSpeed
+    JSR NormaliseYPosition
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT
@@ -119,4 +121,20 @@ CheckButtons:
       JSR UpdateWinThreshold
   :
 
+  RTS
+
+
+NormaliseYPosition:
+  CMP #$10
+  BCS :+
+    LDA #$d0
+    RTS
+  :
+
+  CMP #$d0
+  BCC EndNormaliseYPosition
+  BEQ EndNormaliseYPosition
+  LDA #$10
+
+EndNormaliseYPosition:
   RTS
