@@ -14,9 +14,14 @@ NMI:
   INC nmiTimer
 
   LDA refreshBackground
-  BEQ EndNMI
+  ORA refreshPalette
+  BEQ :+
+    LDA $2002             ; read PPU status to reset the high/low latch
+  :
 
-  LDA $2002             ; read PPU status to reset the high/low latch
+  LDA refreshBackground
+  BEQ ShouldUpdatePalette
+
   LDY #$00
 
 PartialUpdateLoop:
@@ -40,12 +45,36 @@ PartialUpdateInnerLoop:
   BNE PartialUpdateInnerLoop
   JMP PartialUpdateLoop
 
+
+ShouldUpdatePalette:
+  LDA refreshPalette
+  BNE :+
+    LDA refreshBackground
+    BNE AfterPartialUpdate
+    BEQ EndNMI
+  :
+
+UpdatePalette:
+  LDA #$3F
+  STA $2006
+  LDA #$00
+  STA $2006
+  LDY #$00
+
+UpdatePaletteLoop:
+  LDA paletteUpdateMemory, Y
+  STA $2007
+  INY
+  CPY #$20
+  BNE UpdatePaletteLoop
+
 AfterPartialUpdate:
   BIT $2002
   LDA #$00
   STA $2005
   STA $2005
   STA refreshBackground
+  STA refreshPalette
 
 EndNMI:
 

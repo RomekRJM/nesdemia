@@ -8,6 +8,16 @@ AdjustGameMode:
       JSR InitVariables
       LDA #song_index_In20Game
       JSR ChangeMusicTrack
+      JSR LoadInGamePalettes
+  :
+
+  LDA previousGameMode
+  CMP #IN_GAME_MODE
+  BNE :+
+    LDA gameMode
+    CMP #IN_GAME_MODE
+    BEQ :+
+      JSR LoadMenuPalettes
   :
 
   LDA previousGameMode
