@@ -9,7 +9,7 @@
 66 levelNo
 4d gameMode
 86 shopRendered
-56 preLevelRendered
+52 refreshPalette
 2c playerLeft
 2d playerTop
 2e playerRight
