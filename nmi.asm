@@ -13,11 +13,7 @@ NMI:
   INC frame
   INC nmiTimer
 
-  LDA refreshBackground
-  ORA refreshPalette
-  BEQ :+
-    LDA $2002             ; read PPU status to reset the high/low latch
-  :
+  LDA $2002             ; read PPU status to reset the high/low latch
 
   LDA refreshBackground
   BEQ ShouldUpdatePalette
@@ -27,7 +23,7 @@ NMI:
 PartialUpdateLoop:
   ; X - how many bytes to update
   LDX partialUpdateMemory, Y
-  BEQ AfterPartialUpdate
+  BEQ ShouldUpdatePalette
   INY
 
   ; High / Low bytes of PPU address
