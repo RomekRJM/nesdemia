@@ -3,7 +3,7 @@ InGamePaletteData:
   .byte $1c,$12,$10,$30, $02,$18,$27,$17, $3c,$3d,$05,$17, $22,$37,$1c,$17  ;sprite palette data
 
 MenuPaletteData:
-  .byte $22,$37,$1c,$0f, $05,$07,$17,$0F, $22,$36,$17,$0F, $22,$37,$1A,$0F  ;background palette
+  .byte $22,$37,$1c,$0f, $05,$07,$17,$0F, $22,$36,$17,$0F, $22,$15,$1c,$0F  ;background palette
   .byte $1c,$12,$10,$30, $02,$18,$27,$17, $3c,$3d,$05,$17, $22,$37,$37,$37  ;sprite palette data
 
 Background:
