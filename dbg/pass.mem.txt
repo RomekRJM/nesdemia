@@ -20,5 +20,5 @@
 05 emptyAttributes
 06 passwordArray
 08 backgroundLastLinesTmp
-84 shopRendered
-7b passwordValid
+| |
+7f creditsScroll

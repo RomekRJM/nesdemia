@@ -59,6 +59,7 @@ STA points
 
 LDA #MAIN_MENU_MODE
 STA gameMode
+LDA #INIT_GAME_MODE
 STA previousGameMode
 
 JSR InitVariables
