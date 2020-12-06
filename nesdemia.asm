@@ -453,8 +453,10 @@ RenderCredits:
 
 RenderGameCompleted:
   LDA gameEndRendered
-
-  BNE :+
+  ; it's a hack, we need 2 NMIs to fully reload palette,
+  ; which happens after we leave game mode
+  CMP #$02
+  BEQ :+
     .include "background/game_completed_background.asm"
     INC gameEndRendered
   :
