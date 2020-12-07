@@ -168,7 +168,6 @@ CheckCollisionWithPowerup:
   CMP #COLLISSION
   BNE EndOfPowerupCollision
 
-  JSR ForcePowerupRespawn
   LDA powerupActive
   BEQ EndOfPowerupCollision
   DEC powerupActive

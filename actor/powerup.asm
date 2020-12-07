@@ -5,11 +5,10 @@ SpawnPowerup:
   BNE :+
     LDA #POWERUP_LIFE_TIME
     STA powerupLifeTime
+    LDA #$00
+    STA powerupActive
   :
 
-  INC powerupTimer
-  LDA powerupTimer
-  BNE EndOfPowerupSpawning
   ; by default powerup type is dash
   LDY #POWERUP_DASH
 
@@ -45,13 +44,6 @@ SpawnPowerup:
   STA powerupActive
 
 EndOfPowerupSpawning:
-  RTS
-
-ForcePowerupRespawn:
-  LDA #$ff
-  STA powerupTimer
-  LDA #$01
-  STA powerupLifeTime
   RTS
 
 RenderPowerup:
