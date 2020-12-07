@@ -388,7 +388,7 @@ SpawnNewVirus:
   LDA #$00
   STA virusSmart
   JSR NextRandom3Bits
-  CMP #$05
+  CMP #$01
   BCS :+
     LDA #$01
     STA virusSmart

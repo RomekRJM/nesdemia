@@ -1,22 +1,29 @@
-
 SpawnPowerup:
+  DEC powerupLifeTime
   LDA powerupLifeTime
+  BNE EndOfPowerupSpawning
   BNE :+
     LDA #POWERUP_LIFE_TIME
     STA powerupLifeTime
   :
 
   INC powerupTimer
-  BNE EndOfPowerupSpawning
-  DEC powerupLifeTime
+  LDA powerupTimer
   BNE EndOfPowerupSpawning
   ; by default powerup type is dash
   LDY #POWERUP_DASH
-  ; powerups have 3/8 chance to be spawned
-  JSR NextRandom3Bits
-  CMP #$05
+
+  LDA playerLuck
+  STA $01
+  DEC $01
+  LDX $01
+
+  JSR NextRandom5Bits
+  CMP LuckLevelGivingDash, X
   BCC EndOfPowerupSpawning ; aka don't spawn it
-  BNE :+
+
+  CMP LuckLevelGivingAttack, X
+  BCC :+
     ; this powerup is attack
     LDY #POWERUP_ATTACK
   :
@@ -48,6 +55,10 @@ ForcePowerupRespawn:
   RTS
 
 RenderPowerup:
+  LDA powerupActive
+  BNE :+
+    RTS
+  :
   LDX spriteCounter
   LDY #$00
 LoadPowerupSprites:

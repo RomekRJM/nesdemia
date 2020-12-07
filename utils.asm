@@ -14,6 +14,11 @@ NextRandom3Bits:
   AND #%00000111
   RTS
 
+NextRandom5Bits:
+  JSR NextRandomByte
+  AND #%00011111
+  RTS
+
 NextRandom6Bits:
   JSR NextRandomByte
   AND #%01111111
