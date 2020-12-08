@@ -118,3 +118,6 @@ LuckLevelGivingDash:
 
 LuckLevelGivingAttack:
   .byte $1b, $1a, $19, $18, $17, $16, $15, $14
+
+AttackLevelDuration:
+  .byte $73, $87, $9b, $af, $c3, $d7, $eb, $ff

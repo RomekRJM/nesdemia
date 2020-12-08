@@ -103,7 +103,11 @@ CheckButtons:
     LDA playerInvincible
     BNE :+
     DEC playerAttacks
-    LDA #PLAYER_INVINCIBLE_DURATION
+    LDA playerAttack
+    STA $00
+    DEC $00
+    LDX $00
+    LDA AttackLevelDuration, X
     STA playerInvincible
   :
 
