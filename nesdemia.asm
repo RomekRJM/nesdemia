@@ -391,8 +391,10 @@ RenderGame:
 
 RenderGameOver:
   LDA gameEndRendered
-
-  BNE :+
+  ; it's a hack, we need 2 NMIs to fully reload palette,
+  ; which happens after we leave game mode
+  CMP #$02
+  BEQ :+
     .include "background/game_over_background.asm"
     INC gameEndRendered
   :
@@ -530,7 +532,6 @@ RenderMainMenu:
 .segment "VECTORS"
   .word NMI
   .word Reset
-  ;
 
 .segment "CHARS"
   .incbin "gfx/nesdemia.chr"
