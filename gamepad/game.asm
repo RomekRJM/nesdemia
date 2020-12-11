@@ -3,9 +3,26 @@ ReactOnInputInGame:
   STA playerNucleusLeft
   STA playerNucleusTop
 
+  LDA buttons
+  CMP previousButtons
+  BEQ :+
+    LDA #$00
+    STA playerSpeedIndex
+    JMP ContinueReactOnInputInGame
+  :
+
+  LDA playerSpeedIndex
+  BEQ :+
+    LDA #$ff
+    STA playerSpeedIndex
+  :
+  INC playerSpeedIndex
+
+ContinueReactOnInputInGame:
   LDA playerDashing
   BNE :+
-    LDA #PLAYER_NORMAL_SPEED
+    LDX playerSpeedIndex
+    LDA SpeedLevel1, X
     STA playerCurrentSpeed
     JMP CheckButtons
   :
@@ -122,5 +139,8 @@ CheckButtons:
     BNE :+
       JSR UpdateWinThreshold
   :
+
+  LDA buttons
+  STA previousButtons
 
   RTS
