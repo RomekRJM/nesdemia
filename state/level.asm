@@ -121,3 +121,6 @@ LuckLevelGivingAttack:
 
 AttackLevelDuration:
   .byte $73, $87, $9b, $af, $c3, $d7, $eb, $ff
+
+SpeedLevel1:
+  .byte $01, $01
