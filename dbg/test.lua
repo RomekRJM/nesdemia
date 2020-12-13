@@ -1,12 +1,9 @@
-function stopemu()
-    print(memory.readbyte(0xc7));
-end
-
-memory.register(0xc2, stopemu);
 
 while (true) do
-    gui.text(50,50,"virusLeft: " .. memory.readbyte(0xba));
-    gui.text(50,60,"virusTop: " .. memory.readbyte(0xbb));
-    gui.text(50,70,"virusAlive: " .. memory.readbyte(0xc2));
-    emu.frameadvance();
+	if memory.readbyte(0x0532) > 0 then gui.text(50,50,"UP") end 
+	if memory.readbyte(0x0533) > 0 then gui.text(50,60,"DOWN") end
+	if memory.readbyte(0x0534) > 0 then gui.text(50,70,"LEFT") end
+	if memory.readbyte(0x0535) > 0 then gui.text(50,80,"RIGHT") end
+    
+	emu.frameadvance();
 end;

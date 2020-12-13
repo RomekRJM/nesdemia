@@ -2,21 +2,65 @@ ReactOnInputInGame:
   LDA #$04
   STA playerNucleusLeft
   STA playerNucleusTop
+  
+  ; test code
+  LDA #$00
+  STA $0532
+  STA $0533
+  STA $0534
+  STA $0535
+  ; end test code
 
   LDA buttons
   CMP previousButtons
   BEQ :+
     LDA #$00
     STA playerSpeedIndex
-    JMP ContinueReactOnInputInGame
+	STA playerDiagonalSpeedIndex
+	STA playerMovesDiagonally
+    ;JMP ContinueReactOnInputInGame
   :
+  
+  LDA buttons
+  AND #%00000011
+  BEQ ContinueOnNonDiagonalMove
+  
+  LDA buttons
+  AND #%00001100
+  BEQ ContinueOnNonDiagonalMove
+  
+  JMP GetDiagonalSpeeds
 
+ContinueOnNonDiagonalMove:
   LDA playerSpeedIndex
   BEQ :+
     LDA #$ff
     STA playerSpeedIndex
   :
   INC playerSpeedIndex
+  LDX playerSpeedIndex
+  LDA SpeedLevel1, X
+  STA playerSpeedX
+  STA playerSpeedY
+  
+  JMP ContinueReactOnInputInGame
+
+GetDiagonalSpeeds:
+  LDA playerDiagonalSpeedIndex
+  CMP #$04
+  BNE :+
+    LDA #$00
+	STA playerDiagonalSpeedIndex
+  :
+  LDX playerDiagonalSpeedIndex
+  LDA DiagonalSpeedLevel1, X
+  STA playerSpeedX
+  INC playerDiagonalSpeedIndex
+  
+  LDX playerDiagonalSpeedIndex
+  LDA DiagonalSpeedLevel1, X
+  STA playerSpeedY
+  INC playerDiagonalSpeedIndex
 
 ContinueReactOnInputInGame:
   LDA playerDashing
@@ -40,12 +84,14 @@ ContinueReactOnInputInGame:
   STA playerCurrentSpeed
 
 CheckButtons:
-	LDA buttons
+  LDA buttons
   AND #BUTTON_LEFT
   BEQ :+
+	LDA playerSpeedX
+	STA $0534
     LDA playerLeft
     SEC
-    SBC playerCurrentSpeed
+    SBC playerSpeedX
     STA playerLeft
     CLC
     ADC #PLAYER_WIDTH
@@ -58,9 +104,11 @@ CheckButtons:
   LDA buttons
   AND #BUTTON_RIGHT
   BEQ :+
+    LDA playerSpeedX
+	STA $0535
     LDA playerLeft
     CLC
-    ADC playerCurrentSpeed
+    ADC playerSpeedX
     STA playerLeft
     CLC
     ADC #PLAYER_WIDTH
@@ -73,9 +121,11 @@ CheckButtons:
   LDA buttons
   AND #BUTTON_UP
   BEQ :+
+    LDA playerSpeedY
+	STA $0532
     LDA playerTop
     SEC
-    SBC playerCurrentSpeed
+    SBC playerSpeedY
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT
@@ -85,12 +135,14 @@ CheckButtons:
     STA playerNucleusTop
   :
 
-	LDA buttons
+  LDA buttons
   AND #BUTTON_DOWN
   BEQ :+
+    LDA playerSpeedY
+	STA $0533
     LDA playerTop
     CLC
-    ADC playerCurrentSpeed
+    ADC playerSpeedY
     STA playerTop
     CLC
     ADC #PLAYER_HEIGHT

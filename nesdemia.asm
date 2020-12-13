@@ -133,8 +133,12 @@
 .define attackBought $8c
 .define speedBought $8d
 .define shopConfirm $8e
-.define dbg1 $8f
-.define dbg2 $90
+.define playerDiagonalSpeedIndex $8f
+.define playerMovesDiagonally $90
+.define playerSpeedX $91
+.define playerSpeedY $92
+.define dbg1 $93
+.define dbg2 $94
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
