@@ -16,9 +16,9 @@
 2f playerBottom
 24 vLeftORTop
 25 vRightORBottom
-53 points
-05 emptyAttributes
-06 passwordArray
-08 backgroundLastLinesTmp
-| |
-7f creditsScroll
+532 U
+533 D
+534 L
+535 R
+91 X
+92 Y

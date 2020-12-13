@@ -124,3 +124,6 @@ AttackLevelDuration:
 
 SpeedLevel1:
   .byte $01, $01
+  
+DiagonalSpeedLevel1:
+  .byte $01, $00, $00, $01
