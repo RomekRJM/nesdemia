@@ -1,15 +1,9 @@
 ReactOnInputInGame:
+  DEC playerSpeed
+  
   LDA #$04
   STA playerNucleusLeft
   STA playerNucleusTop
-  
-  ; test code
-  LDA #$00
-  STA $0532
-  STA $0533
-  STA $0534
-  STA $0535
-  ; end test code
 
   LDA buttons
   CMP previousButtons
@@ -18,7 +12,6 @@ ReactOnInputInGame:
     STA playerSpeedIndex
 	STA playerDiagonalSpeedIndex
 	STA playerMovesDiagonally
-    ;JMP ContinueReactOnInputInGame
   :
   
   LDA buttons
@@ -33,13 +26,18 @@ ReactOnInputInGame:
 
 ContinueOnNonDiagonalMove:
   LDA playerSpeedIndex
-  BEQ :+
+  CMP #$04
+  BNE :+
     LDA #$ff
     STA playerSpeedIndex
   :
   INC playerSpeedIndex
-  LDX playerSpeedIndex
-  LDA SpeedLevel1, X
+  LDA playerSpeedIndex
+  LDX playerSpeed
+  CLC
+  ADC SpeedIndex, X
+  TAX
+  LDA SpeedLevel, X
   STA playerSpeedX
   STA playerSpeedY
   
@@ -47,18 +45,26 @@ ContinueOnNonDiagonalMove:
 
 GetDiagonalSpeeds:
   LDA playerDiagonalSpeedIndex
-  CMP #$04
+  CMP #$08
   BNE :+
     LDA #$00
 	STA playerDiagonalSpeedIndex
   :
-  LDX playerDiagonalSpeedIndex
-  LDA DiagonalSpeedLevel1, X
+  LDA playerDiagonalSpeedIndex
+  LDX playerSpeed
+  CLC
+  ADC DiagonalSpeedIndex, X
+  TAX
+  LDA DiagonalSpeedLevel, X
   STA playerSpeedX
   INC playerDiagonalSpeedIndex
   
-  LDX playerDiagonalSpeedIndex
-  LDA DiagonalSpeedLevel1, X
+  LDA playerDiagonalSpeedIndex
+  LDX playerSpeed
+  CLC
+  ADC DiagonalSpeedIndex, X
+  TAX
+  LDA DiagonalSpeedLevel, X
   STA playerSpeedY
   INC playerDiagonalSpeedIndex
 
@@ -66,7 +72,7 @@ ContinueReactOnInputInGame:
   LDA playerDashing
   BNE :+
     LDX playerSpeedIndex
-    LDA SpeedLevel1, X
+    LDA SpeedLevel, X
     STA playerCurrentSpeed
     JMP CheckButtons
   :
@@ -88,7 +94,6 @@ CheckButtons:
   AND #BUTTON_LEFT
   BEQ :+
 	LDA playerSpeedX
-	STA $0534
     LDA playerLeft
     SEC
     SBC playerSpeedX
@@ -105,7 +110,6 @@ CheckButtons:
   AND #BUTTON_RIGHT
   BEQ :+
     LDA playerSpeedX
-	STA $0535
     LDA playerLeft
     CLC
     ADC playerSpeedX
@@ -122,7 +126,6 @@ CheckButtons:
   AND #BUTTON_UP
   BEQ :+
     LDA playerSpeedY
-	STA $0532
     LDA playerTop
     SEC
     SBC playerSpeedY
@@ -139,7 +142,6 @@ CheckButtons:
   AND #BUTTON_DOWN
   BEQ :+
     LDA playerSpeedY
-	STA $0533
     LDA playerTop
     CLC
     ADC playerSpeedY
@@ -194,5 +196,7 @@ CheckButtons:
 
   LDA buttons
   STA previousButtons
+  
+  INC playerSpeed
 
   RTS
