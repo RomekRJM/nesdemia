@@ -50,8 +50,9 @@ STA levelNo
 LDA #$01
 STA playerLuck
 STA playerAttack
-STA playerSpeed
 STA playerCurrentSpeed
+LDA #$08
+STA playerSpeed
 
 ; test code !
 LDA #$c4

@@ -1,6 +1,6 @@
 36 luck
 37 attack
-38 speed
+3a speed
 69 points
 66 level
 87 attackBought
