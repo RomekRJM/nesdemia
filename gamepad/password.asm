@@ -65,6 +65,11 @@ ReactOnInputInPassword:
     BNE :+
     JSR LoadPassword
     LDA passwordValid
+    BNE HandleCorrectPassword
+    LDA #WRONG_LABEL_DURATION
+    STA displayWrongPassword
+HandleCorrectPassword:
+    LDA passwordValid
     BEQ :+
     LDA #PRE_LEVEL_MODE
     STA gameMode

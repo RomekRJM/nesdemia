@@ -134,7 +134,7 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$a6
+  LDA #$86
   STA partialUpdateMemory, Y
   INY
 
@@ -154,7 +154,7 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA #$26
+  LDA #$66
   STA partialUpdateMemory, Y
   INY
 
@@ -172,7 +172,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$a6
+    LDA #$86
     STA $01
 
     ; high byte of arrow down position
@@ -180,7 +180,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$26
+    LDA #$66
     STA $03
   :
 
@@ -192,7 +192,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$a9
+    LDA #$89
     STA $01
 
     ; high byte of arrow down position
@@ -200,7 +200,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$29
+    LDA #$69
     STA $03
   :
 
@@ -212,7 +212,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$ac
+    LDA #$8c
     STA $01
 
     ; high byte of arrow down position
@@ -220,7 +220,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$2c
+    LDA #$6c
     STA $03
   :
 
@@ -232,7 +232,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$af
+    LDA #$8f
     STA $01
 
     ; high byte of arrow down position
@@ -240,7 +240,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$2f
+    LDA #$6f
     STA $03
   :
 
@@ -252,7 +252,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$b2
+    LDA #$92
     STA $01
 
     ; high byte of arrow down position
@@ -260,7 +260,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$32
+    LDA #$72
     STA $03
   :
 
@@ -272,7 +272,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$b5
+    LDA #$95
     STA $01
 
     ; high byte of arrow down position
@@ -280,7 +280,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$35
+    LDA #$75
     STA $03
   :
 
@@ -292,7 +292,7 @@ RenderPartialPasswordBackground:
     STA $00
 
     ; low byte of arrow up position
-    LDA #$b8
+    LDA #$98
     STA $01
 
     ; high byte of arrow down position
@@ -300,7 +300,7 @@ RenderPartialPasswordBackground:
     STA $02
 
     ; low byte of arrow down position
-    LDA #$38
+    LDA #$78
     STA $03
   :
 
@@ -338,18 +338,19 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA passwordValid
-  BNE :+
+  LDA displayWrongPassword
+  BEQ :+
+    DEC displayWrongPassword
     ; Print WRONG
     LDA #$09
     STA partialUpdateMemory, Y
     INY
 
-    LDA $02
+    LDA #$22
     STA partialUpdateMemory, Y
     INY
 
-    LDA $b8
+    LDA #$ab
     STA partialUpdateMemory, Y
     INY
 
@@ -397,11 +398,11 @@ RenderPartialPasswordBackground:
   STA partialUpdateMemory, Y
   INY
 
-  LDA $02
+  LDA #$22
   STA partialUpdateMemory, Y
   INY
 
-  LDA $b8
+  LDA #$ab
   STA partialUpdateMemory, Y
   INY
 

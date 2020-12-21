@@ -18,7 +18,7 @@ RenderPasswordBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-  JSR LoadMenuAttributes
+  JSR LoadPasswordAttributes
 
   LDA #$00
   STA $2005

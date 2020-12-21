@@ -127,18 +127,19 @@
 .define passwordCurrentDigit $80
 .define passwordRendered $81
 .define passwordValid $82
-.define creditsScroll $83
-.define ppuHigh $84
-.define ppuLow $85
-.define passwordArray $86 ; 7
-.define shopRendered $8d
-.define currentShopItem $8e
-.define luckBought $8f
-.define attackBought $90
-.define speedBought $91
-.define shopConfirm $92
-.define dbg1 $93
-.define dbg2 $94
+.define displayWrongPassword $83
+.define creditsScroll $84
+.define ppuHigh $85
+.define ppuLow $86
+.define passwordArray $87 ; 7
+.define shopRendered $8e
+.define currentShopItem $8f
+.define luckBought $90
+.define attackBought $91
+.define speedBought $92
+.define shopConfirm $93
+.define dbg1 $94
+.define dbg2 $95
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -208,6 +209,7 @@ NO_COLLISSION = $00
 LUNG_HEALTHY_ATTRIBUTE = %10101010
 LUNG_SICK_ATTRIBUTE = %11111111
 ATTRIBUTE_COST_INCREASE = $02
+WRONG_LABEL_DURATION = $50
 
 WIN_ON_POINTS = $00
 WIN_ON_KILLS = $01
@@ -507,6 +509,8 @@ RenderMainMenu:
 .include "background/game_attributes.asm"
 
 .include "background/menu_attributes.asm"
+
+.include "background/password_attributes.asm"
 
 .include "actor/cursor.asm"
 
