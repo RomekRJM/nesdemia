@@ -1,6 +1,4 @@
 ReactOnInputInGame:
-  DEC playerSpeed
-  
   LDA #$04
   STA playerNucleusLeft
   STA playerNucleusTop
@@ -10,10 +8,30 @@ ReactOnInputInGame:
   BEQ :+
     LDA #$00
     STA playerSpeedIndex
-	STA playerDiagonalSpeedIndex
-	STA playerMovesDiagonally
+    STA playerDiagonalSpeedIndex
+    STA playerMovesDiagonally
   :
   
+  LDA playerDashing
+  BEQ CheckArrowsPressed
+
+  DEC playerDashing
+  LDA playerDashing
+  BNE :+
+    LDA playerCurrentSpeed
+    SEC
+    SBC #PLAYER_DASH_SPEED_INCREMENT
+    STA playerCurrentSpeed
+    
+    INC usedPowerups
+    LDX winCondition
+    CPX #WIN_ON_POWERUPS
+    BNE :+
+      JSR UpdateWinThreshold
+  :
+  
+  
+CheckArrowsPressed:  
   LDA buttons
   AND #%00000011
   BEQ ContinueOnNonDiagonalMove
@@ -33,7 +51,7 @@ ContinueOnNonDiagonalMove:
   :
   INC playerSpeedIndex
   LDA playerSpeedIndex
-  LDX playerSpeed
+  LDX playerCurrentSpeed
   CLC
   ADC SpeedIndex, X
   TAX
@@ -41,17 +59,17 @@ ContinueOnNonDiagonalMove:
   STA playerSpeedX
   STA playerSpeedY
   
-  JMP ContinueReactOnInputInGame
+  JMP CheckButtons
 
 GetDiagonalSpeeds:
   LDA playerDiagonalSpeedIndex
   CMP #$08
   BNE :+
     LDA #$00
-	STA playerDiagonalSpeedIndex
+    STA playerDiagonalSpeedIndex
   :
   LDA playerDiagonalSpeedIndex
-  LDX playerSpeed
+  LDX playerCurrentSpeed
   CLC
   ADC DiagonalSpeedIndex, X
   TAX
@@ -60,7 +78,7 @@ GetDiagonalSpeeds:
   INC playerDiagonalSpeedIndex
   
   LDA playerDiagonalSpeedIndex
-  LDX playerSpeed
+  LDX playerCurrentSpeed
   CLC
   ADC DiagonalSpeedIndex, X
   TAX
@@ -68,32 +86,11 @@ GetDiagonalSpeeds:
   STA playerSpeedY
   INC playerDiagonalSpeedIndex
 
-ContinueReactOnInputInGame:
-  LDA playerDashing
-  BNE :+
-    LDX playerSpeedIndex
-    LDA SpeedLevel, X
-    STA playerCurrentSpeed
-    JMP CheckButtons
-  :
-
-  DEC playerDashing
-  LDA playerDashing
-  BNE :+
-    INC usedPowerups
-    LDX winCondition
-    CPX #WIN_ON_POWERUPS
-    BNE :+
-      JSR UpdateWinThreshold
-  :
-  LDA #PLAYER_DASH_SPEED
-  STA playerCurrentSpeed
-
 CheckButtons:
   LDA buttons
   AND #BUTTON_LEFT
   BEQ :+
-	LDA playerSpeedX
+    LDA playerSpeedX
     LDA playerLeft
     SEC
     SBC playerSpeedX
@@ -104,7 +101,7 @@ CheckButtons:
 
     LDA #$01
     STA playerNucleusLeft
-	:
+    :
 
   LDA buttons
   AND #BUTTON_RIGHT
@@ -164,6 +161,11 @@ CheckButtons:
       LDA #PLAYER_DASHING_TIMEOUT
       STA playerDashing
       DEC playerDashCount
+      LDA playerCurrentSpeed
+      CLC
+      ADC #PLAYER_DASH_SPEED_INCREMENT
+      STA playerCurrentSpeed
+
   :
 
   LDA buttons
@@ -196,7 +198,5 @@ CheckButtons:
 
   LDA buttons
   STA previousButtons
-  
-  INC playerSpeed
 
   RTS

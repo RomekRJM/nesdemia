@@ -51,7 +51,6 @@ LDA #$01
 STA playerLuck
 STA playerAttack
 STA playerCurrentSpeed
-LDA #$08
 STA playerSpeed
 
 ; test code !
