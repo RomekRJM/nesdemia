@@ -105,12 +105,15 @@ EndCheckWinCondition:
 ; Time digit 1
 
 ; Time digit 0
-Level:
+Level:; no   type win  win1 win0 vir  svir puch ach  time ti1  ti0
+  .byte $1a, $00, $0a, $01, $00, $08, $01, $03, $01, $14, $02, $00  ; 26th level
+  .byte $0f, $00, $0a, $01, $00, $03, $03, $03, $01, $14, $02, $00  ; 6th level
   .byte $01, $00, $09, $00, $09, $01, $00, $03, $01, $3c, $06, $00  ; 1st level
   .byte $02, $01, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 2nd level
   .byte $03, $02, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 3rd level
   .byte $04, $03, $02, $00, $02, $02, $00, $03, $01, $3c, $06, $00  ; 4th level
   .byte $05, $04, $0a, $00, $04, $02, $00, $03, $01, $0a, $01, $00  ; 5th level
+  .byte $06, $02, $0a, $00, $04, $03, $03, $03, $01, $14, $02, $00  ; 6th level
 
 
 LuckLevelGivingDash:
