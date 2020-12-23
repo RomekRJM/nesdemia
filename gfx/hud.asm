@@ -35,8 +35,6 @@ RenderHUD:
   STA renderedNumber
   JSR RenderPoint
 
-  JSR RenderPowerupHUD
-
   RTS
 
 
@@ -95,46 +93,6 @@ LoadPointSprites:
   INY
   CPY #$04
   BNE LoadPointSprites
-  STX spriteCounter
-  RTS
-
-
-RenderPowerupHUD:
-  LDX spriteCounter
-  LDY #$00
-LoadAttackPowerupHUDLoop:
-  LDA PowerupAttackData, Y
-  CPY #$03
-  BNE :+
-    LDA #$08
-  :
-  CPY #$00
-  BNE :+
-    CLC
-    ADC #$08
-  :
-  STA $0200, X
-  INX
-  INY
-  CPY #$04
-  BNE LoadAttackPowerupHUDLoop
-  LDY #$00
-LoadDashPowerupHUDLoop:
-  LDA PowerupDashData, Y
-  CPY #$03
-  BNE :+
-    LDA #$2f
-  :
-  CPY #$00
-  BNE :+
-    CLC
-    ADC #$08
-  :
-  STA $0200, X
-  INX
-  INY
-  CPY #$04
-  BNE LoadDashPowerupHUDLoop
   STX spriteCounter
   RTS
 
