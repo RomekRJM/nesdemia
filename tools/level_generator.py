@@ -59,16 +59,17 @@ class Level:
 
     def __repr__(self):
         return '.byte ' + self.to_cc65_hex(self.level_no) + ', ' + self.to_cc65_hex(
-            self.win_condition) + ', ' + self.to_cc65_hex(self.win_threshold // 10) + ', ' + self.to_cc65_hex(
-            self.win_threshold % 10) + ', ' + self.to_cc65_hex(self.no_viruses) + ', ' + self.to_cc65_hex(
-            self.no_smart_viruses) + ', ' + self.to_cc65_hex(self.power_up_chance) + ', ' + self.to_cc65_hex(
-            self.attack_chance) + ', ' + self.to_cc65_hex(self.max_allowed_time) + ', ' + self.to_cc65_hex(
-            self.max_allowed_time % 10) + ', ' + self.to_cc65_hex(self.max_allowed_time) + ' ; level ' + str(
-            self.level_no)
+            self.win_condition) + ', ' + self.to_cc65_hex(self.win_threshold) + ', ' + self.to_cc65_hex(
+            self.win_threshold // 10) + ', ' + self.to_cc65_hex(self.win_threshold % 10) + ', ' + self.to_cc65_hex(
+            self.no_viruses) + ', ' + self.to_cc65_hex(self.no_smart_viruses) + ', ' + self.to_cc65_hex(
+            self.power_up_chance) + ', ' + self.to_cc65_hex(self.attack_chance) + ', ' + self.to_cc65_hex(
+            self.max_allowed_time) + ', ' + self.to_cc65_hex(self.max_allowed_time // 10) + ', ' + self.to_cc65_hex(
+            self.max_allowed_time % 10) + ' ; level ' + str(self.level_no)
 
 
 TUTORIAL_LEVELS = {
-    1: Level(1, WinCondition.POINTS, 5, 1, 1, 1, 1, 60)
+    1: Level(level_no=1, win_condition=WinCondition.POINTS, win_threshold=5, no_viruses=1, no_super_viruses=1,
+             power_up_chance=1, attack_chance=1, max_allowed_time=60)
 }
 
 
