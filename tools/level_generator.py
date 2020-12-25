@@ -3,6 +3,7 @@ from math import ceil, floor, log
 
 NO_LEVELS = 32
 MAX_LEVEL_DURATION = 60
+NO_POWER_UP = 31
 
 
 class WinCondition(Enum):
@@ -37,12 +38,14 @@ class Level:
             raise AttributeError('super_virus_chance not in range 0..8')
         self.no_smart_viruses = super_virus_chance
 
-        if power_up_chance not in range(8):
-            raise AttributeError('power_up_chance not in range 1..7')
+        if power_up_chance not in range(32):
+            raise AttributeError('power_up_chance not in range 0..31')
         self.power_up_chance = power_up_chance
 
-        if attack_chance not in range(8):
-            raise AttributeError('attack_chance not in range 1..7')
+        if attack_chance not in range(32):
+            raise AttributeError('attack_chance not in range 0..31')
+        if attack_chance < power_up_chance:
+            raise AttributeError('attack_chance should not be less than power_up_chance')
         self.attack_chance = attack_chance
 
         if max_allowed_time not in range(10, 256):
@@ -68,7 +71,15 @@ class Level:
 
 TUTORIAL_LEVELS = {
     1: Level(level_no=1, win_condition=WinCondition.POINTS, win_threshold=5, no_viruses=1, super_virus_chance=0,
-             power_up_chance=1, attack_chance=1, max_allowed_time=60)
+             power_up_chance=NO_POWER_UP, attack_chance=NO_POWER_UP, max_allowed_time=60),
+    2: Level(level_no=2, win_condition=WinCondition.USE_POWER_UP, win_threshold=3, no_viruses=2, super_virus_chance=0,
+             power_up_chance=16, attack_chance=NO_POWER_UP, max_allowed_time=40),
+    3: Level(level_no=3, win_condition=WinCondition.KILL_VIRUS, win_threshold=3, no_viruses=2, super_virus_chance=0,
+             power_up_chance=16, attack_chance=16, max_allowed_time=35),
+    4: Level(level_no=4, win_condition=WinCondition.SURVIVE, win_threshold=15, no_viruses=5, super_virus_chance=0,
+             power_up_chance=16, attack_chance=24, max_allowed_time=15),
+    5: Level(level_no=5, win_condition=WinCondition.KILL_SUPER_VIRUS, win_threshold=2, no_viruses=1, super_virus_chance=8,
+             power_up_chance=7, attack_chance=7, max_allowed_time=35),
 }
 
 
