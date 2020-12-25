@@ -1,5 +1,5 @@
 from enum import Enum
-from math import ceil, floor
+from math import ceil, floor, log
 
 NO_LEVELS = 32
 
@@ -14,7 +14,7 @@ class WinCondition(Enum):
 
 class Level:
     def __init__(self, level_no: int, win_condition: WinCondition, win_threshold: int, no_viruses: int,
-                 no_super_viruses: int, power_up_chance: int, attack_chance: int, max_allowed_time: int):
+                 super_virus_chance: int, power_up_chance: int, attack_chance: int, max_allowed_time: int):
 
         if level_no not in range(1, NO_LEVELS + 1):
             raise AttributeError('level_no not in range 1..32')
@@ -32,11 +32,9 @@ class Level:
             raise AttributeError('no_viruses not in range 0..11')
         self.no_viruses = no_viruses
 
-        if no_super_viruses > no_viruses:
-            raise AttributeError('no_smart_viruses should not be greater than no_viruses')
-        if no_super_viruses not in range(12):
-            raise AttributeError('no_smart_viruses not in range 0..11')
-        self.no_smart_viruses = no_super_viruses
+        if super_virus_chance not in range(9):
+            raise AttributeError('super_virus_chance not in range 0..8')
+        self.no_smart_viruses = super_virus_chance
 
         if power_up_chance not in range(8):
             raise AttributeError('power_up_chance not in range 1..7')
@@ -68,7 +66,7 @@ class Level:
 
 
 TUTORIAL_LEVELS = {
-    1: Level(level_no=1, win_condition=WinCondition.POINTS, win_threshold=5, no_viruses=1, no_super_viruses=1,
+    1: Level(level_no=1, win_condition=WinCondition.POINTS, win_threshold=5, no_viruses=1, super_virus_chance=0,
              power_up_chance=1, attack_chance=1, max_allowed_time=60)
 }
 
@@ -85,7 +83,7 @@ def new_level():
             power_up_chance = 8 - ceil(level_no / 8)
             attack_chance = ceil(power_up_chance / 2.5)
             no_viruses = min(ceil(level_no * (NO_LEVELS / 11)), 11)
-            no_super_viruses = no_viruses // 4
+            super_virus_chance = max(0, floor(1.8 * log(level_no, 4)) - 1)
 
             if condition == WinCondition.POINTS:
                 win_threshold = 5 + level_no // 4
@@ -100,7 +98,7 @@ def new_level():
             elif condition == WinCondition.SURVIVE:
                 win_threshold = max_allowed_time
 
-            yield Level(level_no, condition, win_threshold, no_viruses, no_super_viruses, power_up_chance,
+            yield Level(level_no, condition, win_threshold, no_viruses, super_virus_chance, power_up_chance,
                         attack_chance, max_allowed_time)
 
 
