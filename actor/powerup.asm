@@ -17,11 +17,25 @@ SpawnPowerup:
   DEC $01
   LDX $01
 
+  LDA LuckLevelGivingDash, X
+  STA $05
+  LDA powerupChance
+  BEQ :+
+    STA $05
+  :
+
+  LDA LuckLevelGivingAttack, X
+  STA $06
+  LDA attackChance
+  BEQ :+
+    STA $06
+  :
+
   JSR NextRandom5Bits
-  CMP LuckLevelGivingDash, X
+  CMP $05
   BCC EndOfPowerupSpawning ; aka don't spawn it
 
-  CMP LuckLevelGivingAttack, X
+  CMP $06
   BCC :+
     ; this powerup is attack
     LDY #POWERUP_ATTACK
