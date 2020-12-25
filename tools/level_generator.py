@@ -2,6 +2,7 @@ from enum import Enum
 from math import ceil, floor, log
 
 NO_LEVELS = 32
+MAX_LEVEL_DURATION = 60
 
 
 class WinCondition(Enum):
@@ -79,7 +80,7 @@ def new_level():
             win_condition = (level_no + 1) % len(WinCondition)
             condition = WinCondition(win_condition)
 
-            max_allowed_time = 100 - level_no * 2
+            max_allowed_time = ceil(MAX_LEVEL_DURATION - 0.04 * level_no * level_no) // 5 * 5
             power_up_chance = 8 - ceil(level_no / 8)
             attack_chance = ceil(power_up_chance / 2.5)
             no_viruses = min(ceil(level_no * (NO_LEVELS / 11)), 11)
@@ -96,6 +97,7 @@ def new_level():
             elif condition == WinCondition.USE_POWER_UP:
                 win_threshold = 2 ** floor(level_no / len(WinCondition))
             elif condition == WinCondition.SURVIVE:
+                max_allowed_time = MAX_LEVEL_DURATION - (ceil(0.75 * max_allowed_time) // 5 * 5)
                 win_threshold = max_allowed_time
 
             yield Level(level_no, condition, win_threshold, no_viruses, super_virus_chance, power_up_chance,
