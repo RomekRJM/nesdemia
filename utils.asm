@@ -279,7 +279,7 @@ InitVariables:
   STA playerDashing
   STA passwordValid
   STA creditsScroll
-  
+
   LDA playerSpeed
   SEC
   SBC #$01
@@ -389,7 +389,7 @@ ComputeCostOfUpgrading:
     RTS
   :
 
-  LDA #$01
+  LDA #$03
   :
     CLC
     ADC #ATTRIBUTE_COST_INCREASE
