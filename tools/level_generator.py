@@ -83,7 +83,7 @@ def new_level():
             max_allowed_time = ceil(MAX_LEVEL_DURATION - 0.04 * level_no * level_no) // 5 * 5
             power_up_chance = 8 - ceil(level_no / 8)
             attack_chance = ceil(power_up_chance / 2.5)
-            no_viruses = min(ceil(level_no * (NO_LEVELS / 11)), 11)
+            no_viruses = max(1, ceil(3.2 * log(level_no, 3)))
             super_virus_chance = max(0, floor(1.8 * log(level_no, 4)) - 1)
 
             if condition == WinCondition.POINTS:
