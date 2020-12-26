@@ -117,10 +117,21 @@ RenderPartialShopBackground:
 
   JSR RenderShopArrows
 
+  ; We will only be refreshing one cost at a time, as loading all
+  ; will note be possible in a single vblank
+  ; X - will contain the index of currently refreshed item
+  LDA frame
+  AND #%00000011
+  TAX
+  CPX #%00000011
+  BEQ ContinueShopRendering
+
+  STX $0b
   JSR ComputeCostOfUpgrading
   JSR Hex2Dec
 
-  LDA currentShopItem
+  LDX $0b
+  CPX #$00
   BNE :+
     LDA #$20
     STA $03
@@ -129,8 +140,7 @@ RenderPartialShopBackground:
     STA $04
   :
 
-  LDA currentShopItem
-  CMP #$01
+  CPX #$01
   BNE :+
     LDA #$21
     STA $03
@@ -139,8 +149,7 @@ RenderPartialShopBackground:
     STA $04
   :
 
-  LDA currentShopItem
-  CMP #$02
+  CPX #$02
   BNE :+
     LDA #$21
     STA $03
@@ -150,6 +159,8 @@ RenderPartialShopBackground:
   :
 
   JSR RenderCosts
+
+ContinueShopRendering:
   JSR RenderMoney
   JSR RenderConfirmDialog
 
