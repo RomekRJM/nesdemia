@@ -3,7 +3,7 @@ from math import ceil, floor, log
 
 NO_LEVELS = 32
 MAX_LEVEL_DURATION = 60
-NO_POWER_UP = 31
+NO_POWER_UP = 255
 
 
 class WinCondition(Enum):
@@ -38,14 +38,14 @@ class Level:
             raise AttributeError('super_virus_chance not in range 0..8')
         self.no_smart_viruses = super_virus_chance
 
-        if power_up_chance not in range(32):
-            raise AttributeError('power_up_chance not in range 0..31')
+        allowed_power_ups = list(range(32)) + [NO_POWER_UP]
+
+        if power_up_chance not in allowed_power_ups:
+            raise AttributeError('power_up_chance not in range 0..31, NO_POWER_UP')
         self.power_up_chance = power_up_chance
 
-        if attack_chance not in range(32):
-            raise AttributeError('attack_chance not in range 0..31')
-        if attack_chance < power_up_chance:
-            raise AttributeError('attack_chance should not be less than power_up_chance')
+        if attack_chance not in allowed_power_ups:
+            raise AttributeError('attack_chance not in range 0..31, NO_POWER_UP')
         self.attack_chance = attack_chance
 
         if max_allowed_time not in range(10, 256):
@@ -88,25 +88,27 @@ def new_level():
         if level_no in TUTORIAL_LEVELS:
             yield TUTORIAL_LEVELS[level_no]
         else:
-            win_condition = (level_no + 1) % len(WinCondition)
+            seed = level_no - len(TUTORIAL_LEVELS)
+            win_condition = (seed-1) % len(WinCondition)
             condition = WinCondition(win_condition)
 
-            max_allowed_time = ceil(MAX_LEVEL_DURATION - 0.04 * level_no * level_no) // 5 * 5
+            max_allowed_time = ceil(MAX_LEVEL_DURATION - 0.04 * seed * seed) // 5 * 5
             power_up_chance = 0
             attack_chance = 0
-            no_viruses = max(1, ceil(3.2 * log(level_no, 3)))
-            super_virus_chance = max(0, floor(1.8 * log(level_no, 4)) - 1)
+            no_viruses = max(1, ceil(3.2 * log(seed, 3)))
+            super_virus_chance = max(0, floor(1.8 * log(seed, 4)) - 1)
 
             if condition == WinCondition.POINTS:
-                win_threshold = 5 + level_no // 4
+                win_threshold = 5 + seed // 4
             elif condition == WinCondition.USE_POWER_UP:
-                win_threshold = level_no // 2
+                win_threshold = seed // 2
             elif condition == WinCondition.KILL_VIRUS:
-                win_threshold = ceil(level_no / len(WinCondition)) * 5
+                win_threshold = ceil(seed / len(WinCondition)) * 5
             elif condition == WinCondition.KILL_SUPER_VIRUS:
-                win_threshold = ceil(level_no / len(WinCondition)) * 3
+                win_threshold = ceil(seed / len(WinCondition)) * 3
+                super_virus_chance = max(1, super_virus_chance)
             elif condition == WinCondition.USE_POWER_UP:
-                win_threshold = 2 ** floor(level_no / len(WinCondition))
+                win_threshold = 2 ** floor(seed / len(WinCondition))
             elif condition == WinCondition.SURVIVE:
                 max_allowed_time = MAX_LEVEL_DURATION - (ceil(0.75 * max_allowed_time) // 5 * 5)
                 win_threshold = max_allowed_time
