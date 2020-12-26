@@ -42,7 +42,7 @@ RenderPreLevelNo:
 
   LDA $01
   BEQ :+
-    LDA $00
+    LDA $01
     STA partialUpdateMemory, X
     INX
   :
