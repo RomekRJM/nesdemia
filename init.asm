@@ -54,7 +54,7 @@ STA playerCurrentSpeed
 STA playerSpeed
 
 ; test code !
-LDA #$c4
+LDA #$00
 STA points
 
 LDA #MAIN_MENU_MODE
