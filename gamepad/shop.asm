@@ -74,6 +74,7 @@ EndReactOnInputInShop:
 
 
 IncreaseBoughUnits:
+  LDX currentShopItem
   JSR ComputeCostOfUpgrading
   STA $00
   LDA points

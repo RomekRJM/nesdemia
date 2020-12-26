@@ -374,10 +374,9 @@ Hex2DecOnes:
   STA $02
   RTS
 
-
+; Requires X set to shop item number
 ; Returns cost of buing next item in A
 ComputeCostOfUpgrading:
-  LDX currentShopItem
   LDA playerLuck, X
   CLC
   ADC luckBought, X
