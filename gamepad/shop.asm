@@ -136,4 +136,13 @@ ConfirmOrder:
     CPX #$03
     BNE :-
 
+  LDA points
+  JSR Hex2Dec
+  LDA $00
+  STA pointIndex2
+  LDA $01
+  STA pointIndex1
+  LDA $02
+  STA pointIndex0
+
   RTS
