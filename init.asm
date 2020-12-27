@@ -53,6 +53,9 @@ STA playerAttack
 STA playerCurrentSpeed
 STA playerSpeed
 
+LDA #$02
+STA playerLives
+
 ; test code !
 LDA #$00
 STA points

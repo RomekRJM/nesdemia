@@ -279,6 +279,8 @@ InitVariables:
   STA playerDashing
   STA passwordValid
   STA creditsScroll
+  STA resetCounter
+  STA roundWonCounter
 
   LDA playerSpeed
   SEC
@@ -288,9 +290,6 @@ InitVariables:
   LDA #$01
   STA nmiTimer
   STA refreshBackground
-
-  LDA #$c0
-  STA resetCounter
 
   LDA #$80
   STA playerTop

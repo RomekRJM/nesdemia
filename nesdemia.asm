@@ -64,82 +64,85 @@
 .define playerAnimationFrame $42
 .define playerAnimationChangeFrame $43
 .define playerAttacks $44
-.define health $45
-.define healthUpdated $46
-.define initReset $47
-.define initNextLevel $48
-.define resetCounter $49
-.define powerupLeft $4a
-.define powerupTop $4b
-.define powerupRight $4c
-.define powerupBottom $4d
-.define powerupLifeTime $4e
-.define powerupType $4f
-.define powerupActive $50
-.define dashIndex0 $51
-.define dashIndex1 $52
-.define gameMode $53
-.define previousGameMode $54
-.define refreshBackground $55
-.define refreshPalette $56
-.define menuCursorTop $57
-.define menuOption $58
-.define gameEndRendered $59
-.define gameRendered $5a
-.define creditsRendered $5b
-.define mainMenuRendered $5c
-.define preLevelRendered $5d
-.define virusLeft $5e
-.define virusTop $5f
-.define virusRight $60
-.define virusBottom $61
-.define virusXSpeed $62
-.define virusYSpeed $63
-.define virusXDirection $64
-.define virusYDirection $65
-.define virusAlive $66
-.define virusMoveFrame $67
-.define virusAnimationFrame $68
-.define virusAnimationChangeFrame $69
-.define virusSmart $6a
-.define virusCntr $6b
-.define virusPointer $6c
+.define playerLives $45
+.define health $46
+.define healthUpdated $47
+.define initReset $48
+.define initNextLevel $49
+.define resetCounter $4a
+.define roundWonCounter $4b
+.define powerupLeft $4c
+.define powerupTop $4d
+.define powerupRight $4e
+.define powerupBottom $4f
+.define powerupLifeTime $50
+.define powerupType $51
+.define powerupActive $52
+.define dashIndex0 $53
+.define dashIndex1 $54
+.define gameMode $55
+.define previousGameMode $56
+.define refreshBackground $57
+.define refreshPalette $58
+.define menuCursorTop $59
+.define menuOption $5a
+.define gameEndRendered $5b
+.define gameRendered $5c
+.define creditsRendered $5d
+.define mainMenuRendered $5e
+.define preLevelRendered $5f
+.define virusLeft $60
+.define virusTop $61
+.define virusRight $62
+.define virusBottom $63
+.define virusXSpeed $64
+.define virusYSpeed $65
+.define virusXDirection $66
+.define virusYDirection $67
+.define virusAlive $68
+.define virusMoveFrame $69
+.define virusAnimationFrame $6a
+.define virusAnimationChangeFrame $6b
+.define virusSmart $6c
+.define virusCntr $6d
+.define virusPointer $6e
 ; level specific
-.define levelNo $6d
-.define winCondition $6e
-.define winThreshold $6f
-.define points $70
-.define kills $71
-.define smartKills $72
-.define usedPowerups $73
-.define timeLimit $74
-.define noViruses $75
-.define smartVirusChance $76
-.define powerupChance $77
-.define attackChance $78
-.define LastLinesTextLo $79
-.define LastLinesTextHi $7a
-.define winThresholdDigit1 $7b
-.define winThresholdDigit0 $7c
-.define timeDigit1 $7d
-.define timeDigit0 $7e
-.define countdownTimer $7f
-.define passwordCurrentDigit $80
-.define passwordRendered $81
-.define passwordValid $82
-.define displayWrongPassword $83
-.define creditsScroll $84
-.define ppuHigh $85
-.define ppuLow $86
-.define passwordArray $87 ; 7
-.define shopRendered $8e
-.define currentShopItem $8f
-.define luckBought $90
-.define attackBought $91
-.define speedBought $92
-.define shopConfirm $93
-.define dbg1 $94
-.define dbg2 $95
+.define levelNo $6f
+.define winCondition $70
+.define winThreshold $71
+.define points $72
+.define kills $73
+.define smartKills $74
+.define usedPowerups $75
+.define timeLimit $76
+.define noViruses $77
+.define smartVirusChance $78
+.define powerupChance $79
+.define attackChance $7a
+.define LastLinesTextLo $7b
+.define LastLinesTextHi $7c
+.define winThresholdDigit1 $7d
+.define winThresholdDigit0 $7e
+.define timeDigit1 $7f
+.define timeDigit0 $80
+.define countdownTimer $81
+.define passwordCurrentDigit $82
+.define passwordRendered $83
+.define passwordValid $84
+.define displayWrongPassword $85
+.define creditsScroll $86
+.define ppuHigh $87
+.define ppuLow $88
+.define passwordArray $89 ; 7
+.define shopRendered $90
+.define currentShopItem $91
+.define luckBought $92
+.define attackBought $93
+.define speedBought $94
+.define shopConfirm $95
+.define gameModeAfterReset $96
+.define dbg1 $97
+.define dbg2 $98
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -335,15 +338,40 @@ WaitForNmiLoop:
 ResetIfNeeded:
   LDA initReset
   BEQ :+
+    LDA #$00
+    STA initReset
+    DEC resetCounter
+    LDA #GAME_OVER_MODE
+    STA gameModeAfterReset
+    DEC playerLives
+    LDA playerLives
+    CMP #$ff
+    BEQ :+
+      LDA #PRE_LEVEL_MODE
+      STA gameModeAfterReset
+  :
+
+  LDA resetCounter
+  BEQ :+
     DEC resetCounter
     LDA resetCounter
     CMP #$A0
-    BNE :+
-      LDA #GAME_OVER_MODE
-      STA gameMode
-    :
+    BNE CheckIfTimeForReset
+
+    LDA gameModeAfterReset
+    STA gameMode
+    CMP #GAME_OVER_MODE
+    BEQ :+
+    DEC levelNo
+    LDA #$00
+    STA resetCounter
+
+CheckIfTimeForReset:
     LDA resetCounter
     BNE :+
+      LDA gameMode
+      CMP #GAME_OVER_MODE
+      BNE :+
       JMP ($FFFC)
   :
 
@@ -352,8 +380,8 @@ ResetIfNeeded:
 NextLevelIfNeeded:
   LDA initNextLevel
   BEQ EndNextLevelIfNeeded
-  DEC resetCounter
-  LDA resetCounter
+  DEC roundWonCounter
+  LDA roundWonCounter
   CMP #$A0
   BNE EndNextLevelIfNeeded
 
