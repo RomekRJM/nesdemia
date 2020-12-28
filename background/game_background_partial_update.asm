@@ -1,6 +1,8 @@
 RenderPartialGameBackground:
   LDY #$00
 
+  JSR RenderLives
+
   LDA winCondition
   CMP #WIN_BY_SURVIVING
   BEQ ContinueRenderPartialGameBackground
@@ -120,5 +122,31 @@ UpdateLungsBackground:
   STA partialUpdateMemory, Y
   INY
   .endrepeat
+
+  RTS
+
+
+RenderLives:
+  LDA #$01
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$20
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$37
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA playerLives
+  CLC
+  ADC #$3c
+  CMP #$3c
+  BCS :+
+    LDA #$3c
+  :
+  STA partialUpdateMemory, Y
+  INY
 
   RTS

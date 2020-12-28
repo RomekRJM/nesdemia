@@ -7,6 +7,8 @@ RenderPartialPreLevelBackground:
 
   JSR RenderPreLevelDescription
 
+  JSR RenderPreLevelLives
+
   LDA #$00
   STA partialUpdateMemory, X
 
@@ -196,6 +198,32 @@ WriteWinThresholdLoop:
     STA partialUpdateMemory, X
     INX
   :
+
+  LDA $02
+  STA partialUpdateMemory, X
+  INX
+
+  RTS
+
+RenderPreLevelLives:
+  TXA
+  PHA
+  LDA playerLives
+  JSR Hex2Dec
+  PLA
+  TAX
+
+  LDA #$01
+  STA partialUpdateMemory, X
+  INX
+
+  LDA #$22
+  STA partialUpdateMemory, X
+  INX
+
+  LDA #$d0
+  STA partialUpdateMemory, X
+  INX
 
   LDA $02
   STA partialUpdateMemory, X
