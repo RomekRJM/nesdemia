@@ -101,6 +101,9 @@ EndRenderPartialGameBackground:
   STA partialUpdateMemory, Y
   INY
 
+  LDA #$01
+  STA refreshBackground
+
   RTS
 
 
