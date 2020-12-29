@@ -141,8 +141,9 @@
 .define speedBought $94
 .define shopConfirm $95
 .define gameModeAfterReset $96
-.define dbg1 $97
-.define dbg2 $98
+.define fistAnimator $97
+.define dbg1 $98
+.define dbg2 $99
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -205,7 +206,7 @@ IN_GAME_MODE = $08
 INIT_GAME_MODE = $ff
 
 LAST_LEVEL = $20
-
+FIST_ANIMATOR_LENGTH = $08
 COLLISSION = $01
 NO_COLLISSION = $00
 

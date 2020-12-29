@@ -185,3 +185,9 @@ SpeedIndex:
 
 DiagonalSpeedIndex:
   .byte $00, $08, $10, $18, $20, $28, $30, $38, $40, $48, $50, $58, $60, $68
+
+FistAnimatorX:
+  .byte $01, $03, $05, $08, $0a, $08, $05, $03
+
+FistAnimatorY:
+  .byte $00, $08, $10, $18, $20, $28, $30, $38
