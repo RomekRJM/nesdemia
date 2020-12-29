@@ -18,7 +18,7 @@ RenderCreditsBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-  JSR LoadMenuAttributes
+  JSR LoadTextAreaAttributes
 
   LDA #$28
   STA ppuHigh
@@ -35,7 +35,7 @@ RenderCreditsBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-  JSR LoadMenuAttributes
+  JSR LoadTextAreaAttributes
 
   LDA #$00
   STA $2005

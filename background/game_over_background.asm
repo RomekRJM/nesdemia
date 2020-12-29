@@ -18,7 +18,7 @@ RenderGameOverBackground:
   STA backgroundLLPointerHi
 
   JSR RenderBackground
-  JSR LoadMenuAttributes
+  JSR LoadTextAreaAttributes
 
   LDA #$00
   STA $2005

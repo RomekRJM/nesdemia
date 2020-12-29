@@ -233,9 +233,12 @@ MainGameLoop:
   LDA gameMode
   CMP #MAIN_MENU_MODE
   BNE :+
+    LDA #$00
+    STA spriteCounter
     JSR ReactOnInputInMenu
     JSR RenderMainMenu
     JSR RenderCursor
+    JSR RenderLogo
     JSR AdjustGameMode
     JMP ContinueMainGameLoop
   :
@@ -329,7 +332,7 @@ CheckCollisions:
   RTS
 
 WaitForNmi:
-  LDA nmiTimer			;vblank wait
+  LDA nmiTimer    ;vblank wait
 WaitForNmiLoop:
   CMP nmiTimer
   BEQ WaitForNmiLoop
@@ -502,7 +505,7 @@ RenderMainMenu:
   LDA mainMenuRendered
 
   BNE :+
-    .include "background/menu_background.asm"
+    .include "background/main_menu_background.asm"
     INC mainMenuRendered
   :
 
@@ -536,7 +539,9 @@ RenderMainMenu:
 
 .include "background/game_attributes.asm"
 
-.include "background/menu_attributes.asm"
+.include "background/text_area_attributes.asm"
+
+.include "background/main_menu_attributes.asm"
 
 .include "background/password_attributes.asm"
 
@@ -559,6 +564,8 @@ RenderMainMenu:
 .include "actor/pill.asm"
 
 .include "actor/powerup.asm"
+
+.include "actor/logo.asm"
 
 .include "utils.asm"
 

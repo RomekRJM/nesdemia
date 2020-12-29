@@ -1,7 +1,8 @@
 RenderCursor:
-  LDX #$00
+  LDX spriteCounter
+  LDY #$00
 LoadCursorSprite:
-  LDA MainMenuCursor, X
+  LDA MainMenuCursor, Y
   CPX #$00
   BNE :+
     CLC
@@ -9,8 +10,10 @@ LoadCursorSprite:
   :
 
   STA $0200, X
+  INY
   INX
-  CPX #$04
+  CPY #$04
   BNE LoadCursorSprite
+  STX spriteCounter
 
   RTS
