@@ -1,5 +1,6 @@
 InGamePaletteData:
   .byte $1A,$29,$1A,$0F, $05,$07,$17,$0F, $22,$36,$17,$0F, $22,$37,$1E,$0F  ;background palette
+  ;     Nucleus/pu/svir  Player cell      Virus            HUD numbers
   .byte $1c,$12,$10,$30, $02,$18,$27,$17, $3c,$3d,$05,$17, $22,$37,$1c,$17  ;sprite palette data
 
 MenuPaletteData:
