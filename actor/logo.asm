@@ -1,12 +1,13 @@
 RenderLogo:
-  JSR LoadFistSprite
-  JSR LoadFistWithVaccineSprite
-  
   LDA frame
-  AND #%0011111
-  BNE :+
+  AND #%00000011
+  CMP #%00000011
+  BEQ :+
     RTS
   :
+
+  JSR RenderFistSprite
+  JSR RenderFistWithVaccineSprite
 
   INC fistAnimator
   LDA fistAnimator
@@ -15,21 +16,62 @@ RenderLogo:
     LDA #$00
     STA fistAnimator
   :
-  
+
   RTS
 
 
-LoadFistSprite:
+RenderFistSprite:
   LDX fistAnimator
   LDA FistAnimatorX, X
   STA $01
+  LDA FistAnimatorY, X
+  STA $03
+  LDA #.LOBYTE(Fist)
+  STA $08
+  LDA #.HIBYTE(Fist)
+  STA $09
+  LDA #$24
+  STA $0a
+
+  JSR AnimateCircleMovement
+
+  RTS
+
+
+RenderFistWithVaccineSprite:
+  LDX fistAnimator
+  LDA FistWithVaccineAnimatorX, X
+  STA $01
+  LDA FistWithVaccineAnimatorY, X
+  STA $03
+  LDA #.LOBYTE(FistWithVaccine)
+  STA $08
+  LDA #.HIBYTE(FistWithVaccine)
+  STA $09
+  LDA #$54
+  STA $0a
+
+  JSR AnimateCircleMovement
+
+  RTS
+
+
+AnimateCircleMovement:
   LDX spriteCounter
   LDY #$00
   STY $00
 LoadFistSpriteLoop:
-  LDA Fist, Y
+  LDA ($08), Y
   STA $02
   LDA $00
+  BNE :+
+    LDA $02
+    CLC
+    ADC $03
+    STA $02
+  :
+  LDA $00
+  CMP #$03
   BNE :+
     LDA $02
     CLC
@@ -48,23 +90,8 @@ LoadFistSpriteLoop:
   :
   INY
   INX
-  CPY #$24
+  CPY $0a
   BNE LoadFistSpriteLoop
   STX spriteCounter
-  
-  RTS
 
-LoadFistWithVaccineSprite:
-  LDX spriteCounter
-  LDY #$00
-LoadFistWithVaccineSpriteLoop:
-  LDA FistWithVaccine, Y
-
-  STA $0200, X
-  INY
-  INX
-  CPY #$54
-  BNE LoadFistWithVaccineSpriteLoop
-  STX spriteCounter
-  
   RTS

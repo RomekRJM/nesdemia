@@ -1,4 +1,3 @@
-7b LastLinesTextLo
 7c LastLinesTextHi
 7d winThresholdDigit1
 7e winThresholdDigit0
@@ -20,5 +19,6 @@
 94 speedBought
 95 shopConfirm
 96 gameModeAfterReset
-97 dbg1
-98 dbg2
+97 fistAnimator
+98 dbg1
+99 dbg2
