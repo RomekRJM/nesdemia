@@ -1,22 +1,4 @@
 RenderHUD:
-  LDA #$00
-  STA renderedNumberOffset
-  LDA pointIndex0
-  STA renderedNumber
-  JSR RenderPoint
-
-  LDA #$09
-  STA renderedNumberOffset
-  LDA pointIndex1
-  STA renderedNumber
-  JSR RenderPoint
-
-  LDA #$12
-  STA renderedNumberOffset
-  LDA pointIndex2
-  STA renderedNumber
-  JSR RenderPoint
-
   LDA #$df
   STA renderedNumberOffset
   LDA playerAttacks

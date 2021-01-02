@@ -16,8 +16,8 @@
 2f playerBottom
 24 vLeftORTop
 25 vRightORBottom
-532 U
-533 D
+72 points
+73 preLevelPoints
 534 L
 535 R
 91 X
