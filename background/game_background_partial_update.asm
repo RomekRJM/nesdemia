@@ -145,10 +145,10 @@ RenderLives:
 
   LDA playerLives
   CLC
-  ADC #$3c
-  CMP #$3c
+  ADC #$46
+  CMP #$46
   BCS :+
-    LDA #$3c
+    LDA #$46
   :
   STA partialUpdateMemory, Y
   INY
@@ -176,8 +176,7 @@ RenderPoints:
   :
     LDA $00, X
     CLC
-    ADC #$3c
-    CMP #$3c
+    ADC #$46
     STA partialUpdateMemory, Y
     INY
     INX
