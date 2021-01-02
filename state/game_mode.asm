@@ -26,6 +26,8 @@ AdjustGameMode:
     LDA gameMode
     CMP #PRE_LEVEL_MODE
     BNE :+
+      LDA preLevelPoints
+      STA points
       INC levelNo
       JSR LoadLevel
       JSR InitVariables

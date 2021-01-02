@@ -72,6 +72,8 @@ RoundWon:
   STA gameMode
   LDA #$01
   STA initNextLevel
+  LDA points
+  STA preLevelPoints
 
 EndCheckWinCondition:
   RTS

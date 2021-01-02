@@ -2,6 +2,7 @@ RenderPartialGameBackground:
   LDY #$00
 
   JSR RenderLives
+  JSR RenderPoints
 
   LDA winCondition
   CMP #WIN_BY_SURVIVING
@@ -151,5 +152,36 @@ RenderLives:
   :
   STA partialUpdateMemory, Y
   INY
+
+  RTS
+
+
+RenderPoints:
+  LDA #$03
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA points
+  JSR Hex2Dec
+
+  LDA #$20
+  STA partialUpdateMemory, Y
+  INY
+
+  LDA #$3a
+  STA partialUpdateMemory, Y
+  INY
+
+  LDX #$00
+  :
+    LDA $00, X
+    CLC
+    ADC #$3c
+    CMP #$3c
+    STA partialUpdateMemory, Y
+    INY
+    INX
+    CPX #$03
+    BCC :-
 
   RTS
