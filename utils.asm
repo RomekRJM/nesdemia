@@ -236,6 +236,8 @@ LoadPassword:
   INC playerAttack
   INC levelNo
   INC points
+  LDA points
+  STA preLevelPoints
 
   JSR ComputeControlSum
 

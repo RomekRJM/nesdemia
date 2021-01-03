@@ -138,6 +138,7 @@ ConfirmOrder:
     BNE :-
 
   LDA points
+  STA preLevelPoints
   JSR Hex2Dec
   LDA $00
   STA pointIndex2
