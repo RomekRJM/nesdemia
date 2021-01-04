@@ -18,6 +18,7 @@ AdjustGameMode:
     CMP #IN_GAME_MODE
     BEQ :+
       JSR LoadMenuPalettes
+      JSR ClearViruses
   :
 
   LDA previousGameMode
@@ -74,5 +75,17 @@ ClearGfxLoop:
   STA partialUpdateMemory, X
   INX
   BNE ClearGfxLoop
+
+  RTS
+
+ClearViruses:
+  LDA #$00
+  TAX
+
+  :
+    STA $0100, X
+    INX
+    CPX #$a0
+    BCC :-
 
   RTS
