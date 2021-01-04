@@ -1,10 +1,31 @@
-# nesdemia
-Using #stayathome as an opportunity to write retro NES game about battling pandemic.
+# Immunatio
+Using #stayathome as an opportunity to write a retro NES game about battling pandemic.
 
 <img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/scr02.png" width="400px" height="340px">
 
 
 ## Version history
+
+**0.4 - 04.01.2021**
+
+Enhancements
+* Game now has 32 levels, most of them are procedurally generated.
+* Added animated main menu graphics by RetHunter.
+* Better lung and powerups graphics by RetHunter.
+* Added more contributors to the credits.
+
+Balance
+* Player now has 3 lives.
+* New round no longer starts where the old one finished.
+* Increased attributes prices in the shop.
+
+Bug fixes
+* Fixed level counter.
+* Prices are now always correct on the newly displayed shop screen.
+* Header HUD icons don't display when the player is at the top of the screen.
+* Fixed artefact when displaying "WRONG" on password screen.
+
+
 
 **0.3 - 21.12.2020**
 
@@ -18,7 +39,7 @@ Bug fixes
 * Improved collisions with power ups.
 * Pre level screen correctly displays level number.
 * Fixed collision detection with virus when player does not move.
-* Music does not stop anymore, when new level is loaded.
+* Music does not stop anymore, when a new level is loaded.
 * Credits does not include main menu options when opened multiple times in a row.
 * Improved display area on real TVs.
 * Fixed load game functionality.

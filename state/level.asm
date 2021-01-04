@@ -107,7 +107,7 @@ EndCheckWinCondition:
 ; Time digit 1
 
 ; Time digit 0
-Level:; no   type win  win1 win0 vir  svir puch ach  time ti1  ti0
+Level:; no type win  win1 win0 vir  svir puch ach  time ti1  ti0
 .byte $01, $00, $05, $00, $05, $01, $00, $ff, $ff, $3c, $06, $00 ; level 1
 .byte $02, $03, $03, $00, $03, $02, $00, $10, $ff, $28, $04, $00 ; level 2
 .byte $03, $01, $03, $00, $03, $02, $00, $10, $10, $23, $03, $05 ; level 3
