@@ -1,6 +1,19 @@
+; reads joypad in DPCM safety mode
+GetControllerInput:
+  JSR ReadJoypad
+GetAgain:
+  LDA buttons
+  PHA
+  JSR ReadJoypad
+  PLA
+  CMP buttons
+  BNE GetAgain
+  RTS
+  
+
 ; At the same time that we strobe bit 0, we initialize the ring counter
 ; so we're hitting two birds with one stone here
-GetControllerInput:
+ReadJoypad:
   LDA #$01
   ; While the strobe bit is set, buttons will be continuously reloaded.
   ; This means that reading from JOYPAD1 will only return the state of the
@@ -11,9 +24,9 @@ GetControllerInput:
   ; By storing 0 into JOYPAD1, the strobe bit is cleared and the reloading stops.
   ; This allows all 8 buttons (newly reloaded) to be read from JOYPAD1.
   STA JOYPAD1
-GetControllerInputLoop:
+ReadJoypadLoop:
   LDA JOYPAD1
   LSR A	       ; bit 0 -> Carry
   ROL buttons  ; Carry -> bit 0; bit 7 -> Carry
-  BCC GetControllerInputLoop
+  BCC ReadJoypadLoop
   RTS
