@@ -1,49 +1,69 @@
 LoadLevel:
+  LDY levelNo
+  CPY #$10
+  BCS :+
+    LDA #.LOBYTE(Level1_16)
+    STA $04
+    LDA #.HIBYTE(Level1_16)
+    STA $05
+    JMP ContinueLoadLevel
+  :
+
+  LDA #.LOBYTE(Level17_32)
+  STA $04
+  LDA #.HIBYTE(Level17_32)
+  STA $05
+
+  TYA
+  SEC
+  SBC #$10
+  TAY
+
+ContinueLoadLevel:
   LDA #$00
-  LDX levelNo
 LoadLevelOffset:
-  DEX
+  DEY
   BEQ LoadLevelVariables
   CLC
   ADC #$0c ; number of level variables
   JMP LoadLevelOffset
 
 LoadLevelVariables:
-  TAX
-  LDA Level, X
+  TAY
+  LDA ($04), Y
   STA levelNo
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA winCondition
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA winThreshold
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA winThresholdDigit1
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA winThresholdDigit0
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA noViruses
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA smartVirusChance
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA powerupChance
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA attackChance
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA timeLimit
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA timeDigit1
-  INX
-  LDA Level, X
+  INY
+  LDA ($04), Y
   STA timeDigit0
 
   RTS
@@ -107,7 +127,7 @@ EndCheckWinCondition:
 ; Time digit 1
 
 ; Time digit 0
-Level:; no type win  win1 win0 vir  svir puch ach  time ti1  ti0
+Level1_16:; no type win  win1 win0 vir  svir puch ach  time ti1  ti0
 .byte $01, $00, $05, $00, $05, $01, $00, $ff, $ff, $3c, $06, $00 ; level 1
 .byte $02, $03, $03, $00, $03, $02, $00, $10, $ff, $28, $04, $00 ; level 2
 .byte $03, $01, $03, $00, $03, $02, $00, $10, $10, $23, $03, $05 ; level 3
@@ -124,6 +144,8 @@ Level:; no type win  win1 win0 vir  svir puch ach  time ti1  ti0
 .byte $0e, $03, $04, $00, $04, $07, $01, $00, $00, $37, $05, $05 ; level 14
 .byte $0f, $04, $14, $02, $00, $07, $01, $00, $00, $14, $02, $00 ; level 15
 .byte $10, $00, $07, $00, $07, $07, $02, $00, $00, $37, $05, $05 ; level 16
+
+Level17_32:
 .byte $11, $01, $0f, $01, $05, $08, $02, $00, $00, $37, $05, $05 ; level 17
 .byte $12, $02, $09, $00, $09, $08, $02, $00, $00, $32, $05, $00 ; level 18
 .byte $13, $03, $07, $00, $07, $08, $02, $00, $00, $32, $05, $00 ; level 19
@@ -140,6 +162,7 @@ Level:; no type win  win1 win0 vir  svir puch ach  time ti1  ti0
 .byte $1e, $04, $23, $03, $05, $0a, $03, $00, $00, $23, $03, $05 ; level 30
 .byte $1f, $00, $0b, $01, $01, $0a, $03, $00, $00, $1e, $03, $00 ; level 31
 .byte $20, $01, $1e, $03, $00, $0a, $03, $00, $00, $1e, $03, $00 ; level 32
+; .byte $20, $00, $05, $00, $05, $01, $00, $ff, $ff, $3c, $06, $00
 
 LuckLevelGivingDash:
   .byte $16, $14, $12, $10, $0e, $0c, $0a, $08

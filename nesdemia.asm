@@ -346,8 +346,15 @@ ResetIfNeeded:
     LDA #$00
     STA initReset
     DEC resetCounter
+
+    LDA gameMode
+    STA gameModeAfterReset
+    CMP #GAME_COMPLETED_MODE
+    BEQ :+
+
     LDA #GAME_OVER_MODE
     STA gameModeAfterReset
+
     DEC playerLives
     LDA playerLives
     CMP #$ff
@@ -365,18 +372,21 @@ ResetIfNeeded:
 
     LDA gameModeAfterReset
     STA gameMode
-    CMP #GAME_OVER_MODE
+
+    JSR GameModeRequiresReset
     BEQ :+
+
     DEC levelNo
     LDA #$00
     STA resetCounter
+  :
 
 CheckIfTimeForReset:
     LDA resetCounter
     BNE :+
-      LDA gameMode
-      CMP #GAME_OVER_MODE
+      JSR GameModeRequiresReset
       BNE :+
+
       JMP ($FFFC)
   :
 

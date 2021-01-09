@@ -431,3 +431,23 @@ PlayNewTrack:
   STX sound_param_byte_0
   JSR play_song
   RTS
+
+
+; Returns 0 for game over and game completed or 1 otherwise
+GameModeRequiresReset:
+  LDA gameMode
+  CMP #GAME_OVER_MODE
+  BNE :+
+    LDA #$00
+    RTS
+  :
+
+  LDA gameMode
+  CMP #GAME_COMPLETED_MODE
+  BNE :+
+    LDA #$00
+    RTS
+  :
+
+  LDA #$01
+  RTS
