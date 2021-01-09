@@ -92,13 +92,13 @@ JSR ChangeMusicTrack
 LDA #$01
 STA initCompleted
 
-; test code
-
-LDA #$1f
-STA levelNo
-
-LDA #$07
-STA playerSpeed
-STA playerAttack
-STA playerLuck
-STA points
+; test code - cheat mode 
+;
+; LDA #$1f
+; STA levelNo
+;
+; LDA #$07
+; STA playerSpeed
+; STA playerAttack
+; STA playerLuck
+; STA points
