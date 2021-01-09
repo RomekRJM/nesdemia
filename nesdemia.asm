@@ -347,8 +347,13 @@ ResetIfNeeded:
     STA initReset
     DEC resetCounter
 
-    JSR GameModeRequiresReset
+    LDA gameMode
+    STA gameModeAfterReset
+    CMP #GAME_COMPLETED_MODE
     BEQ :+
+
+    LDA #GAME_OVER_MODE
+    STA gameModeAfterReset
 
     DEC playerLives
     LDA playerLives
