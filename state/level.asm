@@ -1,6 +1,6 @@
 LoadLevel:
   LDY levelNo
-  CPY #$10
+  CPY #$11
   BCS :+
     LDA #.LOBYTE(Level1_16)
     STA $04
