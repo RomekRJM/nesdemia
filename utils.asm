@@ -268,7 +268,7 @@ EndLoadPassword:
 InitVariables:
   LDA #$00
   STA gameRendered
-  STA gameEndRendered
+  STA levelEndRendered
   STA creditsRendered
   STA mainMenuRendered
   STA passwordRendered

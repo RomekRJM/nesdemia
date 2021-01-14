@@ -86,7 +86,7 @@
 .define refreshPalette $58
 .define menuCursorTop $59
 .define menuOption $5a
-.define gameEndRendered $5b
+.define levelEndRendered $5b
 .define gameRendered $5c
 .define creditsRendered $5d
 .define mainMenuRendered $5e
@@ -293,7 +293,7 @@ MainGameLoop:
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode
-    JSR RenderGameCompleted
+    JSR RenderLevelCompleted
     JSR NextLevelIfNeeded
     JMP ContinueMainGameLoop
   :
@@ -302,7 +302,7 @@ MainGameLoop:
   CMP #GAME_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode
-    JSR RenderGameCompleted
+    JSR RenderLevelCompleted
     JMP ContinueMainGameLoop
   :
 
@@ -440,13 +440,13 @@ RenderGame:
   RTS
 
 RenderGameOver:
-  LDA gameEndRendered
+  LDA levelEndRendered
   ; it's a hack, we need 2 NMIs to fully reload palette,
   ; which happens after we leave game mode
   CMP #$02
   BEQ :+
     .include "background/game_over_background.asm"
-    INC gameEndRendered
+    INC levelEndRendered
   :
 
   RTS
@@ -501,14 +501,14 @@ RenderCredits:
 
   RTS
 
-RenderGameCompleted:
-  LDA gameEndRendered
+RenderLevelCompleted:
+  LDA levelEndRendered
   ; it's a hack, we need 2 NMIs to fully reload palette,
   ; which happens after we leave game mode
   CMP #$02
   BEQ :+
-    .include "background/game_completed_background.asm"
-    INC gameEndRendered
+    .include "background/level_completed_background.asm"
+    INC levelEndRendered
   :
 
   RTS

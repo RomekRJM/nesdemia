@@ -1,4 +1,4 @@
-RenderGameCompletedBackground:
+RenderLevelCompletedBackground:
   LDA #$00
   STA $2000
   STA $2001
@@ -8,9 +8,9 @@ RenderGameCompletedBackground:
   LDA #$00
   STA ppuLow
 
-  LDA #.LOBYTE(GameCompletedBackground)
+  LDA #.LOBYTE(LevelCompletedBackground)
   STA backgroundPointerLo
-  LDA #.HIBYTE(GameCompletedBackground)
+  LDA #.HIBYTE(LevelCompletedBackground)
   STA backgroundPointerHi
   LDA #.LOBYTE(BackgroundLLClear)
   STA backgroundLLPointerLo
