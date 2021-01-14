@@ -302,7 +302,7 @@ MainGameLoop:
   CMP #GAME_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode
-    JSR RenderLevelCompleted
+    JSR RenderGameCompleted
     JMP ContinueMainGameLoop
   :
 
@@ -497,6 +497,18 @@ RenderCredits:
   LDA creditsRendered
   BEQ :+
     JSR SlowlyScrollDown
+  :
+
+  RTS
+
+RenderGameCompleted:
+  LDA levelEndRendered
+  ; it's a hack, we need 2 NMIs to fully reload palette,
+  ; which happens after we leave game mode
+  CMP #$02
+  BEQ :+
+    .include "background/game_completed_background.asm"
+    INC levelEndRendered
   :
 
   RTS

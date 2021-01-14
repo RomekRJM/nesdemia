@@ -92,6 +92,9 @@ JSR ChangeMusicTrack
 LDA #$01
 STA initCompleted
 
+LDA #GAME_COMPLETED_MODE
+STA gameMode
+
 ; test code - cheat mode
 ;
 ; LDA #$1f
