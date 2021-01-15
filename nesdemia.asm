@@ -143,9 +143,8 @@
 .define shopConfirm $96
 .define gameModeAfterReset $97
 .define fistAnimator $98
-.define resetDuration $99
-.define dbg1 $9a
-.define dbg2 $9b
+.define dbg1 $99
+.define dbg2 $9a
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -302,6 +301,7 @@ MainGameLoop:
   LDA gameMode
   CMP #GAME_COMPLETED_MODE
   BNE :+
+    JSR ReactOnInputInGameCompleted
     JSR AdjustGameMode
     JSR RenderGameCompleted
     JMP ContinueMainGameLoop
@@ -347,17 +347,6 @@ ResetIfNeeded:
     LDA #$00
     STA initReset
     DEC resetCounter
-	
-	LDA #$00
-	STA resetDuration
-
-    LDA gameMode
-    STA gameModeAfterReset
-    CMP #GAME_COMPLETED_MODE
-    BEQ :+
-	
-	LDA #$A0
-	STA resetDuration
 
     LDA #GAME_OVER_MODE
     STA gameModeAfterReset
@@ -375,7 +364,7 @@ ResetIfNeeded:
   BEQ :+
     DEC resetCounter
     LDA resetCounter
-    CMP resetDuration
+    CMP #$a0
     BNE CheckIfTimeForReset
 
     LDA gameModeAfterReset
@@ -546,6 +535,8 @@ RenderMainMenu:
 .include "gamepad/capture_input.asm"
 
 .include "gamepad/game.asm"
+
+.include "gamepad/game_completed.asm"
 
 .include "gamepad/main_menu.asm"
 

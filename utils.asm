@@ -442,12 +442,12 @@ GameModeRequiresReset:
     RTS
   :
 
-  LDA gameMode
-  CMP #GAME_COMPLETED_MODE
-  BNE :+
-    LDA #$00
-    RTS
-  :
+  ;LDA gameMode
+  ;CMP #GAME_COMPLETED_MODE
+  ;BNE :+
+  ;  LDA #$00
+  ;  RTS
+  ;:
 
   LDA #$01
   RTS

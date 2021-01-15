@@ -20,5 +20,5 @@
 73 preLevelPoints
 534 L
 535 R
-91 X
+55 gameMode
 92 Y
