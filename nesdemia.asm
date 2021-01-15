@@ -143,8 +143,9 @@
 .define shopConfirm $96
 .define gameModeAfterReset $97
 .define fistAnimator $98
-.define dbg1 $99
-.define dbg2 $9a
+.define resetDuration $99
+.define dbg1 $9a
+.define dbg2 $9b
 
 ;$b5 - $f2 - used by ggsound
 .segment "STARTUP"
@@ -346,11 +347,17 @@ ResetIfNeeded:
     LDA #$00
     STA initReset
     DEC resetCounter
+	
+	LDA #$00
+	STA resetDuration
 
     LDA gameMode
     STA gameModeAfterReset
     CMP #GAME_COMPLETED_MODE
     BEQ :+
+	
+	LDA #$A0
+	STA resetDuration
 
     LDA #GAME_OVER_MODE
     STA gameModeAfterReset
@@ -362,12 +369,13 @@ ResetIfNeeded:
       LDA #PRE_LEVEL_MODE
       STA gameModeAfterReset
   :
+  
 
   LDA resetCounter
   BEQ :+
     DEC resetCounter
     LDA resetCounter
-    CMP #$A0
+    CMP resetDuration
     BNE CheckIfTimeForReset
 
     LDA gameModeAfterReset
@@ -562,6 +570,8 @@ RenderMainMenu:
 .include "background/pre_level_background_partial_update.asm"
 
 .include "background/game_attributes.asm"
+
+.include "background/game_completed_attributes.asm"
 
 .include "background/text_area_attributes.asm"
 
