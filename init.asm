@@ -98,8 +98,8 @@ STA initCompleted
 ; STA gameMode
 
 ;
-LDA #$1f
-STA levelNo
+; LDA #$1f
+; STA levelNo
 ;
 ; LDA #$07
 ; STA playerSpeed
