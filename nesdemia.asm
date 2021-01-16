@@ -86,7 +86,7 @@
 .define refreshPalette $58
 .define menuCursorTop $59
 .define menuOption $5a
-.define gameEndRendered $5b
+.define levelEndRendered $5b
 .define gameRendered $5c
 .define creditsRendered $5d
 .define mainMenuRendered $5e
@@ -293,7 +293,7 @@ MainGameLoop:
   CMP #LEVEL_COMPLETED_MODE
   BNE :+
     JSR AdjustGameMode
-    JSR RenderGameCompleted
+    JSR RenderLevelCompleted
     JSR NextLevelIfNeeded
     JMP ContinueMainGameLoop
   :
@@ -301,6 +301,7 @@ MainGameLoop:
   LDA gameMode
   CMP #GAME_COMPLETED_MODE
   BNE :+
+    JSR ReactOnInputInGameCompleted
     JSR AdjustGameMode
     JSR RenderGameCompleted
     JMP ContinueMainGameLoop
@@ -347,11 +348,6 @@ ResetIfNeeded:
     STA initReset
     DEC resetCounter
 
-    LDA gameMode
-    STA gameModeAfterReset
-    CMP #GAME_COMPLETED_MODE
-    BEQ :+
-
     LDA #GAME_OVER_MODE
     STA gameModeAfterReset
 
@@ -362,12 +358,13 @@ ResetIfNeeded:
       LDA #PRE_LEVEL_MODE
       STA gameModeAfterReset
   :
+  
 
   LDA resetCounter
   BEQ :+
     DEC resetCounter
     LDA resetCounter
-    CMP #$A0
+    CMP #$a0
     BNE CheckIfTimeForReset
 
     LDA gameModeAfterReset
@@ -440,13 +437,13 @@ RenderGame:
   RTS
 
 RenderGameOver:
-  LDA gameEndRendered
+  LDA levelEndRendered
   ; it's a hack, we need 2 NMIs to fully reload palette,
   ; which happens after we leave game mode
   CMP #$02
   BEQ :+
     .include "background/game_over_background.asm"
-    INC gameEndRendered
+    INC levelEndRendered
   :
 
   RTS
@@ -502,13 +499,25 @@ RenderCredits:
   RTS
 
 RenderGameCompleted:
-  LDA gameEndRendered
+  LDA levelEndRendered
   ; it's a hack, we need 2 NMIs to fully reload palette,
   ; which happens after we leave game mode
   CMP #$02
   BEQ :+
     .include "background/game_completed_background.asm"
-    INC gameEndRendered
+    INC levelEndRendered
+  :
+
+  RTS
+
+RenderLevelCompleted:
+  LDA levelEndRendered
+  ; it's a hack, we need 2 NMIs to fully reload palette,
+  ; which happens after we leave game mode
+  CMP #$02
+  BEQ :+
+    .include "background/level_completed_background.asm"
+    INC levelEndRendered
   :
 
   RTS
@@ -526,6 +535,8 @@ RenderMainMenu:
 .include "gamepad/capture_input.asm"
 
 .include "gamepad/game.asm"
+
+.include "gamepad/game_completed.asm"
 
 .include "gamepad/main_menu.asm"
 
@@ -550,6 +561,8 @@ RenderMainMenu:
 .include "background/pre_level_background_partial_update.asm"
 
 .include "background/game_attributes.asm"
+
+.include "background/game_completed_attributes.asm"
 
 .include "background/text_area_attributes.asm"
 

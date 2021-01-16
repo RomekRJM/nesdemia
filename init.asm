@@ -93,6 +93,10 @@ LDA #$01
 STA initCompleted
 
 ; test code - cheat mode
+
+; LDA #GAME_COMPLETED_MODE
+; STA gameMode
+
 ;
 ; LDA #$1f
 ; STA levelNo

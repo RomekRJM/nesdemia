@@ -268,7 +268,7 @@ EndLoadPassword:
 InitVariables:
   LDA #$00
   STA gameRendered
-  STA gameEndRendered
+  STA levelEndRendered
   STA creditsRendered
   STA mainMenuRendered
   STA passwordRendered
@@ -442,12 +442,12 @@ GameModeRequiresReset:
     RTS
   :
 
-  LDA gameMode
-  CMP #GAME_COMPLETED_MODE
-  BNE :+
-    LDA #$00
-    RTS
-  :
+  ;LDA gameMode
+  ;CMP #GAME_COMPLETED_MODE
+  ;BNE :+
+  ;  LDA #$00
+  ;  RTS
+  ;:
 
   LDA #$01
   RTS

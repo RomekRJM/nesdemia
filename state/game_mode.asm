@@ -51,13 +51,6 @@ AdjustGameMode:
     JSR ClearGfx
   :
 
-  LDA gameMode
-  CMP #GAME_COMPLETED_MODE
-  BNE :+
-    LDA #$01
-    STA initReset
-  :
-
 SavePreviousGameMode:
   LDA gameMode
   STA previousGameMode
