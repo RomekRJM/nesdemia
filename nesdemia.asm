@@ -358,13 +358,13 @@ ResetIfNeeded:
       LDA #PRE_LEVEL_MODE
       STA gameModeAfterReset
   :
-  
+
 
   LDA resetCounter
   BEQ :+
     DEC resetCounter
     LDA resetCounter
-    CMP #$a0
+    CMP #$f0
     BNE CheckIfTimeForReset
 
     LDA gameModeAfterReset
