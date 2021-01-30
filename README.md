@@ -1,7 +1,16 @@
 # Immunatio
 Using #stayathome as an opportunity to write a retro NES game about battling pandemic.
 
-<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/scr02.png" width="400px" height="340px">
+<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/nesdemia-0.png" width="400px" height="340px">
+
+<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/nesdemia-1.png" width="400px" height="340px">
+
+
+## MOD
+Mariusz Jałyński has moded this game, changing all the graphics and giving it much darker wibe. I highly recommend you to try it:
+https://raw.githubusercontent.com/RomekRJM/nesdemia/master/nesdemia_mod.nes
+
+<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/nesdemia_mod-0.png" width="400px" height="340px">
 
 
 ## Version history
