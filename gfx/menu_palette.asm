@@ -4,6 +4,7 @@ LoadMenuPalettes:
   LDA #.HIBYTE(MenuPaletteData)
   STA palettePointerHi       ; put the high byte of the address into pointer
 
+  LDA #$1c
   JSR LoadPalettes
 
   RTS
