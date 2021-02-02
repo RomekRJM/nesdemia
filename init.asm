@@ -47,7 +47,7 @@ CLEARMEM:
 LDA #$00
 STA levelNo
 
-LDA #$01
+LDA #$05
 STA playerLuck
 STA playerAttack
 STA playerCurrentSpeed
@@ -92,7 +92,7 @@ JSR ChangeMusicTrack
 LDA #$01
 STA initCompleted
 
-LDA #$00
+LDA #$09
 STA levelNo
 
 ; test code - cheat mode
