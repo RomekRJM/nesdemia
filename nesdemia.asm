@@ -257,8 +257,8 @@ MainGameLoop:
   CMP #PASSWORD_GAME_MODE
   BNE :+
     JSR ReactOnInputInPassword
-    JSR AdjustGameMode
     JSR RenderPassword
+    JSR AdjustGameMode
     JMP ContinueMainGameLoop
   :
 

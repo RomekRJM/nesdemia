@@ -19,6 +19,6 @@
 72 points
 73 preLevelPoints
 534 L
-535 R
 55 gameMode
+84 passRendered
 92 Y

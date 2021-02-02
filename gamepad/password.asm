@@ -58,6 +58,16 @@ ReactOnInputInPassword:
   :
 
   LDA buttons
+  AND #BUTTON_SELECT
+  BEQ :+
+    LDA previousButtons
+    AND #BUTTON_SELECT
+    BNE :+
+    LDA #MAIN_MENU_MODE
+    STA gameMode
+  :
+
+  LDA buttons
   AND #BUTTON_START
   BEQ :+
     LDA previousButtons
