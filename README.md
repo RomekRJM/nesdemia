@@ -20,7 +20,7 @@ Game got some recognition in local Polish media
 * [gry.interia.pl](https://gry.interia.pl/newsy/news-immunatio-to-nowa-gra-na-pegasusa,nId,4968668)
 * [graczpospolita.pl](https://graczpospolita.pl/nowa-polska-gra-na-pegasusa-sprzedana-za-czterocyfrowa-kwote/)
 
-## Autors
+## Authors
 * Programming: Roman Subik.
 * Graphics: RETHUNTER, Roman Subik, Dorota Subik.
 * Music: ‪Håvard Handergård.
