@@ -5,7 +5,7 @@ Below you can find youtube review by Korpokrowa ( it's in Polish ):
 
 [![IMMUNATIO review](https://img.youtube.com/vi/0hyVntmwJzo/0.jpg)](https://www.youtube.com/watch?v=0hyVntmwJzo)
 
-<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/cartridge.png" width="400px" height="340px">
+<img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/cartridge.png" width="525px" height="300px">
 
 <img src="https://raw.githubusercontent.com/RomekRJM/nesdemia/master/screenshots/nesdemia-0.png" width="400px" height="340px">
 
