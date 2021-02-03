@@ -80,6 +80,8 @@ CheckWinCondition:
 
   LDA timeLimit
   BNE :+
+    LDA resetCounter
+    BNE :+ ; fix for lives overflow: don't reset if reset in progress
     LDA #$01
     STA initReset
   :
